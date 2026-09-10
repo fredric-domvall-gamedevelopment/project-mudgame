@@ -80,8 +80,12 @@ namespace MUD.Worlds
                 if(SkillPoints == 0)
                 {
                     player.Attack = calculator.CalculateCharacterAttack(player);
+                    player.Defense = calculator.ClalculateCharacterDefense(player);
 
-                    Console.WriteLine($"Character created! \nName: {player.Name} | STR: {player.Stats.Strength} | DEX: {player.Stats.Dexterity} | END: {player.Stats.Endurance} || Attack: {player.Attack}");
+                    Console.WriteLine($"Character created! \n" +
+                        $"Name: [{player.Name}] \n" +
+                        $"STR: {player.Stats.Strength} || DEX: {player.Stats.Dexterity} || END: {player.Stats.Endurance}\n" +
+                        $"HP: {player.Health}/{player.MaxHealth} || Attack: {player.Attack} || Defense: {player.Defense}");
                     Console.WriteLine("Are you happy with your character? (press n to restart, any other key to continue)");
 
                     choice = Console.ReadKey().KeyChar;
@@ -105,7 +109,7 @@ namespace MUD.Worlds
                 Console.WriteLine("You are dead, game over!");
                 return;
             }
-            Console.WriteLine($"Player: {player.Name} | HP: {player.Health}/{player.MaxHealth} | Attack: {player.Attack}\n ");
+            Console.WriteLine($"Player: {player.Name} | HP: {player.Health}/{player.MaxHealth} | Attack: {player.Attack} | Defense: {player.Defense}\n ");
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("1. Go to the Sea");
             Console.WriteLine("2. Go to the Mountains");

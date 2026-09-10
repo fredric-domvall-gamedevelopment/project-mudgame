@@ -72,9 +72,10 @@ namespace MUD.Worlds
 
         private void GoToSea()
         {
+            Enemy enemy = CreateEnemy(new Enemy());
             Sea sea = new Sea();
             sea.ShowGraphic();
-            Console.WriteLine("you meet a seamonster, you get scared and run away. you loose 10 Hp");
+            Console.WriteLine($"you meet a {enemy.Name}, you get scared and run away. you loose 10 Hp");
             player.Health -= 10;
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -115,9 +116,9 @@ namespace MUD.Worlds
             Console.Clear();
         }
 
-        private void CreateEnemy()
+        private Enemy CreateEnemy(Enemy enemy)
         {
-            Enemy enemy = new Enemy();
+             
             enemy = new Enemy
             {
                 Type = Models.Enums.EnemyType.Goblin,
@@ -127,6 +128,7 @@ namespace MUD.Worlds
                 Defence = 5
             };
 
+            return enemy;
         }
     }
 }

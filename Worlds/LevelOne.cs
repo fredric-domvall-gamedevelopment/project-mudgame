@@ -20,8 +20,8 @@ namespace MUD.Worlds
         private void CreatePlayer()
         {
             int SkillPoints = 20;
-            player.Attack = 0;
-            player.Defense = 0;
+            player.Attack = 0f;
+            player.Defense = 0f;
 
             Console.WriteLine("-----Create your character-----\n");
             Console.WriteLine("What is your name?");
@@ -37,7 +37,7 @@ namespace MUD.Worlds
             }
             Console.Clear();
 
-            player.MaxHealth = 100;
+            player.MaxHealth = 100f;
             player.Health = player.MaxHealth;
             player.IsDead = false;
 
@@ -163,9 +163,9 @@ namespace MUD.Worlds
             {
                 Type = Models.Enums.EnemyType.Goblin,
                 Name = "Goblin",
-                Health = 50,
-                Attack = 10,
-                Defense = 5
+                Health = 50f,
+                Attack = 10f,
+                Defense = 5f
             };
 
             return enemy;

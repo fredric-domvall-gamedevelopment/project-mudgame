@@ -1,11 +1,8 @@
 ﻿namespace MUD.Models;
-public class Player
+
+public class Player : Character
 {
-    public string Name { get; set; } = String.Empty;
-    public int Health { get; set; }
-    public int MaxHealth { get; set; }
-    public int Attack { get; set; }
-    public int Defence { get; set; }
-    public bool IsDead { get; set; }
-    public float Speed { get; set; }
+    //Hitta Lösning för inventory
+
+    //Hitta lösning för equipment
 }

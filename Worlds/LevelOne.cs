@@ -21,7 +21,7 @@ namespace MUD.Worlds
         {
             int SkillPoints = 20;
             player.Attack = 0;
-            player.Defence = 0;
+            player.Defense = 0;
 
             Console.WriteLine("-----Create your character-----\n");
             Console.WriteLine("What is your name?");
@@ -46,7 +46,7 @@ namespace MUD.Worlds
                 Console.WriteLine("-----Set your Attack & Defence stats-----\n");
                 Console.WriteLine($"You have {SkillPoints} points to spend\n");
                 Console.WriteLine($"1. Increase Attack  | Current Attack: {player.Attack}");
-                Console.WriteLine($"2. Increase Defence | Current Defence: {player.Defence}");
+                Console.WriteLine($"2. Increase Defence | Current Defence: {player.Defense}");
 
                 char choice = Console.ReadKey().KeyChar;
                 Console.Clear();
@@ -58,7 +58,7 @@ namespace MUD.Worlds
                         SkillPoints--; 
                         break;
                     case '2':
-                        player.Defence++;
+                        player.Defense++;
                         SkillPoints--;
                         break;
                     default:
@@ -165,7 +165,7 @@ namespace MUD.Worlds
                 Name = "Goblin",
                 Health = 50,
                 Attack = 10,
-                Defence = 5
+                Defense = 5
             };
 
             return enemy;
@@ -186,10 +186,10 @@ namespace MUD.Worlds
                 switch (choice)
                 {
                     case '1':
-                        enemy.Health -= player.Attack - enemy.Defence;
-                        Console.WriteLine($"You attack the {enemy.Name} for {player.Attack - enemy.Defence} damage!");
-                        player.Health -= enemy.Attack - player.Defence;
-                        Console.WriteLine($"The {enemy.Name} attacks you for {enemy.Attack - player.Defence} damage!");
+                        enemy.Health -= player.Attack - enemy.Defense;
+                        Console.WriteLine($"You attack the {enemy.Name} for {player.Attack - enemy.Defense} damage!");
+                        player.Health -= enemy.Attack - player.Defense;
+                        Console.WriteLine($"The {enemy.Name} attacks you for {enemy.Attack - player.Defense} damage!");
                         break;
                     case '2':
                         Console.WriteLine("You run away from the battle.");

@@ -114,5 +114,19 @@ namespace MUD.Worlds
             Console.ReadKey();
             Console.Clear();
         }
+
+        private void CreateEnemy()
+        {
+            Enemy enemy = new Enemy();
+            enemy = new Enemy
+            {
+                Type = Models.Enums.EnemyType.Goblin,
+                Name = "Goblin",
+                Health = 50,
+                Attack = 10,
+                Defence = 5
+            };
+
+        }
     }
 }

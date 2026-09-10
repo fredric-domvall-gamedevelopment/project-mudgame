@@ -24,6 +24,9 @@ namespace MUD.Worlds
 
         private void CreatePlayer()
         {
+            int SkillPoints = 20;
+            player.Attack = 0;
+            player.Defence = 0;
             Console.WriteLine("-----Create your character-----");
             Console.WriteLine("What is your name?");
             while (String.IsNullOrEmpty(player.Name))
@@ -37,6 +40,34 @@ namespace MUD.Worlds
             player.Health = 100;
             Console.WriteLine("You have " + player.Health + " HP");
             player.IsDead = false;
+
+            Console.WriteLine("Set your Attack & Defence stats");
+            Console.WriteLine($"You have {SkillPoints} points to spend");
+
+            do
+            {
+                Console.WriteLine($"You have {SkillPoints} left.");
+                Console.WriteLine($"Current Attack: {player.Attack} | Current Defence: {player.Defence}");
+                Console.WriteLine("1. Increase Attack");
+                Console.WriteLine("2. Increase Defence");
+
+                char choice = Console.ReadKey().KeyChar;
+                switch(choice)
+                {
+                    case '1':
+                        player.Attack++;
+                        SkillPoints--; 
+                        break;
+                    case '2':
+                        player.Defence++;
+                        SkillPoints--;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice, please try again.");
+                        break;
+                }
+                Console.Clear();
+            } while (SkillPoints > 0);
 
         }
 

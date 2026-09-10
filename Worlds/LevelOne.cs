@@ -44,8 +44,8 @@ namespace MUD.Worlds
 
             Console.WriteLine("Oh, your name is " + player.Name);
             Console.WriteLine("Not what I would have chosen, but it will do I suppose...");
-
-            player.Health = 100;
+            player.MaxHealth = 100;
+            player.Health = player.MaxHealth;
             Console.WriteLine("You have " + player.Health + " HP");
             player.IsDead = false;
 
@@ -149,7 +149,7 @@ namespace MUD.Worlds
             {
                 Console.WriteLine("You accept the offer and rest in the tavern.");
                 Console.WriteLine("You recover to full health.");
-                player.Health = 100;
+                player.Health = player.MaxHealth;
             }
             else
             {

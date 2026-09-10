@@ -11,17 +11,8 @@ namespace MUD.Worlds
         public void StartGame()
         {
             Console.WriteLine("Welcome the magical worlds of MUDs");
-            Console.WriteLine("Who are you?");
 
-            while(String.IsNullOrEmpty(player.Name)) {
-                player.Name = Console.ReadLine()!;
-            }
-
-            Console.WriteLine("Oh, your name is " + player.Name);
-            Console.WriteLine("Not what I would have chosen, but it will do I suppose...");
-            player.Health = 100;
-            Console.WriteLine("You have " + player.Health + " HP");
-            player.IsDead = false;
+            CreatePlayer();
 
             if (player.IsDead)
                 Console.WriteLine("You are however, dead?");
@@ -33,6 +24,19 @@ namespace MUD.Worlds
 
         private void CreatePlayer()
         {
+            Console.WriteLine("-----Create your character-----");
+            Console.WriteLine("What is your name?");
+            while (String.IsNullOrEmpty(player.Name))
+            {
+                player.Name = Console.ReadLine()!;
+            }
+
+            Console.WriteLine("Oh, your name is " + player.Name);
+            Console.WriteLine("Not what I would have chosen, but it will do I suppose...");
+
+            player.Health = 100;
+            Console.WriteLine("You have " + player.Health + " HP");
+            player.IsDead = false;
 
         }
 

@@ -28,7 +28,7 @@ namespace MUD.Worlds
             player.Attack = 0f;
             player.Defense = 0f;
             player.MaxHealth = 50f;
-            player.IsDead = false;
+            player.IsDead = false;          
 
             Console.WriteLine("-----Create your character-----\n");
             Console.WriteLine("What is your name?");
@@ -43,8 +43,6 @@ namespace MUD.Worlds
                 }
             }
             Console.Clear();
-
-
 
             do
             {
@@ -96,11 +94,6 @@ namespace MUD.Worlds
                         StartGame();
                 }
             } while (SkillPoints > 0);
-
-            
-            
-
-
         }
 
         private void PlayGame()

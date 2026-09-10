@@ -10,7 +10,7 @@ namespace MUD.Worlds
 
         public void StartGame()
         {
-            Console.WriteLine("Welcome the magical worlds of MUDs");
+            Console.WriteLine("Welcome the magical worlds of MUDs \n");
 
             CreatePlayer();
 
@@ -24,15 +24,23 @@ namespace MUD.Worlds
 
         private void CreatePlayer()
         {
+
             int SkillPoints = 20;
             player.Attack = 0;
             player.Defence = 0;
             Console.WriteLine("-----Create your character-----");
             Console.WriteLine("What is your name?");
-            while (String.IsNullOrEmpty(player.Name))
+            player.Name = Console.ReadLine()!;
+            if(String.IsNullOrEmpty(player.Name))
             {
-                player.Name = Console.ReadLine()!;
+                while (String.IsNullOrEmpty(player.Name))
+                {
+                    Console.WriteLine("Please enter a valid name");
+                    player.Name = Console.ReadLine()!;
+                }
             }
+            Console.Clear();
+
 
             Console.WriteLine("Oh, your name is " + player.Name);
             Console.WriteLine("Not what I would have chosen, but it will do I suppose...");
@@ -41,13 +49,11 @@ namespace MUD.Worlds
             Console.WriteLine("You have " + player.Health + " HP");
             player.IsDead = false;
 
-            Console.WriteLine("Set your Attack & Defence stats");
-            Console.WriteLine($"You have {SkillPoints} points to spend");
-
             do
             {
-                Console.WriteLine($"You have {SkillPoints} left.");
-                Console.WriteLine($"Current Attack: {player.Attack} | Current Defence: {player.Defence}");
+                Console.WriteLine("-----Set your Attack & Defence stats-----");
+                Console.WriteLine($"You have {SkillPoints} points to spend");
+                Console.WriteLine($"Current Attack: {player.Attack} | Current Defence: {player.Defence}\n");
                 Console.WriteLine("1. Increase Attack");
                 Console.WriteLine("2. Increase Defence");
 
@@ -64,6 +70,9 @@ namespace MUD.Worlds
                         break;
                     default:
                         Console.WriteLine("Invalid choice, please try again.");
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey();
+                        Console.Clear();
                         break;
                 }
                 Console.Clear();

@@ -1,10 +1,12 @@
 ﻿using MUD.Art;
 using MUD.Models;
+using MUD.Services;
 
 namespace MUD.Worlds
 {
     public class LevelOne
     {
+        CharacterStatsCalculator calculator = new CharacterStatsCalculator();
         Player player = new Player();
 
 
@@ -20,8 +22,14 @@ namespace MUD.Worlds
         private void CreatePlayer()
         {
             int SkillPoints = 20;
+            player.Stats.Strength = 0;
+            player.Stats.Dexterity = 0;
+            player.Stats.Endurance = 0;
             player.Attack = 0f;
             player.Defense = 0f;
+            player.MaxHealth = 100f;
+            player.Health = player.MaxHealth;
+            player.IsDead = false;
 
             Console.WriteLine("-----Create your character-----\n");
             Console.WriteLine("What is your name?");
@@ -37,16 +45,15 @@ namespace MUD.Worlds
             }
             Console.Clear();
 
-            player.MaxHealth = 100f;
-            player.Health = player.MaxHealth;
-            player.IsDead = false;
+
 
             do
             {
                 Console.WriteLine("-----Set your Attack & Defence stats-----\n");
                 Console.WriteLine($"You have {SkillPoints} points to spend\n");
-                Console.WriteLine($"1. Increase Attack  | Current Attack: {player.Attack}");
-                Console.WriteLine($"2. Increase Defence | Current Defence: {player.Defense}");
+                Console.WriteLine($"1. Increase Strength  | Current STR: {player.Stats.Strength}");
+                Console.WriteLine($"2. Increase Dexterity | Current DEX: {player.Stats.Dexterity}");
+                Console.WriteLine($"3. Increase Endurance | Current END: {player.Stats.Endurance}");
 
                 char choice = Console.ReadKey().KeyChar;
                 Console.Clear();
@@ -54,11 +61,15 @@ namespace MUD.Worlds
                 switch (choice)
                 {
                     case '1':
-                        player.Attack++;
+                        player.Stats.Strength++;
                         SkillPoints--; 
                         break;
                     case '2':
-                        player.Defense++;
+                        player.Stats.Dexterity++;
+                        SkillPoints--;
+                        break;
+                    case '3':
+                        player.Stats.Endurance++;
                         SkillPoints--;
                         break;
                     default:
@@ -66,7 +77,24 @@ namespace MUD.Worlds
                         Console.WriteLine("Invalid choice, please try again.\n");
                         break;
                 }
+                if(SkillPoints == 0)
+                {
+                    player.Attack = calculator.CalculateCharacterAttack(player);
+
+                    Console.WriteLine($"Character created! \nName: {player.Name} | STR: {player.Stats.Strength} | DEX: {player.Stats.Dexterity} | END: {player.Stats.Endurance} || Attack: {player.Attack}");
+                    Console.WriteLine("Are you happy with your character? (press n to restart, any other key to continue)");
+
+                    choice = Console.ReadKey().KeyChar;
+                    Console.Clear();
+
+                    if (choice == 'N' || choice == 'n')
+                        StartGame();
+                }
             } while (SkillPoints > 0);
+
+            
+            
+
 
         }
 
@@ -77,7 +105,7 @@ namespace MUD.Worlds
                 Console.WriteLine("You are dead, game over!");
                 return;
             }
-            Console.WriteLine($"Player: {player.Name} | HP: {player.Health}");
+            Console.WriteLine($"Player: {player.Name} | HP: {player.Health}/{player.MaxHealth} | Attack: {player.Attack}\n ");
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("1. Go to the Sea");
             Console.WriteLine("2. Go to the Mountains");

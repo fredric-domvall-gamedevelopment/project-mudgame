@@ -85,7 +85,7 @@ namespace MUD.Worlds
             Console.WriteLine($"Player: {player.Name} | HP: {player.Health}");
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("1. Go to the Sea");
-            Console.WriteLine("2. Go to the Forest");
+            Console.WriteLine("2. Go to the Mountains");
             Console.WriteLine("3. Go to the Tavern");
 
             Char choice = Console.ReadKey().KeyChar;
@@ -130,6 +130,7 @@ namespace MUD.Worlds
         {
             Mountains mountain = new Mountains();
             mountain.ShowGraphic();
+            Battle(CreateEnemy(new Enemy()), player);
             Console.WriteLine("you meet a goblin, you get scared and run away. you loose 10 Hp");
             player.Health -= 10;
             Console.WriteLine("Press any key to continue...");
@@ -179,9 +180,6 @@ namespace MUD.Worlds
         {
             Console.WriteLine($"Enemy: {enemy.Name} | Health: {enemy.Health} | Attack: {enemy.Attack} | Defence: {enemy.Defence}");
             Console.WriteLine($"Player: {player.Name} | Health: {player.Health} | Attack: {player.Attack} | Defence: {player.Defence}");
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-            Console.Clear();
         }
     }
 }

@@ -41,12 +41,8 @@ namespace MUD.Worlds
             }
             Console.Clear();
 
-
-            Console.WriteLine("Oh, your name is " + player.Name);
-            Console.WriteLine("Not what I would have chosen, but it will do I suppose...");
             player.MaxHealth = 100;
             player.Health = player.MaxHealth;
-            Console.WriteLine("You have " + player.Health + " HP");
             player.IsDead = false;
 
             do
@@ -119,7 +115,7 @@ namespace MUD.Worlds
             Enemy enemy = CreateEnemy(new Enemy());
             Sea sea = new Sea();
             sea.ShowGraphic();
-            Console.WriteLine($"you meet a {enemy.Name}, you get scared and run away. you loose 10 Hp");
+            Battle(CreateEnemy(new Enemy()), player);
             player.Health -= 10;
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -131,7 +127,6 @@ namespace MUD.Worlds
             Mountains mountain = new Mountains();
             mountain.ShowGraphic();
             Battle(CreateEnemy(new Enemy()), player);
-            Console.WriteLine("you meet a goblin, you get scared and run away. you loose 10 Hp");
             player.Health -= 10;
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -184,7 +179,7 @@ namespace MUD.Worlds
                 Console.WriteLine($"Enemy: {enemy.Name} | HP: {enemy.Health}");
                 Console.WriteLine("What would you like to do?");
                 Console.WriteLine("1. Attack");
-                Console.WriteLine("3. Run");
+                Console.WriteLine("2. Run away");
                 char choice = Console.ReadKey().KeyChar;
                 switch (choice)
                 {

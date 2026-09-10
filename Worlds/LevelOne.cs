@@ -1,5 +1,6 @@
 ﻿using MUD.Art;
 using MUD.Models;
+using MUD.Models.Enums;
 using MUD.Services;
 
 namespace MUD.Worlds
@@ -184,15 +185,11 @@ namespace MUD.Worlds
 
         private Enemy CreateEnemy(Enemy enemy)
         {
-             
-            enemy = new Enemy
-            {
-                Type = Models.Enums.EnemyType.Goblin,
-                Name = "Goblin",
-                Health = 50f,
-                Attack = 10f,
-                Defense = 5f
-            };
+            Random random = new Random();
+            EnemyType enemytype = (EnemyType)random.Next(0, 3);
+
+            EnemyCreator enemyCreator = new EnemyCreator();
+            enemy = enemyCreator.CreateEnemy(enemytype);
 
             return enemy;
         }

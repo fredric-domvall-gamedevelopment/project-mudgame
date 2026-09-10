@@ -27,8 +27,7 @@ namespace MUD.Worlds
             player.Stats.Endurance = 0f;
             player.Attack = 0f;
             player.Defense = 0f;
-            player.MaxHealth = 100f;
-            player.Health = player.MaxHealth;
+            player.MaxHealth = 50f;
             player.IsDead = false;
 
             Console.WriteLine("-----Create your character-----\n");
@@ -81,6 +80,8 @@ namespace MUD.Worlds
                 {
                     player.Attack = calculator.CalculateCharacterAttack(player);
                     player.Defense = calculator.ClalculateCharacterDefense(player);
+                    player.MaxHealth = calculator.CalculateCharacterHealth(player);
+                    player.Health = player.MaxHealth;
 
                     Console.WriteLine($"Character created! \n" +
                         $"Name: [{player.Name}] \n" +

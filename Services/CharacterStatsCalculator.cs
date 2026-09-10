@@ -15,4 +15,10 @@ public class CharacterStatsCalculator
         character.Defense = character.Stats.Dexterity;
         return character.Defense;
     }
+
+    public float CalculateCharacterHealth(Character character)
+    {
+        character.MaxHealth += character.Stats.Endurance * 5;
+        return character.MaxHealth;
+    }
 }

@@ -12,7 +12,11 @@ namespace MUD.Worlds
         {
             Console.WriteLine("Welcome the magical worlds of MUDs");
             Console.WriteLine("Who are you?");
-            player.Name = Console.ReadLine();
+
+            while(String.IsNullOrEmpty(player.Name)) {
+                player.Name = Console.ReadLine()!;
+            }
+
             Console.WriteLine("Oh, your name is " + player.Name);
             Console.WriteLine("Not what I would have chosen, but it will do I suppose...");
             player.Health = 100;

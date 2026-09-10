@@ -7,5 +7,4 @@ public class Character
     public float Attack { get; set; }
     public float Defense { get; set; }
     public bool IsDead { get; set; }
-    public float Speed { get; set; }
 }

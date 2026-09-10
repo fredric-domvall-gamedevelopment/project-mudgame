@@ -14,11 +14,6 @@ namespace MUD.Worlds
 
             CreatePlayer();
 
-            if (player.IsDead)
-                Console.WriteLine("You are however, dead?");
-            else
-                Console.WriteLine("You are alive? Good!");
-
             PlayGame();
         }
 
@@ -28,7 +23,7 @@ namespace MUD.Worlds
             int SkillPoints = 20;
             player.Attack = 0;
             player.Defence = 0;
-            Console.WriteLine("-----Create your character-----");
+            Console.WriteLine("-----Create your character-----\n");
             Console.WriteLine("What is your name?");
             player.Name = Console.ReadLine()!;
             if(String.IsNullOrEmpty(player.Name))
@@ -47,14 +42,15 @@ namespace MUD.Worlds
 
             do
             {
-                Console.WriteLine("-----Set your Attack & Defence stats-----");
-                Console.WriteLine($"You have {SkillPoints} points to spend");
-                Console.WriteLine($"Current Attack: {player.Attack} | Current Defence: {player.Defence}\n");
-                Console.WriteLine("1. Increase Attack");
-                Console.WriteLine("2. Increase Defence");
+                Console.WriteLine("-----Set your Attack & Defence stats-----\n");
+                Console.WriteLine($"You have {SkillPoints} points to spend\n");
+                Console.WriteLine($"1. Increase Attack  | Current Attack: {player.Attack}");
+                Console.WriteLine($"2. Increase Defence | Current Defence: {player.Defence}");
 
                 char choice = Console.ReadKey().KeyChar;
-                switch(choice)
+                Console.Clear();
+
+                switch (choice)
                 {
                     case '1':
                         player.Attack++;
@@ -65,19 +61,21 @@ namespace MUD.Worlds
                         SkillPoints--;
                         break;
                     default:
-                        Console.WriteLine("Invalid choice, please try again.");
-                        Console.WriteLine("Press any key to continue...");
-                        Console.ReadKey();
-                        Console.Clear();
+                        
+                        Console.WriteLine("Invalid choice, please try again.\n");
                         break;
                 }
-                Console.Clear();
             } while (SkillPoints > 0);
 
         }
 
         private void PlayGame()
         {
+            if(player.IsDead)
+            {
+                Console.WriteLine("You are dead, game over!");
+                return;
+            }
             Console.WriteLine($"Player: {player.Name} | HP: {player.Health}");
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("1. Go to the Sea");
@@ -85,6 +83,7 @@ namespace MUD.Worlds
             Console.WriteLine("3. Go to the Tavern");
 
             Char choice = Console.ReadKey().KeyChar;
+            Console.Clear();
 
             switch (choice)
             {
@@ -116,7 +115,6 @@ namespace MUD.Worlds
             Sea sea = new Sea();
             sea.ShowGraphic();
             Battle(CreateEnemy(new Enemy()), player);
-            player.Health -= 10;
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
             Console.Clear();
@@ -127,7 +125,6 @@ namespace MUD.Worlds
             Mountains mountain = new Mountains();
             mountain.ShowGraphic();
             Battle(CreateEnemy(new Enemy()), player);
-            player.Health -= 10;
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
             Console.Clear();
@@ -135,11 +132,13 @@ namespace MUD.Worlds
 
         private void GoToTavern()
         {
-            Console.WriteLine("----------------THE TAVERN-----------------");
+            Console.WriteLine("----------------THE TAVERN-----------------\n");
             Console.WriteLine("you enter the tavern, it is warm and cozy");
             Console.WriteLine("you meet a bartender, he offers you a room to rest in");
             Console.WriteLine("do you accept his kind offer?  \n  (press y to accept, any other key to decline)");
+
             char choice = Console.ReadKey().KeyChar;
+            Console.Clear();
             if (choice == 'y')
             {
                 Console.WriteLine("You accept the offer and rest in the tavern.");
@@ -180,7 +179,9 @@ namespace MUD.Worlds
                 Console.WriteLine("What would you like to do?");
                 Console.WriteLine("1. Attack");
                 Console.WriteLine("2. Run away");
+
                 char choice = Console.ReadKey().KeyChar;
+                Console.Clear();
                 switch (choice)
                 {
                     case '1':

@@ -174,5 +174,14 @@ namespace MUD.Worlds
 
             return enemy;
         }
+
+        private void Battle(Enemy enemy, Player player)
+        {
+            Console.WriteLine($"Enemy: {enemy.Name} | Health: {enemy.Health} | Attack: {enemy.Attack} | Defence: {enemy.Defence}");
+            Console.WriteLine($"Player: {player.Name} | Health: {player.Health} | Attack: {player.Attack} | Defence: {player.Defence}");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
+        }
     }
 }

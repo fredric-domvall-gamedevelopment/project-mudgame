@@ -19,12 +19,13 @@ namespace MUD.Worlds
 
         private void CreatePlayer()
         {
-
             int SkillPoints = 20;
             player.Attack = 0;
             player.Defence = 0;
+
             Console.WriteLine("-----Create your character-----\n");
             Console.WriteLine("What is your name?");
+
             player.Name = Console.ReadLine()!;
             if(String.IsNullOrEmpty(player.Name))
             {

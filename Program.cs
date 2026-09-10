@@ -7,6 +7,7 @@ namespace MUD
     {
         static void Main(string[] args)
         {
+            Console.Title = "MUD - The Magical World";
             LevelOne levelOne = new LevelOne();
             levelOne.StartGame();
         }

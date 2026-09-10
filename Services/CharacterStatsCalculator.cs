@@ -9,4 +9,10 @@ public class CharacterStatsCalculator
         character.Attack = character.Stats.Strength;
         return character.Attack;
     }
+
+    public float ClalculateCharacterDefense(Character character)
+    {
+        character.Defense = character.Stats.Dexterity;
+        return character.Defense;
+    }
 }

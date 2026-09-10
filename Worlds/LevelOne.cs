@@ -22,9 +22,9 @@ namespace MUD.Worlds
         private void CreatePlayer()
         {
             int SkillPoints = 20;
-            player.Stats.Strength = 0;
-            player.Stats.Dexterity = 0;
-            player.Stats.Endurance = 0;
+            player.Stats.Strength = 0f;
+            player.Stats.Dexterity = 0f;
+            player.Stats.Endurance = 0f;
             player.Attack = 0f;
             player.Defense = 0f;
             player.MaxHealth = 100f;

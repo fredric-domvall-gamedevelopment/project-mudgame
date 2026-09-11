@@ -139,13 +139,8 @@ namespace MUD.Worlds
 
         private void GoToSea()
         {
-            Enemy enemy = CreateEnemy(new Enemy());
             Sea sea = new Sea();
-            sea.ShowGraphic();
-            Battle(CreateEnemy(new Enemy()), player);
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-            Console.Clear();
+            sea.EnterSea(player, CreateEnemy(new Enemy()));
         }
 
         private void GoToMountains()

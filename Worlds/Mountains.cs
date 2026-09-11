@@ -12,7 +12,7 @@ public class Mountains
         mountains.ShowGraphic();
 
         EnemyCreator enemyCreator = new EnemyCreator();
-        Battle(enemyCreator.CreateRandomEnemy(new Enemy()), player);
+        Battle(enemyCreator.CreateRandomEnemy(), player);
 
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();

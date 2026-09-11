@@ -54,13 +54,11 @@ public class EnemyCreator
         return enemy;
     }
 
-    public Enemy CreateRandomEnemy(Enemy enemy)
+    public Enemy CreateRandomEnemy()
     {
         Random random = new Random();
         EnemyType enemytype = (EnemyType)random.Next(0, 3);
-     
-        enemy = CreateEnemy(enemytype);
 
-        return enemy;
+        return CreateEnemy(enemytype);
     }
 }

@@ -3,6 +3,7 @@
 namespace MUD.Services;
 public class FightingSystem
 {
+    PlayerCreator playerCreator = new PlayerCreator();
     public void Battle(Enemy enemy, Player player)
     {
         do
@@ -48,6 +49,10 @@ public class FightingSystem
                 player.SkillPoints += 4;
                 Console.WriteLine($"Congratulations! You have leveled up to level {player.Level}!");
                 Console.WriteLine($"Youve earned 4 Skillpoints.");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                Console.Clear();
+                playerCreator.SetSkillPoints(player);
             }
         }
         else if (player.Health <= 0)

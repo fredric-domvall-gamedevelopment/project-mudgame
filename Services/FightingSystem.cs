@@ -40,6 +40,15 @@ public class FightingSystem
             Console.WriteLine($"You have defeated the {enemy.Name}!");
             player.CurrentXp += enemy.Reward.Xp;
             player.Gold += enemy.Reward.Gold;
+            if(player.CurrentXp >= player.NextLevelXp)
+            {
+                player.Level++;
+                player.CurrentXp -= player.NextLevelXp;
+                player.NextLevelXp = player.Level * 100;
+                player.SkillPoints += 4;
+                Console.WriteLine($"Congratulations! You have leveled up to level {player.Level}!");
+                Console.WriteLine($"Youve earned 4 Skillpoints.");
+            }
         }
         else if (player.Health <= 0)
         {

@@ -9,7 +9,6 @@ public class Sea
 
     public void EnterSea(Player player)
     {
-        //enemy = CreateEnemy(new Enemy());
         SeaArt sea = new SeaArt();
         sea.ShowGraphic();
         Battle(CreateEnemy(new Enemy()), player);

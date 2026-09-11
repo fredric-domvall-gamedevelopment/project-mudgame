@@ -11,24 +11,10 @@ namespace MUD.Worlds
 
         public void StartGame()
         {
-            char choice;
+            
             Console.WriteLine("Welcome the magical worlds of MUDs \n");
 
-            do
-            {
-                player = playerCreator.CreatePlayer();
-
-                Console.WriteLine($"Character created! \n" +
-                $"Name: [{player.Name}] \n" +
-                $"STR: {player.Stats.Strength} || DEX: {player.Stats.Dexterity} || END: {player.Stats.Endurance}\n" +
-                $"HP: {player.Health}/{player.MaxHealth} || Attack: {player.Attack} || Defense: {player.Defense}");
-                Console.WriteLine("Are you happy with your character? (press n to restart, any other key to continue)");
-
-                choice = Console.ReadKey().KeyChar;
-                Console.Clear();
-
-            } while (choice == 'N' || choice == 'n');
-            
+            player = playerCreator.PlayerCreation();
 
             PlayGame();
         }

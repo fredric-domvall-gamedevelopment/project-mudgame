@@ -18,10 +18,13 @@ public class FightingSystem
             switch (choice)
             {
                 case '1':
-                    enemy.Health -= player.Attack - enemy.Defense;
-                    Console.WriteLine($"You attack the {enemy.Name} for {player.Attack - enemy.Defense} damage!");
-                    player.Health -= enemy.Attack - player.Defense;
-                    Console.WriteLine($"The {enemy.Name} attacks you for {enemy.Attack - player.Defense} damage!");
+                    float playerDamage = Math.Max(player.Attack - enemy.Defense, 0);
+                    enemy.Health -= playerDamage;
+                    Console.WriteLine($"You attack the {enemy.Name} for {playerDamage} damage!");
+
+                    float enemyDamage = Math.Max(enemy.Attack - player.Defense, 0);
+                    player.Health -= enemyDamage;
+                    Console.WriteLine($"The {enemy.Name} attacks you for {enemyDamage} damage!");
                     break;
                 case '2':
                     Console.WriteLine("You run away from the battle.");

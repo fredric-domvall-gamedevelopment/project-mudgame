@@ -1,6 +1,6 @@
 ﻿namespace MUD.Art
 {
-    internal class Mountains
+    internal class MountainsArt
     {
         public void ShowGraphic()
         {

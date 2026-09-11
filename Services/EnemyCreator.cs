@@ -10,6 +10,7 @@ public class EnemyCreator
     {
         Enemy enemy = new Enemy();
         CharacterStatsCalculator characterStatsCalculator = new CharacterStatsCalculator();
+
         switch(enemyType)
         {
             case EnemyType.Goblin:
@@ -51,6 +52,15 @@ public class EnemyCreator
             default:
                 throw new ArgumentException("Invalid enemy type");
         }
+
         return enemy;
+    }
+
+    public Enemy CreateRandomEnemy()
+    {
+        Random random = new Random();
+        EnemyType enemytype = (EnemyType)random.Next(0, 3);
+
+        return CreateEnemy(enemytype);
     }
 }

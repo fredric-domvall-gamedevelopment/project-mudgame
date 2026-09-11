@@ -155,15 +155,5 @@ namespace MUD.Worlds
             town.EnterTown(player);
         }
 
-        private Enemy CreateEnemy(Enemy enemy)
-        {
-            Random random = new Random();
-            EnemyType enemytype = (EnemyType)random.Next(0, 3);
-
-            EnemyCreator enemyCreator = new EnemyCreator();
-            enemy = enemyCreator.CreateEnemy(enemytype);
-
-            return enemy;
-        }
     }
 }

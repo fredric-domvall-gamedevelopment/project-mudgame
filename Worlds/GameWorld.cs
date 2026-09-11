@@ -63,7 +63,7 @@ namespace MUD.Worlds
                     break;
                 case '3':
                     Console.WriteLine("You chose to go to the Tavern");
-                    GoToTavern(player);
+                    GoToTown(player);
                     PlayGame();
                     break;
                 default:
@@ -85,7 +85,7 @@ namespace MUD.Worlds
             mountains.EnterMountains(player);
         }
 
-        private void GoToTavern(Player player)
+        private void GoToTown(Player player)
         {
             Town town = new Town();
             town.EnterTown(player);

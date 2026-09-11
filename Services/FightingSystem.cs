@@ -7,8 +7,8 @@ public class FightingSystem
     {
         do
         {
-            Console.WriteLine($"Player: {player.Name} | HP: {player.Health}");
-            Console.WriteLine($"Enemy: {enemy.Name} | HP: {enemy.Health}");
+            Console.WriteLine($"Player: {player.Name} | HP: {player.Health} | Attack: {player.Attack} | Defense: {player.Defense} | Level: {player.Level}");
+            Console.WriteLine($"Enemy: {enemy.Name} | HP: {enemy.Health}  | Attack: {enemy.Attack} | Defense: {enemy.Defense} | Level: {enemy.Level}");
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("1. Attack");
             Console.WriteLine("2. Run away");

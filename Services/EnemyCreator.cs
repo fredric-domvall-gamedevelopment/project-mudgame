@@ -1,12 +1,11 @@
 ﻿using MUD.Models;
 using MUD.Models.Enums;
-using MUD.Services;
 
 namespace MUD.Services;
 
 public class EnemyCreator
 {
-    public Enemy CreateEnemy(EnemyType enemyType)
+    public Enemy CreateEnemy(EnemyType enemyType, Player player)
     {
         Enemy enemy = new Enemy();
         CharacterStatsCalculator characterStatsCalculator = new CharacterStatsCalculator();
@@ -15,10 +14,11 @@ public class EnemyCreator
         {
             case EnemyType.Goblin:
                 enemy.Name = "Goblin";
+                enemy.Level = Random.Shared.Next(1, 4);
                 enemy.MaxHealth = 50f;
-                enemy.Stats.Strength = 7f;
-                enemy.Stats.Dexterity = 5f;
-                enemy.Stats.Endurance = 3f;
+                enemy.Stats.Strength = Random.Shared.Next(player.Level, player.Level + 2) * enemy.Level;
+                enemy.Stats.Dexterity = Random.Shared.Next(player.Level, player.Level + 2) * enemy.Level;
+                enemy.Stats.Endurance = Random.Shared.Next(player.Level, player.Level + 2) * enemy.Level;
                 enemy.Attack = characterStatsCalculator.CalculateCharacterAttack(enemy);
                 enemy.Defense = characterStatsCalculator.ClalculateCharacterDefense(enemy);
                 enemy.MaxHealth = characterStatsCalculator.CalculateCharacterHealth(enemy);
@@ -27,10 +27,11 @@ public class EnemyCreator
                 break;
             case EnemyType.Orc:
                 enemy.Name = "Orc";
+                enemy.Level = Random.Shared.Next(player.Level, player.Level + 3);
                 enemy.MaxHealth = 60f;
-                enemy.Stats.Strength = 8f;
-                enemy.Stats.Dexterity = 6f;
-                enemy.Stats.Endurance = 4f;
+                enemy.Stats.Strength = Random.Shared.Next(player.Level, player.Level + 2) * enemy.Level;
+                enemy.Stats.Dexterity = Random.Shared.Next(player.Level, player.Level + 2) * enemy.Level;
+                enemy.Stats.Endurance = Random.Shared.Next(player.Level, player.Level + 2) * enemy.Level;
                 enemy.Attack = characterStatsCalculator.CalculateCharacterAttack(enemy);
                 enemy.Defense = characterStatsCalculator.ClalculateCharacterDefense(enemy);
                 enemy.MaxHealth = characterStatsCalculator.CalculateCharacterHealth(enemy);
@@ -39,10 +40,11 @@ public class EnemyCreator
                 break;
             case EnemyType.Troll:
                 enemy.Name = "Troll";
+                enemy.Level = Random.Shared.Next(player.Level, player.Level + 4);
                 enemy.MaxHealth = 70f;
-                enemy.Stats.Strength = 9f;
-                enemy.Stats.Dexterity = 7f;
-                enemy.Stats.Endurance = 5f;
+                enemy.Stats.Strength = Random.Shared.Next(player.Level, player.Level + 2) * enemy.Level;
+                enemy.Stats.Dexterity = Random.Shared.Next(player.Level, player.Level + 2) * enemy.Level;
+                enemy.Stats.Endurance = Random.Shared.Next(player.Level, player.Level + 2) * enemy.Level;
                 enemy.Attack = characterStatsCalculator.CalculateCharacterAttack(enemy);
                 enemy.Defense = characterStatsCalculator.ClalculateCharacterDefense(enemy);
                 enemy.MaxHealth = characterStatsCalculator.CalculateCharacterHealth(enemy);
@@ -56,11 +58,11 @@ public class EnemyCreator
         return enemy;
     }
 
-    public Enemy CreateRandomEnemy()
+    public Enemy CreateRandomEnemy(Player player)
     {
         Random random = new Random();
         EnemyType enemytype = (EnemyType)random.Next(0, 3);
 
-        return CreateEnemy(enemytype);
+        return CreateEnemy(enemytype, player);
     }
 }

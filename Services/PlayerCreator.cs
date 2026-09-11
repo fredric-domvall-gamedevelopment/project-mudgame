@@ -10,7 +10,6 @@ public class PlayerCreator
 
     public Player PlayerCreation()
     {
-
         do
         {    
             player = CreatePlayer();
@@ -51,6 +50,7 @@ public class PlayerCreator
                 player.Name = Console.ReadLine()!;
             }
         }
+
         Console.Clear();
 
         do

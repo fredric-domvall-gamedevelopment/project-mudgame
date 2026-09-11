@@ -8,10 +8,8 @@ namespace MUD.Worlds
         Player player = new Player();
         PlayerCreator playerCreator = new PlayerCreator();
 
-
         public void StartGame()
-        {
-            
+        {       
             Console.WriteLine("Welcome the magical worlds of MUDs \n");
 
             player = playerCreator.PlayerCreation();

@@ -3,7 +3,7 @@ using MUD.Services;
 
 namespace MUD.Worlds
 {
-    public class LevelOne
+    public class GameWorld
     {
         CharacterStatsCalculator calculator = new CharacterStatsCalculator();
         Player player = new Player();

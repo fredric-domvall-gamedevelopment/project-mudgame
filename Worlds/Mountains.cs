@@ -10,21 +10,13 @@ public class Mountains
     {
         MountainsArt mountains = new MountainsArt();
         mountains.ShowGraphic();
-        Battle(CreateEnemy(new Enemy()), player);
+
+        EnemyCreator enemyCreator = new EnemyCreator();
+        Battle(enemyCreator.CreateRandomEnemy(new Enemy()), player);
+
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
         Console.Clear();
-    }
-
-    private Enemy CreateEnemy(Enemy enemy)
-    {
-        Random random = new Random();
-        EnemyType enemytype = (EnemyType)random.Next(0, 3);
-
-        EnemyCreator enemyCreator = new EnemyCreator();
-        enemy = enemyCreator.CreateEnemy(enemytype);
-
-        return enemy;
     }
 
     private void Battle(Enemy enemy, Player player)

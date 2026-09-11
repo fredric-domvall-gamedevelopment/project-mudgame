@@ -145,12 +145,8 @@ namespace MUD.Worlds
 
         private void GoToMountains()
         {
-            Mountains mountain = new Mountains();
-            mountain.ShowGraphic();
-            Battle(CreateEnemy(new Enemy()), player);
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-            Console.Clear();
+            Mountains mountains = new Mountains();
+            mountains.EnterMountains(player);
         }
 
         private void GoToTavern(Player player)

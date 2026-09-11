@@ -29,7 +29,7 @@ public class PlayerCreator
     }
     public Player CreatePlayer()
     {
-        int SkillPoints = 20;
+        player.SkillPoints = 20;
         player.Stats.Strength = 0f;
         player.Stats.Dexterity = 0f;
         player.Stats.Endurance = 0f;

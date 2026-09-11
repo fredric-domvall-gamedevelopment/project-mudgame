@@ -67,18 +67,6 @@ public class PlayerCreator
                 player.Defense = calculator.ClalculateCharacterDefense(player);
                 player.MaxHealth = calculator.CalculateCharacterHealth(player);
                 player.Health = player.MaxHealth;
-
-                Console.WriteLine($"Character created! \n" +
-                    $"Name: [{player.Name}] \n" +
-                    $"STR: {player.Stats.Strength} || DEX: {player.Stats.Dexterity} || END: {player.Stats.Endurance}\n" +
-                    $"HP: {player.Health}/{player.MaxHealth} || Attack: {player.Attack} || Defense: {player.Defense}");
-                Console.WriteLine("Are you happy with your character? (press n to restart, any other key to continue)");
-
-                choice = Console.ReadKey().KeyChar;
-                Console.Clear();
-
-                if (choice == 'N' || choice == 'n')
-                    CreatePlayer();
             }
         } while (SkillPoints > 0);
 

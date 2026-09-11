@@ -23,6 +23,8 @@ public class EnemyCreator
                 enemy.Defense = characterStatsCalculator.ClalculateCharacterDefense(enemy);
                 enemy.MaxHealth = characterStatsCalculator.CalculateCharacterHealth(enemy);
                 enemy.Health = enemy.MaxHealth;
+                enemy.Reward.Xp = Random.Shared.Next(1, 10) * enemy.Level;
+                enemy.Reward.Gold = Random.Shared.Next(1, 10) * enemy.Level;
                 enemy.IsDead = false;
                 break;
             case EnemyType.Orc:
@@ -36,6 +38,8 @@ public class EnemyCreator
                 enemy.Defense = characterStatsCalculator.ClalculateCharacterDefense(enemy);
                 enemy.MaxHealth = characterStatsCalculator.CalculateCharacterHealth(enemy);
                 enemy.Health = enemy.MaxHealth;
+                enemy.Reward.Xp = Random.Shared.Next(1, 10) * enemy.Level;
+                enemy.Reward.Gold = Random.Shared.Next(1, 10) * enemy.Level;
                 enemy.IsDead = false;
                 break;
             case EnemyType.Troll:
@@ -49,6 +53,8 @@ public class EnemyCreator
                 enemy.Defense = characterStatsCalculator.ClalculateCharacterDefense(enemy);
                 enemy.MaxHealth = characterStatsCalculator.CalculateCharacterHealth(enemy);
                 enemy.Health = enemy.MaxHealth;
+                enemy.Reward.Xp = Random.Shared.Next(1, 10) * enemy.Level;
+                enemy.Reward.Gold = Random.Shared.Next(1, 10) * enemy.Level;
                 enemy.IsDead = false;
                 break;
             default:

@@ -140,7 +140,7 @@ namespace MUD.Worlds
         private void GoToSea()
         {
             Sea sea = new Sea();
-            sea.EnterSea(player, CreateEnemy(new Enemy()));
+            sea.EnterSea(player);
         }
 
         private void GoToMountains()

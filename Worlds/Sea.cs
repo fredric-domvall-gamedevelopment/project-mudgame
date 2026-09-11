@@ -7,7 +7,7 @@ namespace MUD.Worlds;
 public class Sea
 {
 
-    public void EnterSea(Player player, Enemy enemy)
+    public void EnterSea(Player player)
     {
         //enemy = CreateEnemy(new Enemy());
         SeaArt sea = new SeaArt();

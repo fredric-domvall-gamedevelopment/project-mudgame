@@ -57,9 +57,16 @@ public class PlayerCreator
 
         Console.Clear();
 
+        SetSkillPoints(player);
+
+        return player;
+    }
+
+    public void SetSkillPoints(Player player)
+    {
         do
         {
-            Console.WriteLine("-----Set your Attack & Defence stats-----\n");
+            Console.WriteLine("-----Set your character stats-----\n");
             Console.WriteLine($"You have {player.SkillPoints} points to spend\n");
             Console.WriteLine($"1. Increase Strength  | Current STR: {player.Stats.Strength}");
             Console.WriteLine($"2. Increase Dexterity | Current DEX: {player.Stats.Dexterity}");
@@ -95,7 +102,5 @@ public class PlayerCreator
                 player.Health = player.MaxHealth;
             }
         } while (player.SkillPoints > 0);
-
-        return player;
     }
 }

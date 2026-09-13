@@ -24,7 +24,9 @@ namespace MUD.Worlds
                 Console.WriteLine("You are dead, game over!");
                 return;
             }
-            Console.WriteLine($"Player: {player.Name} | HP: {player.Health}/{player.MaxHealth} | Attack: {player.Attack} | Defense: {player.Defense}\n ");
+            Console.WriteLine($"Player: {player.Name} | HP: {player.Health}/{player.MaxHealth} | Attack: {player.Attack} | Defense: {player.Defense} | Gold: {player.Gold}\n" +
+            $"STR: {player.Stats.Strength} | DEX: {player.Stats.Dexterity} | END: {player.Stats.Endurance} | XP: {player.CurrentXp} / {player.NextLevelXp}\n");
+
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("1. Go to the Sea");
             Console.WriteLine("2. Go to the Mountains");

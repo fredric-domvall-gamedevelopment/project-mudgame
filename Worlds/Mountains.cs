@@ -14,7 +14,7 @@ public class Mountains
         EnemyCreator enemyCreator = new EnemyCreator();
         FightingSystem fightingSystem = new FightingSystem();
 
-        fightingSystem.Battle(enemyCreator.CreateRandomEnemy(), player);
+        fightingSystem.Battle(enemyCreator.CreateRandomEnemy(player), player);
 
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();

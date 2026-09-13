@@ -2,6 +2,7 @@
 public class Character
 {
     public string Name { get; set; } = string.Empty;
+    public int Level { get; set; }
     public float Health { get; set; }
     public float MaxHealth { get; set; }
     public float Attack { get; set; }

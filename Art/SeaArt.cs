@@ -1,6 +1,6 @@
 ﻿namespace MUD.Art
 {
-    internal class Sea
+    internal class SeaArt
     {
         public void ShowGraphic()
         {

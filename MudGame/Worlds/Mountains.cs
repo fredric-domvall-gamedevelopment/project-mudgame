@@ -15,7 +15,7 @@ public class Mountains
         EnemyCreator enemyCreator = new EnemyCreator();
         BattleSystem battleSystem = new BattleSystem();
 
-        battleSystem.Battle(enemyCreator.CreateRandomEnemy(player), player, art, artType);
+        //battleSystem.Battle(enemyCreator.CreateRandomEnemy(player), player, art, artType);
 
         ConsoleHelper.Continue();
     }

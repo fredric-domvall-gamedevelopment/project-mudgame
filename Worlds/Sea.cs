@@ -1,4 +1,5 @@
 ﻿using MUD.Art;
+using MUD.Helpers;
 using MUD.Models;
 using MUD.Models.Enums;
 using MUD.Services;
@@ -17,9 +18,7 @@ public class Sea
 
         fightingSystem.Battle(enemyCreator.CreateRandomEnemy(player), player);
 
-        Console.WriteLine("Press any key to continue...");
-        Console.ReadKey();
-        Console.Clear();
+        ConsoleHelper.Continue();
     }
 
 }

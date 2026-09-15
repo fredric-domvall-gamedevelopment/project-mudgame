@@ -1,4 +1,5 @@
-﻿using MUD.Models;
+﻿using MUD.Helpers;
+using MUD.Models;
 using MUD.Services;
 
 namespace MUD.Worlds
@@ -57,6 +58,8 @@ namespace MUD.Worlds
 
                 default:
                     Console.WriteLine("Invalid choice, please try again.");
+                    ConsoleHelper.Continue();
+
                     PlayGame();
                     break;
             }

@@ -1,4 +1,5 @@
-﻿using MUD.Models;
+﻿using MUD.Helpers;
+using MUD.Models;
 using System.Numerics;
 
 namespace MUD.Services;
@@ -94,6 +95,7 @@ public class PlayerCreator
 
                 default:
                     Console.WriteLine("Invalid choice, please try again.\n");
+                    ConsoleHelper.Continue();
                     break;
             }
             if (player.SkillPoints == 0)

@@ -1,4 +1,5 @@
-﻿using MUD.Models;
+﻿using MUD.Helpers;
+using MUD.Models;
 
 namespace MUD.Services;
 public class FightingSystem
@@ -36,6 +37,7 @@ public class FightingSystem
 
                 default:
                     Console.WriteLine("Invalid choice, please try again.");
+                    ConsoleHelper.Continue();
                     break;
             }
         } while (enemy.Health > 0 && player.Health > 0);

@@ -1,4 +1,5 @@
-﻿using MUD.Models;
+﻿using MUD.Helpers;
+using MUD.Models;
 
 namespace MUD.Worlds;
 public class Town
@@ -33,9 +34,7 @@ public class Town
             Console.WriteLine("You decline the offer and continue on your way.");
         }
 
-        Console.WriteLine("Press any key to continue...");
-        Console.ReadKey();
-        Console.Clear();
+        ConsoleHelper.Continue();
     }
 
 }

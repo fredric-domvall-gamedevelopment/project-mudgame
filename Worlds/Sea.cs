@@ -7,16 +7,14 @@ using MUD.Services;
 namespace MUD.Worlds;
 public class Sea
 {
-
     public void EnterSea(Player player)
     {
-        SeaArt sea = new SeaArt();
-        sea.ShowGraphic();
+        string art = "Sea";
 
         EnemyCreator enemyCreator = new EnemyCreator();
         FightingSystem fightingSystem = new FightingSystem();
 
-        fightingSystem.Battle(enemyCreator.CreateRandomEnemy(player), player);
+        fightingSystem.Battle(enemyCreator.CreateRandomEnemy(player), player, art);
 
         ConsoleHelper.Continue();
     }

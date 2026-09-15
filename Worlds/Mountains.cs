@@ -8,13 +8,12 @@ public class Mountains
 {
     public void EnterMountains(Player player)
     {
-        MountainsArt mountains = new MountainsArt();
-        mountains.ShowGraphic();
+        string art = "Mountains";
 
         EnemyCreator enemyCreator = new EnemyCreator();
         FightingSystem fightingSystem = new FightingSystem();
 
-        fightingSystem.Battle(enemyCreator.CreateRandomEnemy(player), player);
+        fightingSystem.Battle(enemyCreator.CreateRandomEnemy(player), player, art);
 
         ConsoleHelper.Continue();
     }

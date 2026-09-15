@@ -24,11 +24,13 @@ public class FightingSystem
                 case '1':
                     float playerDamage = Math.Max(player.Attack - enemy.Defense, 0);
                     enemy.Health -= playerDamage;
-                    Console.WriteLine($"\nYou attack the {enemy.Name} for {playerDamage} damage!");
+                    Console.WriteLine($"You attack the {enemy.Name} for {playerDamage} damage!\n");
 
                     float enemyDamage = Math.Max(enemy.Attack - player.Defense, 0);
                     player.Health -= enemyDamage;
-                    Console.WriteLine($"\nThe {enemy.Name} attacks you for {enemyDamage} damage!");
+                    Console.WriteLine($"The {enemy.Name} attacks you for {enemyDamage} damage!\n");
+
+                    ConsoleHelper.Continue();
                     break;
 
                 case '2':
@@ -44,7 +46,7 @@ public class FightingSystem
 
         if (enemy.Health <= 0)
         {
-            Console.WriteLine($"You have defeated the {enemy.Name}!");
+            Console.WriteLine($"\nYou have defeated the {enemy.Name}!");
 
             player.CurrentXp += enemy.Reward.Xp * 10;
             player.Gold += enemy.Reward.Gold * 5;
@@ -56,7 +58,7 @@ public class FightingSystem
                 player.NextLevelXp = player.Level * 100;
                 player.SkillPoints += 10;
 
-                Console.WriteLine($"Congratulations! You have leveled up to level {player.Level}!");
+                Console.WriteLine($"\nCongratulations! You have leveled up to level {player.Level}!");
                 Console.WriteLine($"Youve earned 10 Skillpoints.\n");
                 
                 ConsoleHelper.Continue();

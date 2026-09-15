@@ -27,7 +27,7 @@ public class Town
 
         if (choice == 'y')
         {
-            Console.WriteLine("You accept the offer and rest in the tavern.");
+            Console.WriteLine("\nYou accept the offer and rest in the tavern.");
             Console.WriteLine("You recover to full health.");
 
             player.Health = player.MaxHealth;
@@ -35,7 +35,7 @@ public class Town
         }
         else
         {
-            Console.WriteLine("You decline the offer and continue on your way.");
+            Console.WriteLine("\nYou decline the offer and continue on your way.");
         }
 
         ConsoleHelper.Continue();

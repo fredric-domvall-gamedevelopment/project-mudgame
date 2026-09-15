@@ -19,8 +19,7 @@
                 "  /^ ^  ^ ^^  ^    ||___|___||||||||||||___|__|||      /||o||||||\\       |" + "\n" +
                 " / ^   ^   ^    ^  ||___|___||||||||||||___|__|||          | |           |" + "\n" +
                 "/ ^ ^ ^  ^  ^  ^   ||||||||||||||||||||||||||||||oooooooooo| |ooooooo  |" + "\n" +
-                "ooooooooooooooooooooooooooooooooooooooooooooooooooooooooo" + "\n" +
-                "\n";
+                "ooooooooooooooooooooooooooooooooooooooooooooooooooooooooo" + "\n";
 
             return art;
         }

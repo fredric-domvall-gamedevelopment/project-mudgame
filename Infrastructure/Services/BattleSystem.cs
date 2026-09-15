@@ -18,37 +18,37 @@ public class BattleSystem
             case BattleAction.Attack:
                 float playerDamage = Math.Max(player.Attack - enemy.Defense, 0);
                 enemy.Health -= playerDamage;
-                battleInformation.Add($"\n\nYou attack the {enemy.Name} for {playerDamage} damage!\n");
+                battleInformation.Add($"You attack the {enemy.Name} for {playerDamage} damage!");
 
                 if(enemy.Health <= 0)
                 {
-                    battleInformation.Add($"\nYou have defeated the {enemy.Name}!");
+                    battleInformation.Add($"You have defeated the {enemy.Name}!");
                     battleResult = BattleResult.EnemyDead;
                     return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
                 }
 
                 float enemyDamage = Math.Max(enemy.Attack - player.Defense, 0);
                 player.Health -= enemyDamage;
-                battleInformation.Add($"\nThe {enemy.Name} attacks you for {enemyDamage} damage!\n");
+                battleInformation.Add($"The {enemy.Name} attacks you for {enemyDamage} damage!");
 
                 if(player.Health <= 0)
                 {
-                    battleInformation.Add("\nYou have been defeated!\n");
+                    battleInformation.Add("You have been defeated!");
                     battleResult = BattleResult.PlayerDead;
                     return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
                 }
 
-                battleInformation.Add("\nThe battle continues...\n");
+                battleInformation.Add("The battle continues...");
                 battleResult = BattleResult.Continue;
 
                 return new ResultResponse<BattleResult> { IsSuccess = true, Information = battleInformation };
 
             case BattleAction.UseItem:
-                battleInformation.Add("\nYou use an item.\n");
+                battleInformation.Add("You use an item.");
                 return new ResultResponse<BattleResult> { IsSuccess = true, Information = battleInformation };
 
             case BattleAction.Flee:
-                battleInformation.Add("\nYou run away from the battle.\n");
+                battleInformation.Add("You run away from the battle.");
                 return new ResultResponse<BattleResult> { IsSuccess = true, Information = battleInformation };
 
             default:

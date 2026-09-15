@@ -74,6 +74,9 @@ public class Sea
                 case BattleResult.PlayerDead:
                     player.IsDead = true;
                     break;
+
+                case BattleResult.Flee:
+                    return;
             }
         }
     }

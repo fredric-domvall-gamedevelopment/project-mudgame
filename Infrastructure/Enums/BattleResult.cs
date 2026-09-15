@@ -3,5 +3,6 @@ public enum BattleResult
 {
     Continue,
     PlayerDead,
-    EnemyDead
+    EnemyDead,
+    Flee
 }

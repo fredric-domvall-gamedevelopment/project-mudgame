@@ -8,6 +8,9 @@ public class Town
     {
         Console.WriteLine("You have entered the town.");
         Console.WriteLine("only a Tavern remain standing. Maybe can rest here and recover your health. \n");
+        
+        ConsoleHelper.Continue();
+
         Tavern(player);
     }
 
@@ -26,6 +29,7 @@ public class Town
         {
             Console.WriteLine("You accept the offer and rest in the tavern.");
             Console.WriteLine("You recover to full health.");
+
             player.Health = player.MaxHealth;
             player.Gold -= 100;
         }

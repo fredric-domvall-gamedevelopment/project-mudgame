@@ -49,13 +49,13 @@ public class PlayerCreator
 
             player.Name = Console.ReadLine()!;
             
-            if(String.IsNullOrEmpty(player.Name))
+            if(string.IsNullOrEmpty(player.Name))
             {
                 Console.WriteLine("Please enter a valid name");
                 ConsoleHelper.Continue();
             }
 
-        } while (String.IsNullOrEmpty(player.Name));
+        } while (string.IsNullOrEmpty(player.Name));
 
         Console.Clear();
 
@@ -75,6 +75,7 @@ public class PlayerCreator
             Console.WriteLine($"3. Increase Endurance | Current END: {player.Stats.Endurance}");
 
             char choice = Console.ReadKey().KeyChar;
+
             Console.Clear();
 
             switch (choice)

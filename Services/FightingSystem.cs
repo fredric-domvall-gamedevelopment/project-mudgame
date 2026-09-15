@@ -45,6 +45,7 @@ public class FightingSystem
         if (enemy.Health <= 0)
         {
             Console.WriteLine($"You have defeated the {enemy.Name}!");
+
             player.CurrentXp += enemy.Reward.Xp * 10;
             player.Gold += enemy.Reward.Gold * 5;
 
@@ -67,6 +68,7 @@ public class FightingSystem
         else if (player.Health <= 0)
         {
             Console.WriteLine("You have been defeated!");
+
             player.IsDead = true;
         }
     }

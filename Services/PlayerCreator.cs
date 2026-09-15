@@ -1,5 +1,6 @@
 ﻿using MUD.Helpers;
 using MUD.Models;
+using System.Numerics;
 
 namespace MUD.Services;
 public class PlayerCreator
@@ -17,7 +18,7 @@ public class PlayerCreator
             Console.WriteLine($"Character created! \n" +
             $"Name: [{player.Name}] \n" +
             $"STR: {player.Stats.Strength} || DEX: {player.Stats.Dexterity} || END: {player.Stats.Endurance}\n" +
-            $"HP: {player.Health}/{player.MaxHealth} || Attack: {player.Attack} || Defense: {player.Defense}");
+            $"HP: {player.Health}/{player.MaxHealth} || Attack: {player.Attack} || Defense: {player.Defense}\n");
             Console.WriteLine("Are you happy with your character? (press n to restart, any other key to continue)");
 
             choice = Console.ReadKey().KeyChar;
@@ -49,13 +50,13 @@ public class PlayerCreator
 
             player.Name = Console.ReadLine()!;
             
-            if(string.IsNullOrEmpty(player.Name))
+            if (String.IsNullOrEmpty(player.Name))
             {
-                Console.WriteLine("Please enter a valid name");
+                Console.WriteLine("Name cannot be empty. Please enter a valid name.");
                 ConsoleHelper.Continue();
             }
 
-        } while (string.IsNullOrEmpty(player.Name));
+        } while (String.IsNullOrEmpty(player.Name));
 
         Console.Clear();
 
@@ -75,7 +76,6 @@ public class PlayerCreator
             Console.WriteLine($"3. Increase Endurance | Current END: {player.Stats.Endurance}");
 
             char choice = Console.ReadKey().KeyChar;
-
             Console.Clear();
 
             switch (choice)

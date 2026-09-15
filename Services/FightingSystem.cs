@@ -24,19 +24,19 @@ public class FightingSystem
                 case '1':
                     float playerDamage = Math.Max(player.Attack - enemy.Defense, 0);
                     enemy.Health -= playerDamage;
-                    Console.WriteLine($"You attack the {enemy.Name} for {playerDamage} damage!");
+                    Console.WriteLine($"\nYou attack the {enemy.Name} for {playerDamage} damage!");
 
                     float enemyDamage = Math.Max(enemy.Attack - player.Defense, 0);
                     player.Health -= enemyDamage;
-                    Console.WriteLine($"The {enemy.Name} attacks you for {enemyDamage} damage!");
+                    Console.WriteLine($"\nThe {enemy.Name} attacks you for {enemyDamage} damage!");
                     break;
 
                 case '2':
-                    Console.WriteLine("You run away from the battle.");
+                    Console.WriteLine("\nYou run away from the battle.\n");
                     return;
 
                 default:
-                    Console.WriteLine("Invalid choice, please try again.");
+                    Console.WriteLine("Invalid choice, please try again.\n");
                     ConsoleHelper.Continue();
                     break;
             }
@@ -57,17 +57,16 @@ public class FightingSystem
                 player.SkillPoints += 10;
 
                 Console.WriteLine($"Congratulations! You have leveled up to level {player.Level}!");
-                Console.WriteLine($"Youve earned 10 Skillpoints.");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-                Console.Clear();
+                Console.WriteLine($"Youve earned 10 Skillpoints.\n");
+                
+                ConsoleHelper.Continue();
 
                 playerCreator.SetSkillPoints(player);
             }
         }
         else if (player.Health <= 0)
         {
-            Console.WriteLine("You have been defeated!");
+            Console.WriteLine("You have been defeated!\n");
 
             player.IsDead = true;
         }

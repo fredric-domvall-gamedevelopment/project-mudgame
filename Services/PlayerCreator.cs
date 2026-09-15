@@ -15,8 +15,7 @@ public class PlayerCreator
         {    
             player = CreatePlayer();
 
-            Console.WriteLine($"Character created! \n" +
-            $"Name: [{player.Name}] \n" +
+            Console.WriteLine($"Name: {player.Name} \n" +
             $"STR: {player.Stats.Strength} || DEX: {player.Stats.Dexterity} || END: {player.Stats.Endurance}\n" +
             $"HP: {player.Health}/{player.MaxHealth} || Attack: {player.Attack} || Defense: {player.Defense}\n");
             Console.WriteLine("Are you happy with your character? (press n to restart, any other key to continue)");

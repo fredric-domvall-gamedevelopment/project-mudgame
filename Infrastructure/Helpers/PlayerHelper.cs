@@ -4,11 +4,13 @@ namespace Infrastructure.Helpers;
 
 public static class PlayerHelper
 {
-    public static bool PlayerIsDead(Player player)
+    public static ResultResponse<Player> PlayerIsDead(Player player)
     {
+        string message = "You have been defeated!";
+
         if (player.Health <= 0)
             player.IsDead = true;
         
-        return player.IsDead;
+        return new ResultResponse<Player> { IsSuccess = true, Data = player, Information = new List<string> { message } };
     }
 }

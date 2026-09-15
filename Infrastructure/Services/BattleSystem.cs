@@ -37,7 +37,8 @@ public class BattleSystem
                 {
                     battleInformation.Add("You have been defeated!");
                     battleResult = BattleResult.PlayerDead;
-                    player.IsDead = true;
+                    
+                    PlayerHelper.PlayerIsDead(player);
 
                     return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
                 }

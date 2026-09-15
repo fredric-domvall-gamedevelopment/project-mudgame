@@ -6,19 +6,9 @@ namespace MUD.Worlds
 {
     public class GameWorld
     {
-        Player player = new Player();
         PlayerCreator playerCreator = new PlayerCreator();
 
-        public void StartGame()
-        {       
-            Console.WriteLine("Welcome the magical worlds of MUDs \n");
-
-            player = playerCreator.PlayerCreation();
-
-            PlayGame();
-        }
-
-        private void PlayGame()
+        public void PlayGame(Player player)
         {
             if(player.IsDead)
             {
@@ -40,42 +30,42 @@ namespace MUD.Worlds
             switch (choice)
             {
                 case '1':
-                    GoToSea();
-                    PlayGame();
+                    GoToSea(player);
+                    PlayGame(player);
                     break;
 
                 case '2':
-                    GoToMountains();
-                    PlayGame();
+                    GoToMountains(player);
+                    PlayGame(player);
                     break;
 
                 case '3':
-                    GoToTown();
-                    PlayGame();
+                    GoToTown(player);
+                    PlayGame(player);
                     break;
 
                 default:
                     Console.WriteLine("Invalid choice, please try again.");
                     ConsoleHelper.Continue();
 
-                    PlayGame();
+                    PlayGame(player);
                     break;
             }
         }
 
-        private void GoToSea()
+        private void GoToSea(Player player)
         {
             Sea sea = new Sea();
             sea.EnterSea(player);
         }
 
-        private void GoToMountains()
+        private void GoToMountains(Player player)
         {
             Mountains mountains = new Mountains();
             mountains.EnterMountains(player);
         }
 
-        private void GoToTown()
+        private void GoToTown(Player player)
         {
             Town town = new Town();
             town.EnterTown(player);

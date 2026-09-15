@@ -30,8 +30,17 @@ public class Town
             Console.WriteLine("\nYou accept the offer and rest in the tavern.");
             Console.WriteLine("You recover to full health.");
 
-            player.Health = player.MaxHealth;
-            player.Gold -= 100;
+            if(player.Gold < 100)
+            {
+                Console.WriteLine("However, you don't have enough Gold to pay for the room.");
+                Console.WriteLine("You leave the tavern without resting.");
+            }
+            else
+            {
+                Console.WriteLine("You pay 100 Gold for the room and rest in the tavern.");
+                player.Health = player.MaxHealth;
+                player.Gold -= 100;
+            }
         }
         else
         {

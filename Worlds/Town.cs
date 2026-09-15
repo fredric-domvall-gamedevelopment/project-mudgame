@@ -1,5 +1,5 @@
-﻿using MUD.Helpers;
-using MUD.Models;
+﻿using Infrastructure.Helpers;
+using Infrastructure.Models;
 
 namespace MUD.Worlds;
 public class Town

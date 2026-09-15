@@ -1,5 +1,5 @@
-﻿using MUD.Models;
-using MUD.Services;
+﻿using Infrastructure.Models;
+using Infrastructure.Services;
 
 namespace MUD.Worlds;
 public class Sea

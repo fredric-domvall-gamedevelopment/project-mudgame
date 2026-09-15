@@ -15,7 +15,9 @@ public class FightingSystem
             Console.WriteLine("2. Run away");
 
             char choice = Console.ReadKey().KeyChar;
+
             Console.Clear();
+
             switch (choice)
             {
                 case '1':
@@ -27,9 +29,11 @@ public class FightingSystem
                     player.Health -= enemyDamage;
                     Console.WriteLine($"The {enemy.Name} attacks you for {enemyDamage} damage!");
                     break;
+
                 case '2':
                     Console.WriteLine("You run away from the battle.");
                     return;
+
                 default:
                     Console.WriteLine("Invalid choice, please try again.");
                     break;
@@ -41,17 +45,20 @@ public class FightingSystem
             Console.WriteLine($"You have defeated the {enemy.Name}!");
             player.CurrentXp += enemy.Reward.Xp * 10;
             player.Gold += enemy.Reward.Gold * 5;
+
             if(player.CurrentXp >= player.NextLevelXp)
             {
                 player.Level++;
                 player.CurrentXp -= player.NextLevelXp;
                 player.NextLevelXp = player.Level * 100;
                 player.SkillPoints += 10;
+
                 Console.WriteLine($"Congratulations! You have leveled up to level {player.Level}!");
                 Console.WriteLine($"Youve earned 10 Skillpoints.");
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
                 Console.Clear();
+
                 playerCreator.SetSkillPoints(player);
             }
         }

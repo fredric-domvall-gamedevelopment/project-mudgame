@@ -18,7 +18,9 @@ public class Town
         Console.WriteLine("do you accept his  offer?  \n  (press y to accept, any other key to decline)");
 
         char choice = Console.ReadKey().KeyChar;
+
         Console.Clear();
+
         if (choice == 'y')
         {
             Console.WriteLine("You accept the offer and rest in the tavern.");

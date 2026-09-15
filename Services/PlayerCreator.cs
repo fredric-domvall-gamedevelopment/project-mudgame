@@ -81,16 +81,18 @@ public class PlayerCreator
                     player.Stats.Strength++;
                     player.SkillPoints--;
                     break;
+
                 case '2':
                     player.Stats.Dexterity++;
                     player.SkillPoints--;
                     break;
+
                 case '3':
                     player.Stats.Endurance++;
                     player.SkillPoints--;
                     break;
-                default:
 
+                default:
                     Console.WriteLine("Invalid choice, please try again.\n");
                     break;
             }

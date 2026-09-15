@@ -42,16 +42,19 @@ namespace MUD.Worlds
                     GoToSea();
                     PlayGame();
                     break;
+
                 case '2':
                     Console.WriteLine("You chose to go to the Mountains");
                     GoToMountains();
                     PlayGame();
                     break;
+
                 case '3':
                     Console.WriteLine("You chose to go to the Tavern");
                     GoToTown();
                     PlayGame();
                     break;
+
                 default:
                     Console.WriteLine("Invalid choice, please try again.");
                     PlayGame();

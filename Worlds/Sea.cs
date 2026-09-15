@@ -15,8 +15,5 @@ public class Sea
         FightingSystem fightingSystem = new FightingSystem();
 
         fightingSystem.Battle(enemyCreator.CreateRandomEnemy(player), player, art);
-
-        ConsoleHelper.Continue();
     }
-
 }

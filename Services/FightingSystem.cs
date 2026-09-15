@@ -31,7 +31,7 @@ public class FightingSystem
                 case '1':
                     float playerDamage = Math.Max(player.Attack - enemy.Defense, 0);
                     enemy.Health -= playerDamage;
-                    Console.WriteLine($"\nYou attack the {enemy.Name} for {playerDamage} damage!\n");
+                    Console.WriteLine($"\n\nYou attack the {enemy.Name} for {playerDamage} damage!\n");
 
                     float enemyDamage = Math.Max(enemy.Attack - player.Defense, 0);
                     player.Health -= enemyDamage;

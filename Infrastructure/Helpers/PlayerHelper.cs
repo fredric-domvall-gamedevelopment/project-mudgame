@@ -4,7 +4,7 @@ namespace Infrastructure.Helpers;
 
 public static class PlayerHelper
 {
-    public static ResultResponse<Player> PlayerIsDead(Player player)
+    public static ResultResponse<Player> IsPlayerDead(Player player)
     {
         string message = "You have been defeated!";
 

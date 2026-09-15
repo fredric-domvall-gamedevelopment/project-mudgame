@@ -1,7 +1,7 @@
-﻿using MUD.Models;
-using MUD.Models.Enums;
+﻿using Infrastructure.Models;
+using Infrastructure.Enums;
 
-namespace MUD.Services;
+namespace Infrastructure.Services;
 
 public class EnemyCreator
 {
@@ -27,6 +27,7 @@ public class EnemyCreator
                 enemy.Reward.Gold = Random.Shared.Next(1, 10) * enemy.Level;
                 enemy.IsDead = false;
                 break;
+
             case EnemyType.Orc:
                 enemy.Name = "Orc";
                 enemy.Level = Random.Shared.Next(player.Level, player.Level + 3);
@@ -42,6 +43,7 @@ public class EnemyCreator
                 enemy.Reward.Gold = Random.Shared.Next(1, 10) * enemy.Level;
                 enemy.IsDead = false;
                 break;
+
             case EnemyType.Troll:
                 enemy.Name = "Troll";
                 enemy.Level = Random.Shared.Next(player.Level, player.Level + 4);
@@ -57,6 +59,7 @@ public class EnemyCreator
                 enemy.Reward.Gold = Random.Shared.Next(1, 10) * enemy.Level;
                 enemy.IsDead = false;
                 break;
+
             default:
                 throw new ArgumentException("Invalid enemy type");
         }
@@ -67,6 +70,7 @@ public class EnemyCreator
     public Enemy CreateRandomEnemy(Player player)
     {
         Random random = new Random();
+
         EnemyType enemytype = (EnemyType)random.Next(0, 3);
 
         return CreateEnemy(enemytype, player);

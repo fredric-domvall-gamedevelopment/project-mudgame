@@ -1,4 +1,5 @@
-﻿using MUD.Models;
+﻿using Infrastructure.Helpers;
+using Infrastructure.Models;
 
 namespace MUD.Worlds;
 public class Town
@@ -7,6 +8,9 @@ public class Town
     {
         Console.WriteLine("You have entered the town.");
         Console.WriteLine("only a Tavern remain standing. Maybe can rest here and recover your health. \n");
+        
+        ConsoleHelper.Continue();
+
         Tavern(player);
     }
 
@@ -18,22 +22,32 @@ public class Town
         Console.WriteLine("do you accept his  offer?  \n  (press y to accept, any other key to decline)");
 
         char choice = Console.ReadKey().KeyChar;
+
         Console.Clear();
+
         if (choice == 'y')
         {
-            Console.WriteLine("You accept the offer and rest in the tavern.");
+            Console.WriteLine("\nYou accept the offer and rest in the tavern.");
             Console.WriteLine("You recover to full health.");
-            player.Health = player.MaxHealth;
-            player.Gold -= 100;
+
+            if(player.Gold < 100)
+            {
+                Console.WriteLine("However, you don't have enough Gold to pay for the room.");
+                Console.WriteLine("You leave the tavern without resting.");
+            }
+            else
+            {
+                Console.WriteLine("You pay 100 Gold for the room and rest in the tavern.");
+                player.Health = player.MaxHealth;
+                player.Gold -= 100;
+            }
         }
         else
         {
-            Console.WriteLine("You decline the offer and continue on your way.");
+            Console.WriteLine("\nYou decline the offer and continue on your way.");
         }
 
-        Console.WriteLine("Press any key to continue...");
-        Console.ReadKey();
-        Console.Clear();
+        ConsoleHelper.Continue();
     }
 
 }

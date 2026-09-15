@@ -1,6 +1,6 @@
-﻿using MUD.Models.Enums;
+﻿using Infrastructure.Enums;
 
-namespace MUD.Models;
+namespace Infrastructure.Models;
 public class Enemy : Character
 {
     public EnemyType Type { get; set; }

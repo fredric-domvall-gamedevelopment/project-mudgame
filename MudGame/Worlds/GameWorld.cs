@@ -1,29 +1,19 @@
-﻿using MUD.Models;
-using MUD.Services;
+﻿using Infrastructure.Helpers;
+using Infrastructure.Models;
+using Infrastructure.Services;
 
 namespace MUD.Worlds
 {
     public class GameWorld
     {
-        Player player = new Player();
-        PlayerCreator playerCreator = new PlayerCreator();
-
-        public void StartGame()
-        {       
-            Console.WriteLine("Welcome the magical worlds of MUDs \n");
-
-            player = playerCreator.PlayerCreation();
-
-            PlayGame();
-        }
-
-        private void PlayGame()
+        public void PlayGame(Player player)
         {
             if(player.IsDead)
             {
                 Console.WriteLine("You are dead, game over!");
                 return;
             }
+
             Console.WriteLine($"Player: {player.Name} | HP: {player.Health}/{player.MaxHealth} | Attack: {player.Attack} | Defense: {player.Defense} | Gold: {player.Gold}\n" +
             $"STR: {player.Stats.Strength} | DEX: {player.Stats.Dexterity} | END: {player.Stats.Endurance} | XP: {player.CurrentXp} / {player.NextLevelXp}\n");
 
@@ -32,46 +22,49 @@ namespace MUD.Worlds
             Console.WriteLine("2. Go to the Mountains");
             Console.WriteLine("3. Go to the Tavern");
 
-            Char choice = Console.ReadKey().KeyChar;
+            char choice = Console.ReadKey().KeyChar;
+
             Console.Clear();
 
             switch (choice)
             {
                 case '1':
-                    Console.WriteLine("You chose to go to the Sea");
-                    GoToSea();
-                    PlayGame();
+                    GoToSea(player);
+                    PlayGame(player);
                     break;
+
                 case '2':
-                    Console.WriteLine("You chose to go to the Mountains");
-                    GoToMountains();
-                    PlayGame();
+                    GoToMountains(player);
+                    PlayGame(player);
                     break;
+
                 case '3':
-                    Console.WriteLine("You chose to go to the Tavern");
-                    GoToTown();
-                    PlayGame();
+                    GoToTown(player);
+                    PlayGame(player);
                     break;
+
                 default:
                     Console.WriteLine("Invalid choice, please try again.");
-                    PlayGame();
+                    ConsoleHelper.Continue();
+
+                    PlayGame(player);
                     break;
             }
         }
 
-        private void GoToSea()
+        private void GoToSea(Player player)
         {
             Sea sea = new Sea();
             sea.EnterSea(player);
         }
 
-        private void GoToMountains()
+        private void GoToMountains(Player player)
         {
             Mountains mountains = new Mountains();
             mountains.EnterMountains(player);
         }
 
-        private void GoToTown()
+        private void GoToTown(Player player)
         {
             Town town = new Town();
             town.EnterTown(player);

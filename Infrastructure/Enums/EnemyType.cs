@@ -1,4 +1,4 @@
-﻿namespace MUD.Models.Enums;
+﻿namespace Infrastructure.Enums;
 public enum EnemyType
 {
     Goblin,

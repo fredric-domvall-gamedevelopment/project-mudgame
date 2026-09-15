@@ -1,7 +1,7 @@
-﻿using MUD.Models;
-using System.Numerics;
+﻿using Infrastructure.Helpers;
+using Infrastructure.Models;
 
-namespace MUD.Services;
+namespace Infrastructure.Services;
 public class PlayerCreator
 {
     CharacterStatsCalculator calculator = new CharacterStatsCalculator();
@@ -14,10 +14,9 @@ public class PlayerCreator
         {    
             player = CreatePlayer();
 
-            Console.WriteLine($"Character created! \n" +
-            $"Name: [{player.Name}] \n" +
+            Console.WriteLine($"Name: {player.Name} \n" +
             $"STR: {player.Stats.Strength} || DEX: {player.Stats.Dexterity} || END: {player.Stats.Endurance}\n" +
-            $"HP: {player.Health}/{player.MaxHealth} || Attack: {player.Attack} || Defense: {player.Defense}");
+            $"HP: {player.Health}/{player.MaxHealth} || Attack: {player.Attack} || Defense: {player.Defense}\n");
             Console.WriteLine("Are you happy with your character? (press n to restart, any other key to continue)");
 
             choice = Console.ReadKey().KeyChar;
@@ -31,7 +30,6 @@ public class PlayerCreator
     {
         player.SkillPoints = 20;
         player.Level = 1;
-        player.CurrentXp = 0;
         player.NextLevelXp = 100;
         player.Stats.Strength = 0f;
         player.Stats.Dexterity = 0f;
@@ -39,21 +37,21 @@ public class PlayerCreator
         player.Attack = 0f;
         player.Defense = 0f;
         player.MaxHealth = 50f;
-        player.Gold = 0;
-        player.IsDead = false;
-
-        Console.WriteLine("-----Create your character-----\n");
-        Console.WriteLine("What is your name?");
-
-        player.Name = Console.ReadLine()!;
-        if (String.IsNullOrEmpty(player.Name))
+        
+        do
         {
-            while (String.IsNullOrEmpty(player.Name))
+            Console.WriteLine("-----Create your character-----\n");
+            Console.WriteLine("What is your name?");
+
+            player.Name = Console.ReadLine()!;
+            
+            if (string.IsNullOrEmpty(player.Name))
             {
-                Console.WriteLine("Please enter a valid name");
-                player.Name = Console.ReadLine()!;
+                Console.WriteLine("Name cannot be empty. Please enter a valid name.");
+                ConsoleHelper.Continue();
             }
-        }
+
+        } while (string.IsNullOrEmpty(player.Name));
 
         Console.Clear();
 
@@ -81,17 +79,20 @@ public class PlayerCreator
                     player.Stats.Strength++;
                     player.SkillPoints--;
                     break;
+
                 case '2':
                     player.Stats.Dexterity++;
                     player.SkillPoints--;
                     break;
+
                 case '3':
                     player.Stats.Endurance++;
                     player.SkillPoints--;
                     break;
-                default:
 
+                default:
                     Console.WriteLine("Invalid choice, please try again.\n");
+                    ConsoleHelper.Continue();
                     break;
             }
             if (player.SkillPoints == 0)

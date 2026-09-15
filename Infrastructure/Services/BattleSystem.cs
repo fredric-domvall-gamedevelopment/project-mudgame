@@ -41,15 +41,15 @@ public class BattleSystem
                 battleInformation.Add("The battle continues...");
                 battleResult = BattleResult.Continue;
 
-                return new ResultResponse<BattleResult> { IsSuccess = true, Information = battleInformation };
+                return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
 
             case BattleAction.UseItem:
                 battleInformation.Add("You use an item.");
-                return new ResultResponse<BattleResult> { IsSuccess = true, Information = battleInformation };
+                return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
 
             case BattleAction.Flee:
                 battleInformation.Add("You run away from the battle.");
-                return new ResultResponse<BattleResult> { IsSuccess = true, Information = battleInformation };
+                return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(battleAction), battleAction, null);

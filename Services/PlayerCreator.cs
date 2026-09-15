@@ -1,6 +1,5 @@
 ﻿using MUD.Helpers;
 using MUD.Models;
-using System.Numerics;
 
 namespace MUD.Services;
 public class PlayerCreator
@@ -42,19 +41,21 @@ public class PlayerCreator
         player.MaxHealth = 50f;
         player.Gold = 0;
         player.IsDead = false;
-
-        Console.WriteLine("-----Create your character-----\n");
-        Console.WriteLine("What is your name?");
-
-        player.Name = Console.ReadLine()!;
-        if (String.IsNullOrEmpty(player.Name))
+        
+        do
         {
-            while (String.IsNullOrEmpty(player.Name))
+            Console.WriteLine("-----Create your character-----\n");
+            Console.WriteLine("What is your name?");
+
+            player.Name = Console.ReadLine()!;
+            
+            if(String.IsNullOrEmpty(player.Name))
             {
                 Console.WriteLine("Please enter a valid name");
-                player.Name = Console.ReadLine()!;
+                ConsoleHelper.Continue();
             }
-        }
+
+        } while (String.IsNullOrEmpty(player.Name));
 
         Console.Clear();
 

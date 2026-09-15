@@ -6,8 +6,6 @@ namespace MUD.Worlds
 {
     public class GameWorld
     {
-        PlayerCreator playerCreator = new PlayerCreator();
-
         public void PlayGame(Player player)
         {
             if(player.IsDead)
@@ -15,6 +13,7 @@ namespace MUD.Worlds
                 Console.WriteLine("You are dead, game over!");
                 return;
             }
+
             Console.WriteLine($"Player: {player.Name} | HP: {player.Health}/{player.MaxHealth} | Attack: {player.Attack} | Defense: {player.Defense} | Gold: {player.Gold}\n" +
             $"STR: {player.Stats.Strength} | DEX: {player.Stats.Dexterity} | END: {player.Stats.Endurance} | XP: {player.CurrentXp} / {player.NextLevelXp}\n");
 

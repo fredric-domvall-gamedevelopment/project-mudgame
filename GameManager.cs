@@ -37,10 +37,10 @@ public class GameManager
                 
         }
     }
+
     private void StartNewGame()
     {
         player = playerCreator.PlayerCreation();
-
         gameWorld.PlayGame(player);
     }
 

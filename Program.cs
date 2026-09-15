@@ -1,5 +1,4 @@
-﻿using MUD.Models;
-using MUD.Worlds;
+﻿using MUD.Worlds;
 
 namespace MUD
 {

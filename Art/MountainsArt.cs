@@ -2,25 +2,27 @@
 {
     internal class MountainsArt
     {
-        public void ShowGraphic()
+        public string ShowGraphic()
         {
-            Console.WriteLine("");
-            Console.WriteLine("                                   /\\");
-            Console.WriteLine("                              /\\  //\\\\");
-            Console.WriteLine("                       /\\    //\\\\///\\\\\\        /\\");
-            Console.WriteLine("                      //\\\\  ///\\////\\\\\\\\  /\\  //\\\\");
-            Console.WriteLine("         /\\          /  ^ \\/^ ^/^  ^  ^ \\/^ \\/  ^ \\");
-            Console.WriteLine("        / ^\\    /\\  / ^   /  ^/ ^ ^ ^   ^\\ ^/  ^^  \\");
-            Console.WriteLine("       /^   \\  / ^\\/ ^ ^   ^ / ^  ^    ^  \\/ ^   ^  \\       *");
-            Console.WriteLine("      /  ^ ^ \\/^  ^\\ ^ ^ ^   ^  ^   ^   ____  ^   ^  \\     /|\\");
-            Console.WriteLine("     / ^ ^  ^ \\ ^  _\\___________________|  |_____^ ^  \\   /||o\\");
-            Console.WriteLine("    / ^^  ^ ^ ^\\  /______________________________\\ ^ ^ \\ /|o|||\\");
-            Console.WriteLine("   /  ^  ^^ ^ ^  /________________________________\\  ^  /|||||o|\\");
-            Console.WriteLine("  /^ ^  ^ ^^  ^    ||___|___||||||||||||___|__|||      /||o||||||\\       |");
-            Console.WriteLine(" / ^   ^   ^    ^  ||___|___||||||||||||___|__|||          | |           |");
-            Console.WriteLine("/ ^ ^ ^  ^  ^  ^   ||||||||||||||||||||||||||||||oooooooooo| |ooooooo  |");
-            Console.WriteLine("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
-            Console.WriteLine("");
+            string art = "\n" +
+                "                                   /\\" + "\n" +
+                "                              /\\  //\\\\" + "\n" +
+                "                       /\\    //\\\\///\\\\\\        /\\" + "\n" +
+                "                      //\\\\  ///\\////\\\\\\\\  /\\  //\\\\" + "\n" +
+                "         /\\          /  ^ \\/^ ^/^  ^  ^ \\/^ \\/  ^ \\" + "\n" +
+                "        / ^\\    /\\  / ^   /  ^/ ^ ^ ^   ^\\ ^/  ^^  \\" + "\n" +
+                "       /^   \\  / ^\\/ ^ ^   ^ / ^  ^    ^  \\/ ^   ^  \\       *" + "\n" +
+                "      /  ^ ^ \\/^  ^\\ ^ ^ ^   ^  ^   ^   ____  ^   ^  \\     /|\\" + "\n" +
+                "     / ^ ^  ^ \\ ^  _\\___________________|  |_____^ ^  \\   /||o\\" + "\n" +
+                "    / ^^  ^ ^ ^\\  /______________________________\\ ^ ^ \\ /|o|||\\" + "\n" +
+                "   /  ^  ^^ ^ ^  /________________________________\\  ^  /|||||o|\\" + "\n" +
+                "  /^ ^  ^ ^^  ^    ||___|___||||||||||||___|__|||      /||o||||||\\       |" + "\n" +
+                " / ^   ^   ^    ^  ||___|___||||||||||||___|__|||          | |           |" + "\n" +
+                "/ ^ ^ ^  ^  ^  ^   ||||||||||||||||||||||||||||||oooooooooo| |ooooooo  |" + "\n" +
+                "ooooooooooooooooooooooooooooooooooooooooooooooooooooooooo" + "\n" +
+                "\n";
+
+            return art;
         }
     }
 }

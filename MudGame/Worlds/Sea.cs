@@ -80,7 +80,8 @@ public class Sea
 
                     ConsoleHelper.Continue();
 
-                    playerCreator.SetSkillPoints(player);
+                    if(player.SkillPoints > 0)
+                        playerCreator.SetSkillPoints(player);
                     break;
 
                 case BattleResult.PlayerDead:

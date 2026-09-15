@@ -11,6 +11,7 @@ public class Mountains
     MountainsArt mountainsArt = new MountainsArt();
     BattleAction battleAction = new BattleAction();
     BattleSystem battleSystem = new BattleSystem();
+    PlayerCreator playerCreator = new PlayerCreator();
 
     public void EnterMountains(Player player)
     {
@@ -80,6 +81,9 @@ public class Mountains
                                 Console.WriteLine(info);
 
                     ConsoleHelper.Continue();
+
+                    if(player.SkillPoints > 0)
+                        playerCreator.SetSkillPoints(player);
                     break;
 
                 case BattleResult.PlayerDead:

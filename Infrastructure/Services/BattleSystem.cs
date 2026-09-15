@@ -24,6 +24,7 @@ public class BattleSystem
                 {
                     battleInformation.Add($"You have defeated the {enemy.Name}!");
                     battleResult = BattleResult.EnemyDead;
+                    enemy.IsDead = true;
 
                     return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
                 }
@@ -52,6 +53,17 @@ public class BattleSystem
                 enemyDamage = Math.Max(enemy.Attack - player.Defense, 0);
                 player.Health -= enemyDamage;
                 battleInformation.Add($"The {enemy.Name} attacks you for {enemyDamage} damage!");
+
+                if (player.Health <= 0)
+                {
+                    battleInformation.Add("You have been defeated!");
+
+                    battleResult = BattleResult.PlayerDead;
+                    player.IsDead = true;
+
+                    return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
+                }
+
                 battleResult = BattleResult.Continue;
 
                 return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
@@ -71,7 +83,18 @@ public class BattleSystem
 
                 enemyDamage = Math.Max(enemy.Attack - player.Defense, 0);
                 player.Health -= enemyDamage;
+
                 battleInformation.Add($"The {enemy.Name} attacks you for {enemyDamage} damage!");
+                
+                if (player.Health <= 0)
+                {
+                    battleInformation.Add("You have been defeated!");
+                    battleResult = BattleResult.PlayerDead;
+                    player.IsDead = true;
+
+                    return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
+                }
+
                 battleResult = BattleResult.Continue;
 
                 return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };

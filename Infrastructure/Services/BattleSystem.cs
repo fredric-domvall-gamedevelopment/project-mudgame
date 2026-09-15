@@ -8,7 +8,6 @@ namespace Infrastructure.Services;
 public class BattleSystem
 {
     private readonly List<string> battleInformation = new List<string>();
-    PlayerCreator playerCreator = new PlayerCreator();
     BattleResult battleResult = new BattleResult();
     public ResultResponse<BattleResult> Battle(BattleAction battleAction, Enemy enemy, Player player)
     {
@@ -21,9 +20,26 @@ public class BattleSystem
                 enemy.Health -= playerDamage;
                 battleInformation.Add($"\n\nYou attack the {enemy.Name} for {playerDamage} damage!\n");
 
+                if(enemy.Health <= 0)
+                {
+                    battleInformation.Add($"\nYou have defeated the {enemy.Name}!");
+                    battleResult = BattleResult.EnemyDead;
+                    return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
+                }
+
                 float enemyDamage = Math.Max(enemy.Attack - player.Defense, 0);
                 player.Health -= enemyDamage;
                 battleInformation.Add($"\nThe {enemy.Name} attacks you for {enemyDamage} damage!\n");
+
+                if(player.Health <= 0)
+                {
+                    battleInformation.Add("\nYou have been defeated!\n");
+                    battleResult = BattleResult.PlayerDead;
+                    return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
+                }
+
+                battleInformation.Add("\nThe battle continues...\n");
+                battleResult = BattleResult.Continue;
 
                 return new ResultResponse<BattleResult> { IsSuccess = true, Information = battleInformation };
 

@@ -76,6 +76,8 @@ public class Mountains
                 case BattleResult.PlayerDead:
                     player.IsDead = true;
                     break;
+                case BattleResult.Flee:
+                    return;
             }
         }
     }

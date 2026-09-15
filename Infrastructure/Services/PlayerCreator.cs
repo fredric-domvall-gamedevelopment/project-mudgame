@@ -70,7 +70,7 @@ public class PlayerCreator
             Console.WriteLine($"2. Increase Dexterity | Current DEX: {player.Stats.Dexterity}");
             Console.WriteLine($"3. Increase Endurance | Current END: {player.Stats.Endurance}");
 
-            char choice = Console.ReadKey().KeyChar;
+            choice = Console.ReadKey().KeyChar;
             Console.Clear();
 
             switch (choice)

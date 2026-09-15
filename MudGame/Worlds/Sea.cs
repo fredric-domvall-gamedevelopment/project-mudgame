@@ -10,6 +10,7 @@ public class Sea
     SeaArt seaArt = new SeaArt();
     BattleAction battleAction = new BattleAction();
     BattleSystem battleSystem = new BattleSystem();
+    PlayerCreator playerCreator = new PlayerCreator();
 
     public void EnterSea(Player player)
     {
@@ -69,6 +70,17 @@ public class Sea
                     break;
 
                 case BattleResult.EnemyDead:
+                    RewardSystem rewardSystem = new RewardSystem();
+                    var rewardResult = rewardSystem.BattleRewards(enemy, player, battleSystem.battleInformation);
+
+                    if (rewardResult.IsSuccess)
+                        if (rewardResult.Information != null)
+                            foreach (var info in rewardResult.Information)
+                                Console.WriteLine(info);
+
+                    ConsoleHelper.Continue();
+
+                    playerCreator.SetSkillPoints(player);
                     break;
 
                 case BattleResult.PlayerDead:

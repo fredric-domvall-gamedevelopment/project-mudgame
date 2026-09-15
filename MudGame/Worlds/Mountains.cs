@@ -71,6 +71,15 @@ public class Mountains
                     break;
 
                 case BattleResult.EnemyDead:
+                    RewardSystem rewardSystem = new RewardSystem();
+                    var rewardResult = rewardSystem.BattleRewards(enemy, player, battleSystem.battleInformation);
+
+                    if (rewardResult.IsSuccess)
+                        if (rewardResult.Information != null)
+                            foreach (var info in rewardResult.Information)
+                                Console.WriteLine(info);
+
+                    ConsoleHelper.Continue();
                     break;
 
                 case BattleResult.PlayerDead:

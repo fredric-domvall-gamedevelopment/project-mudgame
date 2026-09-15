@@ -1,5 +1,4 @@
-﻿using MUD.Models;
-using MUD.Worlds;
+﻿using MUD.Worlds;
 
 namespace MUD
 {
@@ -8,8 +7,8 @@ namespace MUD
         static void Main(string[] args)
         {
             Console.Title = "MUD - The Magical World";
-            GameWorld levelOne = new GameWorld();
-            levelOne.StartGame();
+            GameManager gameManager = new GameManager();
+            gameManager.StartMenu();
         }
     }
 }

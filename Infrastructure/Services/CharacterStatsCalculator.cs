@@ -1,6 +1,6 @@
-﻿using MUD.Models;
+﻿using Infrastructure.Models;
 
-namespace MUD.Services;
+namespace Infrastructure.Services;
 
 public class CharacterStatsCalculator
 {

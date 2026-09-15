@@ -3,7 +3,7 @@ using MUD.Helpers;
 using MUD.Models;
 
 namespace MUD.Services;
-public class FightingSystem
+public class BattleSystem
 {
     PlayerCreator playerCreator = new PlayerCreator();
     SeaArt sea = new SeaArt();

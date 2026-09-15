@@ -11,9 +11,9 @@ public class Mountains
         string art = "Mountains";
 
         EnemyCreator enemyCreator = new EnemyCreator();
-        FightingSystem fightingSystem = new FightingSystem();
+        BattleSystem battleSystem = new BattleSystem();
 
-        fightingSystem.Battle(enemyCreator.CreateRandomEnemy(player), player, art);
+        battleSystem.Battle(enemyCreator.CreateRandomEnemy(player), player, art);
 
         ConsoleHelper.Continue();
     }

@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="../Infrastructure/Infrastructure.csproj" Id="969dce33-2d02-42fc-b298-ba89e2d124c0" />
   <Project Path="MUD.csproj" />
 </Solution>

@@ -33,25 +33,23 @@ namespace MUD.Worlds
             Console.WriteLine("2. Go to the Mountains");
             Console.WriteLine("3. Go to the Tavern");
 
-            Char choice = Console.ReadKey().KeyChar;
+            char choice = Console.ReadKey().KeyChar;
+
             Console.Clear();
 
             switch (choice)
             {
                 case '1':
-                    Console.WriteLine("You chose to go to the Sea");
                     GoToSea();
                     PlayGame();
                     break;
 
                 case '2':
-                    Console.WriteLine("You chose to go to the Mountains");
                     GoToMountains();
                     PlayGame();
                     break;
 
                 case '3':
-                    Console.WriteLine("You chose to go to the Tavern");
                     GoToTown();
                     PlayGame();
                     break;

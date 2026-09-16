@@ -5,15 +5,15 @@ public class ScoreSystem
 {
     private readonly List<Player> _playerHighscore = new List<Player>();
 
-    public Player CalculateHighscore(Player player)
+    public void CalculateHighscore(Player player)
     {
         player.Score = (int)(player.Stats.Strength + player.Stats.Dexterity + player.Stats.Endurance);
-
-        return player;
     }
 
     public void AddPlayerToHighscoreList(Player player)
     {
+        CalculateHighscore(player);
+
         _playerHighscore.Add(player);
     }
 

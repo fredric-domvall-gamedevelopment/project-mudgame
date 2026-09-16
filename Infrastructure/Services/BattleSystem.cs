@@ -20,13 +20,22 @@ public class BattleSystem
                 enemy.Health -= playerDamage;
                 battleInformation.Add($"You attack the {enemy.Name} for {playerDamage} damage!");
 
-                PlayerHelper.IsPlayerDead(player);
+                if(enemy.Health <= 0)
+                {
+                    battleInformation.Add($"You have defeated the {enemy.Name}!");
+                    battleResult = BattleResult.EnemyDead;
+
+                    return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
+                }
 
                 float enemyDamage = Math.Max(enemy.Attack - player.Defense, 0);
                 player.Health -= enemyDamage;
                 battleInformation.Add($"The {enemy.Name} attacks you for {enemyDamage} damage!");
 
-                PlayerHelper.IsPlayerDead(player);
+                var isPlayerDead = PlayerHelper.IsPlayerDead(player);
+
+                if (isPlayerDead.IsSuccess)
+                    return new ResultResponse<BattleResult> { IsSuccess = true, Data = isPlayerDead.Data, Information = isPlayerDead.Information };
 
                 battleInformation.Add("The battle continues...");
                 battleResult = BattleResult.Continue;
@@ -40,7 +49,10 @@ public class BattleSystem
                 player.Health -= enemyDamage;
                 battleInformation.Add($"The {enemy.Name} attacks you for {enemyDamage} damage!");
 
-                PlayerHelper.IsPlayerDead(player);
+                isPlayerDead = PlayerHelper.IsPlayerDead(player);
+
+                if (isPlayerDead.IsSuccess)
+                    return new ResultResponse<BattleResult> { IsSuccess = true, Data = isPlayerDead.Data, Information = isPlayerDead.Information };
 
                 battleResult = BattleResult.Continue;
 
@@ -64,7 +76,10 @@ public class BattleSystem
 
                 battleInformation.Add($"The {enemy.Name} attacks you for {enemyDamage} damage!");
 
-                PlayerHelper.IsPlayerDead(player);
+                isPlayerDead = PlayerHelper.IsPlayerDead(player);
+
+                if (isPlayerDead.IsSuccess)
+                    return new ResultResponse<BattleResult> { IsSuccess = true, Data = isPlayerDead.Data, Information = isPlayerDead.Information };
 
                 battleResult = BattleResult.Continue;
 

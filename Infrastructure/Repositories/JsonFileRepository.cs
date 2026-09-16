@@ -10,17 +10,17 @@ public class JsonFileRepository<T>
         try
         {
             if(!File.Exists(filePath))
-                return new ResultResponse<List<T>> { IsSuccess = false, Information = new List<string> { "JSON file not found." } };
+                return new ResultResponse<List<T>> { IsSuccess = false, Data = new List<T>(), Information = new List<string> { "JSON file not found." } };
 
             var jsonData = await File.ReadAllTextAsync(filePath);
 
             if (string.IsNullOrWhiteSpace(jsonData))
-                return new ResultResponse<List<T>> { IsSuccess = false, Information = new List<string> { "JSON file is empty." } };
+                return new ResultResponse<List<T>> { IsSuccess = false, Data = new List<T>(), Information = new List<string> { "JSON file is empty." } };
 
             var listData = JsonSerializer.Deserialize<List<T>>(jsonData);
 
             if(listData == null)
-                return new ResultResponse<List<T>> { IsSuccess = false, Information = new List<string> { "Failed to deserialize JSON data." } };
+                return new ResultResponse<List<T>> { IsSuccess = false, Data = new List<T>(), Information = new List<string> { "Failed to deserialize JSON data." } };
 
             return new ResultResponse<List<T>>
             {

@@ -21,6 +21,7 @@ namespace MUD.Worlds
                 Console.WriteLine("You are dead, game over!");
                 
                 await _scoreSystem.AddPlayerToHighscoreList(player);
+                return;
             }
 
             Console.WriteLine($"Player: {player.Name} | HP: {player.Health}/{player.MaxHealth} | Attack: {player.Attack} | Defense: {player.Defense} | Gold: {player.Gold}\n" +

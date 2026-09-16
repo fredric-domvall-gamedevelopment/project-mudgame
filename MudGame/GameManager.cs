@@ -32,6 +32,7 @@ public class GameManager
         {
             case '1':
                 StartNewGame();
+                StartMenu();
                 break;
 
             case '2':

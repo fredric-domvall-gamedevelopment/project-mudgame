@@ -1,5 +1,7 @@
-﻿using Infrastructure.Helpers;
+﻿using Infrastructure.Configurations;
+using Infrastructure.Helpers;
 using Infrastructure.Models;
+using Infrastructure.Repositories;
 using Infrastructure.Services;
 using MUD.Worlds;
 
@@ -9,7 +11,12 @@ public class GameManager
     GameWorld gameWorld = new GameWorld();
     Player player = new Player();
     PlayerCreator playerCreator = new PlayerCreator();
-    ScoreSystem scoreSystem = new ScoreSystem();
+    private readonly ScoreSystem _scoreSystem;
+    
+    public GameManager(ScoreSystem scoreSystem)
+    {
+        _scoreSystem = scoreSystem;
+    }
     public void StartMenu()
     {
         Console.WriteLine("Welcome the magical worlds of MUDs \n");
@@ -52,7 +59,7 @@ public class GameManager
     }
     private void HighscoreList()
     {
-        List<Player> highscoreList = scoreSystem.GetHighscoreList();
+        List<Player> highscoreList = _scoreSystem.GetHighscoreList();
         Console.WriteLine("-----Highscore List-----\n");
 
         if(highscoreList.Count == 0)

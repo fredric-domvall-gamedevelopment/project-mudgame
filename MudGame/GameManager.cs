@@ -41,7 +41,7 @@ public class GameManager
                 ConsoleHelper.Continue();
 
                 StartMenu();
-                break;       
+                break;
         }
     }
 

@@ -20,7 +20,7 @@ namespace MUD.Worlds
             {
                 Console.WriteLine("You are dead, game over!");
                 
-                await _scoreSystem.AddPlayerToHighscoreList(player);
+                var result = await _scoreSystem.AddPlayerToHighscoreList(player);
                 return;
             }
 
@@ -40,24 +40,24 @@ namespace MUD.Worlds
             {
                 case '1':
                     GoToSea(player);
-                    PlayGame(player);
+                    await PlayGame(player);
                     break;
 
                 case '2':
                     GoToMountains(player);
-                    PlayGame(player);
+                    await PlayGame(player);
                     break;
 
                 case '3':
                     GoToTown(player);
-                    PlayGame(player);
+                    await PlayGame(player);
                     break;
 
                 default:
                     Console.WriteLine("Invalid choice, please try again.");
                     ConsoleHelper.Continue();
 
-                    PlayGame(player);
+                    await PlayGame(player);
                     break;
             }
         }

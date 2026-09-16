@@ -10,7 +10,7 @@ namespace MUD
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             IHost host = Host.CreateDefaultBuilder(args)
                 .ConfigureServices( services =>
@@ -24,7 +24,7 @@ namespace MUD
                 .Build();
             Console.Title = "MUD - The Magical World";
             GameManager gameManager = host.Services.GetRequiredService<GameManager>();
-            gameManager.StartMenu();
+            await gameManager.StartMenu();
         }
     }
 }

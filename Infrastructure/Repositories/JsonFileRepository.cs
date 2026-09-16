@@ -45,6 +45,10 @@ public class JsonFileRepository<T>
             var options = new JsonSerializerOptions { WriteIndented = true };
             var jsonData = JsonSerializer.Serialize(listData, options);
 
+            var directory = Path.GetDirectoryName(filePath);
+            if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+                Directory.CreateDirectory(directory);
+
             await File.WriteAllTextAsync(filePath, jsonData);
 
             return new ResultResponse<List<T>>

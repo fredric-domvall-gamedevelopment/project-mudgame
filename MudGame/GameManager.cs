@@ -18,7 +18,7 @@ public class GameManager
         _scoreSystem = scoreSystem;
         _gameWorld = gameWorld;
     }
-    public void StartMenu()
+    public async Task StartMenu()
     {
         Console.WriteLine("Welcome the magical worlds of MUDs \n");
         Console.WriteLine("1. Start New Game");
@@ -31,13 +31,13 @@ public class GameManager
         switch (choice)
         {
             case '1':
-                StartNewGame();
-                StartMenu();
+                await StartNewGame();
+                await StartMenu();
                 break;
 
             case '2':
-                HighscoreList();
-                StartMenu();
+                await HighscoreList();
+                await StartMenu();
                 break;
 
             case '3':
@@ -49,19 +49,19 @@ public class GameManager
                 Console.WriteLine("Invalid choice, please try again.");
                 ConsoleHelper.Continue();
 
-                StartMenu();
+                await StartMenu();
                 break;
         }
     }
 
-    private void StartNewGame()
+    private async Task StartNewGame()
     {
         player = playerCreator.PlayerCreation();
-        _gameWorld.PlayGame(player);
+        await _gameWorld.PlayGame(player);
     }
-    private void HighscoreList()
+    private async Task HighscoreList()
     {
-        List<Player> highscoreList = _scoreSystem.GetHighscoreList();
+        List<Player> highscoreList = await _scoreSystem.GetHighscoreList();
         Console.WriteLine("-----Highscore List-----\n");
 
         if(highscoreList.Count == 0)

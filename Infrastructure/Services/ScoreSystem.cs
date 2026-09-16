@@ -24,12 +24,20 @@ public class ScoreSystem
         CalculateHighscore(player);
 
         _playerHighscore.Add(player);
-        await _jsonFileRepository.WriteToJsonAsync(_fileSources, _playerHighscore);
+        var result = await _jsonFileRepository.WriteToJsonAsync(_fileSources, _playerHighscore);
         return player;
     }
 
-    public List<Player> GetHighscoreList()
+    public async Task<List<Player>> GetHighscoreList()
     {
+        var result = await _jsonFileRepository.ReadFromJsonAsync(_fileSources);
+
+        if (result.IsSuccess)
+        {
+            _playerHighscore.Clear();
+            _playerHighscore.AddRange(result.Data!);
+        }
+
         return _playerHighscore;
     }
 }

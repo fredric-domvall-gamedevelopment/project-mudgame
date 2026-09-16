@@ -9,11 +9,13 @@ public class GameManager
     GameWorld gameWorld = new GameWorld();
     Player player = new Player();
     PlayerCreator playerCreator = new PlayerCreator();
+    ScoreSystem scoreSystem = new ScoreSystem();
     public void StartMenu()
     {
         Console.WriteLine("Welcome the magical worlds of MUDs \n");
         Console.WriteLine("1. Start New Game");
-        Console.WriteLine("2. Exit");
+        Console.WriteLine("2. Show Highscore List");
+        Console.WriteLine("3. Exit");
 
         char choice = Console.ReadKey().KeyChar;
         Console.Clear();
@@ -25,6 +27,11 @@ public class GameManager
                 break;
 
             case '2':
+                HighscoreList();
+                StartMenu();
+                break;
+
+            case '3':
                 ExitGame();
                 break;
 
@@ -42,6 +49,19 @@ public class GameManager
     {
         player = playerCreator.PlayerCreation();
         gameWorld.PlayGame(player);
+    }
+    private void HighscoreList()
+    {
+        List<Player> highscoreList = scoreSystem.GetHighscoreList();
+        Console.WriteLine("-----Highscore List-----\n");
+
+        if(highscoreList.Count == 0)
+            Console.WriteLine("No players in the highscore list yet.");
+        else
+            foreach (var player in highscoreList)
+                Console.WriteLine($"Name: {player.Name} || Score: {player.Score}");
+
+        ConsoleHelper.Continue();
     }
 
     private void ExitGame()

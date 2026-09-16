@@ -5,8 +5,6 @@ using Infrastructure.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MUD.Worlds;
-using System.Net;
-using System.Runtime.CompilerServices;
 
 namespace MUD
 {
@@ -21,6 +19,7 @@ namespace MUD
                     services.AddSingleton<FileSources>();
                     services.AddSingleton<ScoreSystem>();
                     services.AddSingleton<GameManager>();
+                    services.AddSingleton<GameWorld>();
                 })
                 .Build();
             Console.Title = "MUD - The Magical World";

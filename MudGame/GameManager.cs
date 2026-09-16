@@ -8,14 +8,15 @@ using MUD.Worlds;
 namespace MUD;
 public class GameManager
 {
-    GameWorld gameWorld = new GameWorld();
     Player player = new Player();
     PlayerCreator playerCreator = new PlayerCreator();
     private readonly ScoreSystem _scoreSystem;
+    private readonly GameWorld _gameWorld;
     
-    public GameManager(ScoreSystem scoreSystem)
+    public GameManager(ScoreSystem scoreSystem, GameWorld gameWorld)
     {
         _scoreSystem = scoreSystem;
+        _gameWorld = gameWorld;
     }
     public void StartMenu()
     {
@@ -55,7 +56,7 @@ public class GameManager
     private void StartNewGame()
     {
         player = playerCreator.PlayerCreation();
-        gameWorld.PlayGame(player);
+        _gameWorld.PlayGame(player);
     }
     private void HighscoreList()
     {

@@ -6,12 +6,21 @@ namespace MUD.Worlds
 {
     public class GameWorld
     {
-        public void PlayGame(Player player)
+        private readonly ScoreSystem _scoreSystem;
+
+        public GameWorld(ScoreSystem scoreSystem)
         {
-            if(player.IsDead)
+            _scoreSystem = scoreSystem;
+        }
+
+        public async Task PlayGame(Player player)
+        {
+
+            if (player.IsDead)
             {
                 Console.WriteLine("You are dead, game over!");
-                return;
+                
+                await _scoreSystem.AddPlayerToHighscoreList(player);
             }
 
             Console.WriteLine($"Player: {player.Name} | HP: {player.Health}/{player.MaxHealth} | Attack: {player.Attack} | Defense: {player.Defense} | Gold: {player.Gold}\n" +

@@ -32,7 +32,8 @@ public class GameManager
                 break;
 
             case '3':
-                ExitGame();
+                Console.WriteLine("Thank you for playing! Goodbye!");
+                Environment.Exit(0);
                 break;
 
             default:
@@ -40,8 +41,7 @@ public class GameManager
                 ConsoleHelper.Continue();
 
                 StartMenu();
-                break;
-                
+                break;       
         }
     }
 
@@ -62,11 +62,5 @@ public class GameManager
                 Console.WriteLine($"Name: {player.Name} || Score: {player.Score}");
 
         ConsoleHelper.Continue();
-    }
-
-    private void ExitGame()
-    {
-        Console.WriteLine("Thank you for playing! Goodbye!");
-        Environment.Exit(0);
     }
 }

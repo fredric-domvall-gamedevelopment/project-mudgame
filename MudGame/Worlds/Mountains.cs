@@ -24,6 +24,9 @@ public class Mountains
 
     private void ToBattle(Enemy enemy, Player player)
     {
+        if (player.IsDead)
+            return;
+
         Console.WriteLine(mountainsArt.ShowGraphic());
         Console.WriteLine($"Player: {player.Name} | HP: {player.Health} | Attack: {player.Attack} | Defense: {player.Defense} | Level: {player.Level}");
         Console.WriteLine($"Enemy: {enemy.Name} | HP: {enemy.Health} | Attack: {enemy.Attack} | Defense: {enemy.Defense} | Level: {enemy.Level}\n");

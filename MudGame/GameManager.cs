@@ -1,7 +1,6 @@
 ﻿using Infrastructure.Configurations;
 using Infrastructure.Helpers;
 using Infrastructure.Models;
-using Infrastructure.Repositories;
 using Infrastructure.Services;
 using MUD.Worlds;
 
@@ -31,7 +30,7 @@ public class GameManager
         switch (choice)
         {
             case '1':
-                player = playerCreator.PlayerCreation();
+                player = playerCreator.PlayerCreation(player);
                 await _gameWorld.PlayGame(player);
 
                 await StartMenu();
@@ -69,7 +68,7 @@ public class GameManager
         {
             case '1':
                 Console.WriteLine(
-                    "--- Player Stats ---    {0,-10} {1,-15} {2,-10} {3}\n",
+                    "--- Player Stats ---    {0,-10} {1,-15} {2,-10} {3,-10} {4,-10} {5}\n",
                     "Name:", player.Name,
                     "Level:", player.Level,
                     "Score:", player.Score);

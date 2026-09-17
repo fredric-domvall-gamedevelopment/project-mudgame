@@ -1,13 +1,16 @@
-﻿using Infrastructure.Helpers;
-using Infrastructure.Models;
+﻿using Infrastructure.Models;
 
 namespace Infrastructure.Services;
+
 public class PlayerSystem
 {
+    private readonly List<string> playerInformation = new List<string>();
     CharacterStatsCalculator calculator = new CharacterStatsCalculator();
-    char choice;
-    public Player CreatePlayer(Player player)
+
+    public ResultResponse<Player> CreatePlayer(Player player)
     {
+        playerInformation.Clear();
+
         player.SkillPoints = 20;
         player.Level = 1;
         player.NextLevelXp = 100;
@@ -18,70 +21,45 @@ public class PlayerSystem
         player.Defense = 0f;
         player.MaxHealth = 50f;
 
-        do
+        if (string.IsNullOrEmpty(player.Name) || string.IsNullOrWhiteSpace(player.Name))
         {
-            Console.WriteLine("-----Create your character-----\n");
-            Console.WriteLine("What is your name?");
+            playerInformation.Add("Player name cannot be empty. Please enter a valid name.");
+            return new ResultResponse<Player> { IsSuccess = false, Data = player, Information = playerInformation };
+        }
 
-            player.Name = Console.ReadLine()!;
-
-            if (string.IsNullOrEmpty(player.Name))
-            {
-                Console.WriteLine("Name cannot be empty. Please enter a valid name.");
-                ConsoleHelper.Continue();
-            }
-
-        } while (string.IsNullOrEmpty(player.Name));
-
-        Console.Clear();
-
-        SetSkillPoints(player);
-
-        return player;
+        return new ResultResponse<Player> { IsSuccess = true, Data = player, Information = playerInformation };
     }
 
-    public void SetSkillPoints(Player player)
+    public ResultResponse<Player> SetSkillPoints(Player player, char choice)
     {
-        do
+        playerInformation.Clear();
+
+        player.Attack = calculator.CalculateCharacterAttack(player);
+        player.Defense = calculator.ClalculateCharacterDefense(player);
+        player.MaxHealth = calculator.CalculateCharacterHealth(player);
+        player.Health = player.MaxHealth;
+
+        switch (choice)
         {
-            Console.WriteLine("-----Set your character stats-----\n");
-            Console.WriteLine($"You have {player.SkillPoints} points to spend\n");
-            Console.WriteLine($"1. Increase Strength  | Current STR: {player.Stats.Strength}");
-            Console.WriteLine($"2. Increase Dexterity | Current DEX: {player.Stats.Dexterity}");
-            Console.WriteLine($"3. Increase Endurance | Current END: {player.Stats.Endurance}");
+            case '1':
+                player.Stats.Strength++;
+                player.SkillPoints--;
+                return new ResultResponse<Player> { IsSuccess = true, Data = player, Information = null };
 
-            choice = Console.ReadKey().KeyChar;
-            Console.Clear();
+            case '2':
+                player.Stats.Dexterity++;
+                player.SkillPoints--;
+                return new ResultResponse<Player> { IsSuccess = true, Data = player, Information = null };
 
-            switch (choice)
-            {
-                case '1':
-                    player.Stats.Strength++;
-                    player.SkillPoints--;
-                    break;
+            case '3':
+                player.Stats.Endurance++;
+                player.SkillPoints--;
+                return new ResultResponse<Player> { IsSuccess = true, Data = player, Information = null };
 
-                case '2':
-                    player.Stats.Dexterity++;
-                    player.SkillPoints--;
-                    break;
+            default:
+                playerInformation.Add("Invalid choice. Please select a valid option.");
+                return new ResultResponse<Player> { IsSuccess = false, Data = player, Information = playerInformation };
+        }
 
-                case '3':
-                    player.Stats.Endurance++;
-                    player.SkillPoints--;
-                    break;
-
-                default:
-                    Console.WriteLine("Invalid choice, please try again.\n");
-                    ConsoleHelper.Continue();
-                    break;
-            }
-            if (player.SkillPoints == 0)
-            {
-                player.Attack = calculator.CalculateCharacterAttack(player);
-                player.Defense = calculator.ClalculateCharacterDefense(player);
-                player.MaxHealth = calculator.CalculateCharacterHealth(player);
-                player.Health = player.MaxHealth;
-            }
-        } while (player.SkillPoints > 0);
     }
 }

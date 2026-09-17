@@ -84,9 +84,6 @@ public class Mountains
                                 Console.WriteLine(info);
 
                     ConsoleHelper.Continue();
-
-                    if(player.SkillPoints > 0)
-                        playerCreator.SetSkillPoints(player);
                     break;
 
                 case BattleResult.PlayerDead:

@@ -56,6 +56,37 @@ public class GameManager
         }
     }
 
+    public void PlayerMenu(Player player)
+    {
+        Console.WriteLine("Player Menu");
+        Console.WriteLine("1. Show Player Stats");
+        Console.WriteLine("2. Back to Game");
+
+        char choice = Console.ReadKey().KeyChar;
+        Console.Clear();
+
+        switch (choice)
+        {
+            case '1':
+                Console.WriteLine("Nothing to show yet, will be added soon");
+                ConsoleHelper.Continue();
+
+                PlayerMenu(player);
+                break;
+
+            case '2':
+                return;
+
+            default:
+                Console.WriteLine("Invalid choice, please try again.");
+                ConsoleHelper.Continue();
+
+                PlayerMenu(player);
+                break;
+                
+        }
+    }
+
     private async Task HighscoreList()
     {
         List<Player> highscoreList = await _scoreSystem.GetHighscoreList();

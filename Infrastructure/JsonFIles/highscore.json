@@ -1,0 +1,21 @@
+[
+  {
+    "CurrentXp": 0,
+    "NextLevelXp": 100,
+    "Gold": 0,
+    "SkillPoints": 0,
+    "Score": 20,
+    "Name": "bajs",
+    "Level": 1,
+    "Health": -10,
+    "MaxHealth": 50,
+    "Attack": 40,
+    "Defense": 0,
+    "IsDead": true,
+    "Stats": {
+      "Strength": 20,
+      "Dexterity": 0,
+      "Endurance": 0
+    }
+  }
+]

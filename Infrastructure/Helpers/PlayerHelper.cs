@@ -19,6 +19,6 @@ public static class PlayerHelper
             return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = new List<string> { message } };
         }
         
-        return new ResultResponse<BattleResult> { IsSuccess = true };
+        return new ResultResponse<BattleResult> { IsSuccess = false };
     }
 }

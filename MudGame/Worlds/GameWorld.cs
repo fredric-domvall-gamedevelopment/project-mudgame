@@ -6,11 +6,21 @@ namespace MUD.Worlds
 {
     public class GameWorld
     {
-        public void PlayGame(Player player)
+        private readonly ScoreSystem _scoreSystem;
+
+        public GameWorld(ScoreSystem scoreSystem)
         {
-            if(player.IsDead)
+            _scoreSystem = scoreSystem;
+        }
+
+        public async Task PlayGame(Player player)
+        {
+
+            if (player.IsDead)
             {
                 Console.WriteLine("You are dead, game over!");
+                
+                var result = await _scoreSystem.AddPlayerToHighscoreList(player);
                 return;
             }
 
@@ -30,24 +40,24 @@ namespace MUD.Worlds
             {
                 case '1':
                     GoToSea(player);
-                    PlayGame(player);
+                    await PlayGame(player);
                     break;
 
                 case '2':
                     GoToMountains(player);
-                    PlayGame(player);
+                    await PlayGame(player);
                     break;
 
                 case '3':
                     GoToTown(player);
-                    PlayGame(player);
+                    await PlayGame(player);
                     break;
 
                 default:
                     Console.WriteLine("Invalid choice, please try again.");
                     ConsoleHelper.Continue();
 
-                    PlayGame(player);
+                    await PlayGame(player);
                     break;
             }
         }

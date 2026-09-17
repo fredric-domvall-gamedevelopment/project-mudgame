@@ -31,7 +31,9 @@ public class GameManager
         switch (choice)
         {
             case '1':
-                await StartNewGame();
+                player = playerCreator.PlayerCreation();
+                await _gameWorld.PlayGame(player);
+
                 await StartMenu();
                 break;
 
@@ -54,11 +56,6 @@ public class GameManager
         }
     }
 
-    private async Task StartNewGame()
-    {
-        player = playerCreator.PlayerCreation();
-        await _gameWorld.PlayGame(player);
-    }
     private async Task HighscoreList()
     {
         List<Player> highscoreList = await _scoreSystem.GetHighscoreList();

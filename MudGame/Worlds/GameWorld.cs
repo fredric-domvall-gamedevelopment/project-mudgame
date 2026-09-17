@@ -30,7 +30,8 @@ namespace MUD.Worlds
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("1. Go to the Sea");
             Console.WriteLine("2. Go to the Mountains");
-            Console.WriteLine("3. Go to the Tavern");
+            Console.WriteLine("3. Go to the Tavern\n");
+            Console.WriteLine("M. Open Player Menu");
 
             char choice = Console.ReadKey().KeyChar;
 
@@ -50,6 +51,12 @@ namespace MUD.Worlds
 
                 case '3':
                     GoToTown(player);
+                    await PlayGame(player);
+                    break;
+
+                case 'M' or 'm':
+                    GameManager gameManager = new GameManager(_scoreSystem, this);
+                    gameManager.PlayerMenu(player);
                     await PlayGame(player);
                     break;
 

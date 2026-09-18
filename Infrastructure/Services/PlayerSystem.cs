@@ -1,15 +1,24 @@
 ﻿using Infrastructure.Models;
+using Infrastructure.Repositories;
 
 namespace Infrastructure.Services;
 
 public class PlayerSystem
 {
-    private readonly List<string> playerInformation = new List<string>();
+    private readonly List<string> _playerInformation = new List<string>();
+    private readonly JsonFileRepository<Player> _jsonFileRepository;
+    private readonly string _fileSources;
     CharacterStatsCalculator calculator = new CharacterStatsCalculator();
+
+    public PlayerSystem(JsonFileRepository<Player> jsonFileRepository, string fileSources)
+    {
+        _jsonFileRepository = jsonFileRepository;
+        _fileSources = fileSources;
+    }
 
     public ResultResponse<Player> CreatePlayer(Player player)
     {
-        playerInformation.Clear();
+        _playerInformation.Clear();
 
         player.SkillPoints = 20;
         player.Level = 1;
@@ -23,16 +32,16 @@ public class PlayerSystem
 
         if (string.IsNullOrEmpty(player.Name) || string.IsNullOrWhiteSpace(player.Name))
         {
-            playerInformation.Add("Player name cannot be empty. Please enter a valid name.");
-            return new ResultResponse<Player> { IsSuccess = false, Data = player, Information = playerInformation };
+            _playerInformation.Add("Player name cannot be empty. Please enter a valid name.");
+            return new ResultResponse<Player> { IsSuccess = false, Data = player, Information = _playerInformation };
         }
 
-        return new ResultResponse<Player> { IsSuccess = true, Data = player, Information = playerInformation };
+        return new ResultResponse<Player> { IsSuccess = true, Data = player, Information = _playerInformation };
     }
 
     public ResultResponse<Player> SetSkillPoints(Player player, char choice)
     {
-        playerInformation.Clear();
+        _playerInformation.Clear();
 
         player.Attack = calculator.CalculateCharacterAttack(player);
         player.Defense = calculator.ClalculateCharacterDefense(player);
@@ -57,8 +66,8 @@ public class PlayerSystem
                 return new ResultResponse<Player> { IsSuccess = true, Data = player, Information = null };
 
             default:
-                playerInformation.Add("Invalid choice. Please select a valid option.");
-                return new ResultResponse<Player> { IsSuccess = false, Data = player, Information = playerInformation };
+                _playerInformation.Add("Invalid choice. Please select a valid option.");
+                return new ResultResponse<Player> { IsSuccess = false, Data = player, Information = _playerInformation };
         }
 
     }

@@ -55,7 +55,8 @@ public class EnemyCreator(JsonFileRepository<Enemy> jsonFileRepository, FileSour
         int randomIndex = new Random().Next(enemyOptions.Count);
 
         Enemy enemyTemplate = enemyOptions[randomIndex];
-        EnemyRank enemyRank = (EnemyRank)Random.Shared.Next(0,3);
+        EnemyRank enemyRank = (EnemyRank)Random.Shared.Next(0, 3);
+
 
         return CreateEnemy(enemyTemplate, enemyRank, player);
     }
@@ -78,6 +79,32 @@ public class EnemyCreator(JsonFileRepository<Enemy> jsonFileRepository, FileSour
                 break;
             default:
                 throw new ArgumentException("Invalid enemy spawn area");
+        }
+    }
+
+    private void AdjustEnemyStats(Enemy enemy, EnemyRank enemyRank, Player player)
+    {
+        CharacterStatsCalculator characterStatsCalculator = new CharacterStatsCalculator();
+
+        switch (enemyRank)
+        {
+            case EnemyRank.Normal:
+                enemy.Stats.Strength = (int)Random.Shared.Next((int)Math.Max(1, player.Stats.Strength - 3), (int)player.Stats.Strength + 3);
+                enemy.Stats.Dexterity = (int)Random.Shared.Next((int)Math.Max(1, player.Stats.Dexterity - 3), (int)player.Stats.Dexterity + 3);
+                enemy.Stats.Endurance = (int)Random.Shared.Next((int)Math.Max(1, player.Stats.Endurance - 3), (int)player.Stats.Endurance + 3);
+                break;
+            case EnemyRank.Elite:
+                enemy.Stats.Strength = (int)Random.Shared.Next((int)Math.Max(1, player.Stats.Strength - 2), (int)player.Stats.Strength + 5);
+                enemy.Stats.Dexterity = (int)Random.Shared.Next((int)Math.Max(1, player.Stats.Dexterity - 2), (int)player.Stats.Dexterity + 5);
+                enemy.Stats.Endurance = (int)Random.Shared.Next((int)Math.Max(1, player.Stats.Endurance - 2), (int)player.Stats.Endurance + 5);
+                break;
+            case EnemyRank.Boss:
+                enemy.Stats.Strength = (int)Random.Shared.Next((int)Math.Max(1, player.Stats.Strength - 1), (int)player.Stats.Strength + 7);
+                enemy.Stats.Dexterity = (int)Random.Shared.Next((int)Math.Max(1, player.Stats.Dexterity - 1), (int)player.Stats.Dexterity + 7);
+                enemy.Stats.Endurance = (int)Random.Shared.Next((int)Math.Max(1, player.Stats.Endurance - 1), (int)player.Stats.Endurance + 7); 
+                break;
+            default:
+                throw new ArgumentException("Invalid enemy rank");
         }
     }
 }

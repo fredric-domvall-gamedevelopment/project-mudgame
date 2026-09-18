@@ -1,15 +1,17 @@
 ﻿using Infrastructure.Helpers;
 using Infrastructure.Models;
+using Infrastructure.Services;
 
 namespace MUD;
 
-public class PlayerManager(PlayerCreator playerCreator)
+public class PlayerManager(PlayerCreator playerCreator, PlayerSystem playerSystem)
 {
-    public void PlayerMenu(Player player)
+    public async Task PlayerMenu(Player player)
     {
         Console.WriteLine("Player Menu");
         Console.WriteLine("1. Show Player Stats");
-        Console.WriteLine("2. Back to Game");
+        Console.WriteLine("2. Save Player");
+        Console.WriteLine("3. Back to Game");
 
         char choice = Console.ReadKey().KeyChar;
         Console.Clear();
@@ -50,17 +52,21 @@ public class PlayerManager(PlayerCreator playerCreator)
                         ConsoleHelper.Continue();
                 }
 
-                PlayerMenu(player);
+                await PlayerMenu(player);
                 break;
 
             case '2':
+                await playerSystem.SavePlayer(player);
+                return;
+
+            case '3':
                 return;
 
             default:
                 Console.WriteLine("Invalid choice, please try again.");
                 ConsoleHelper.Continue();
 
-                PlayerMenu(player);
+                await PlayerMenu(player);
                 break;
 
         }

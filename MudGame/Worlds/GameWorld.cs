@@ -53,7 +53,7 @@ namespace MUD.Worlds
                     break;
 
                 case 'M' or 'm':
-                    playerManager.PlayerMenu(player);
+                    await playerManager.PlayerMenu(player);
                     await PlayGame(player);
                     break;
 

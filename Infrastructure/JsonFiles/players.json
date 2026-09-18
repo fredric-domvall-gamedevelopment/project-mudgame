@@ -1,0 +1,22 @@
+[
+  {
+    "PlayerId": "ed926b94-ce3e-44ef-82ab-d3ab284842df",
+    "CurrentXp": 0,
+    "NextLevelXp": 100,
+    "Gold": 0,
+    "SkillPoints": 0,
+    "Score": 0,
+    "Name": "Fredric",
+    "Level": 1,
+    "Health": 150,
+    "MaxHealth": 150,
+    "Attack": 20,
+    "Defense": 10,
+    "IsDead": false,
+    "Stats": {
+      "Strength": 10,
+      "Dexterity": 5,
+      "Endurance": 5
+    }
+  }
+]

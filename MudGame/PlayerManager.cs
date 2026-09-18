@@ -95,14 +95,20 @@ public class PlayerManager(PlayerCreator playerCreator, PlayerSystem playerSyste
         {
             var choice = result.Data[selection - 1];
 
-            Console.WriteLine($"Player {choice.Name} loaded successfully.");
-            ConsoleHelper.Continue();
+            var loadResult = await playerSystem.LoadPlayerByPlayerId(choice.PlayerId, player);
 
-            return choice;
+            if(loadResult.IsSuccess && loadResult.Data is not null)
+            {
+                Console.WriteLine($"Player {choice.Name} loaded successfully.");
+                ConsoleHelper.Continue();
+
+                return loadResult.Data;
+            }
+            return player;
         }
         else
         {
-            Console.WriteLine("Invalid selection.");
+            Console.WriteLine("Failed to load player.");
             ConsoleHelper.Continue();
 
             return await LoadPlayer(player);

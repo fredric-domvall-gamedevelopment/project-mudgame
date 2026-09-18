@@ -18,25 +18,5 @@
       "Dexterity": 5,
       "Endurance": 5
     }
-  },
-  {
-    "PlayerId": "c81f6c0a-3983-4a4d-8842-e8441f32a311",
-    "CurrentXp": 110,
-    "NextLevelXp": 200,
-    "Gold": 45,
-    "SkillPoints": 0,
-    "Score": 10,
-    "Name": "Fredric",
-    "Level": 2,
-    "Health": 750,
-    "MaxHealth": 750,
-    "Attack": 20,
-    "Defense": 20,
-    "IsDead": false,
-    "Stats": {
-      "Strength": 10,
-      "Dexterity": 10,
-      "Endurance": 10
-    }
   }
 ]

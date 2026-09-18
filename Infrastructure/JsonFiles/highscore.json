@@ -1,0 +1,22 @@
+[
+  {
+    "PlayerId": "dff9a193-fc78-417c-9c5f-b8e33c164541",
+    "CurrentXp": 0,
+    "NextLevelXp": 0,
+    "Gold": 0,
+    "SkillPoints": 0,
+    "Score": -20,
+    "Name": "",
+    "Level": 0,
+    "Health": 0,
+    "MaxHealth": 0,
+    "Attack": 0,
+    "Defense": 0,
+    "IsDead": true,
+    "Stats": {
+      "Strength": 0,
+      "Dexterity": 0,
+      "Endurance": 0
+    }
+  }
+]

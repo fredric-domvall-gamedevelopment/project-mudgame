@@ -8,6 +8,7 @@ public class Character
     public float MaxHealth { get; set; }
     public float Attack { get; set; }
     public float Defense { get; set; }
+    public float ArmorRating { get; set; }
     public bool IsDead { get; set; }
     public CharacterStats Stats { get; set; } = new CharacterStats();
 }

@@ -8,7 +8,6 @@ namespace MUD;
 public class GameManager(ScoreSystem scoreSystem, GameWorld gameWorld, PlayerCreator playerCreator)
 {
     Player player = new Player();
-    private readonly PlayerCreator playerCreator = playerCreator;
     private readonly ScoreSystem _scoreSystem = scoreSystem;
     private readonly GameWorld _gameWorld = gameWorld;
 

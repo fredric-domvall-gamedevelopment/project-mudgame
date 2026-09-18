@@ -91,7 +91,7 @@ public class BattleSystem
 
     private float CalculateDamage(Character attacker, Character defender)
     {
-        float damage = attacker.Attack * (1 - defender.ArmorRating);
+        float damage = Random.Shared.Next((int)attacker.Attack - 10, (int)attacker.Attack + 10) * (1 - defender.ArmorRating);
 
         return Math.Max(damage, 0);
     }

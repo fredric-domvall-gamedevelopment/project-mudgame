@@ -7,6 +7,7 @@ namespace Infrastructure.Services;
 public class PlayerSystem(JsonFileRepository<Player> jsonFileRepository, FileSources fileSources)
 {
     private readonly List<string> _playerInformation = new List<string>();
+    private readonly List<Player> _savedPlayers = new List<Player>();
     private readonly JsonFileRepository<Player> _jsonFileRepository = jsonFileRepository;
     private readonly FileSources _fileSources = fileSources;
     CharacterStatsCalculator calculator = new CharacterStatsCalculator();
@@ -64,6 +65,35 @@ public class PlayerSystem(JsonFileRepository<Player> jsonFileRepository, FileSou
                 _playerInformation.Add("Invalid choice. Please select a valid option.");
                 return new ResultResponse<Player> { IsSuccess = false, Data = player, Information = _playerInformation };
         }
+    }
+
+    public async Task<ResultResponse<Player>> SavePlayer(Player player)
+    {
+        _savedPlayers.Clear();
+
+        var result = await _jsonFileRepository.ReadFromJsonAsync(_fileSources.PlayersFileSource);
+
+        if (result.Data != null)
+            _savedPlayers.AddRange(result.Data);
+
+        if (_savedPlayers.FirstOrDefault(p => p.PlayerId == player.PlayerId) is not null)
+        {
+            _savedPlayers.RemoveAll(p => p.PlayerId == player.PlayerId);
+            _savedPlayers.Add(player);
+        }
+        else
+            _savedPlayers.Add(player);
+
+        result = await _jsonFileRepository.WriteToJsonAsync(_fileSources.PlayersFileSource, _savedPlayers);
+        if(!result.IsSuccess && result.Information is not null)
+        {
+            _playerInformation.AddRange(result.Information);
+            return new ResultResponse<Player> { IsSuccess = false, Data = player, Information = _playerInformation };
+        }
+
+        _playerInformation.Add("Player saved successfully.");
+
+        return new ResultResponse<Player> { IsSuccess = true, Data = player, Information = _playerInformation };
 
     }
 }

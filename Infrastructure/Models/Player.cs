@@ -2,6 +2,7 @@
 
 public class Player : Character
 {
+    public Guid PlayerId { get; private set; } = Guid.NewGuid();
     public int CurrentXp { get; set; }
     public int NextLevelXp { get; set; }
     public int Gold { get; set; }

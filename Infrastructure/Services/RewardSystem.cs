@@ -2,9 +2,8 @@
 using Infrastructure.Models;
 
 namespace Infrastructure.Services;
-public class RewardSystem(PlayerSystem playerSystem)
+public class RewardSystem()
 {
-    private readonly PlayerSystem _playerSystem = playerSystem;
 
     public ResultResponse<Reward> BattleRewards(Enemy enemy, Player player, List<string> rewardInformation)
     {

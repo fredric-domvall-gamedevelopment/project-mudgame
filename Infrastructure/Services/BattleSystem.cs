@@ -15,7 +15,7 @@ public class BattleSystem
         switch (battleAction)
         {
             case BattleAction.Attack:
-                float playerDamage = Math.Max(player.Attack - enemy.Defense, 0);
+                float playerDamage = CalculateDamage(player, enemy);
                 enemy.Health -= playerDamage;
                 battleInformation.Add($"You attack the {enemy.Name} for {playerDamage} damage!");
 
@@ -27,7 +27,7 @@ public class BattleSystem
                     return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
                 }
 
-                float enemyDamage = Math.Max(enemy.Attack - player.Defense, 0);
+                float enemyDamage = CalculateDamage(enemy, player);
                 player.Health -= enemyDamage;
                 battleInformation.Add($"The {enemy.Name} attacks you for {enemyDamage} damage!");
 
@@ -44,7 +44,7 @@ public class BattleSystem
             case BattleAction.UseItem:
                 battleInformation.Add("You use an item.");
 
-                enemyDamage = Math.Max(enemy.Attack - player.Defense, 0);
+                enemyDamage = CalculateDamage(enemy, player);
                 player.Health -= enemyDamage;
                 battleInformation.Add($"The {enemy.Name} attacks you for {enemyDamage} damage!");
 
@@ -70,7 +70,7 @@ public class BattleSystem
 
                 battleInformation.Add("You failed to escape from the battle.");
 
-                enemyDamage = Math.Max(enemy.Attack - player.Defense, 0);
+                enemyDamage = CalculateDamage(enemy, player);
                 player.Health -= enemyDamage;
 
                 battleInformation.Add($"The {enemy.Name} attacks you for {enemyDamage} damage!");
@@ -87,5 +87,12 @@ public class BattleSystem
             default:
                 throw new ArgumentOutOfRangeException(nameof(battleAction), battleAction, null);
         }
+    }
+
+    private float CalculateDamage(Character attacker, Character defender)
+    {
+        float damage = attacker.Attack * (1 - defender.ArmorRating);
+
+        return Math.Max(damage, 0);
     }
 }

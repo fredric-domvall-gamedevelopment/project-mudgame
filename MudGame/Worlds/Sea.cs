@@ -5,7 +5,7 @@ using Infrastructure.Services;
 using MUD.Art;
 
 namespace MUD.Worlds;
-public class Sea(RewardSystem rewardSystem)
+public class Sea(RewardSystem rewardSystem, EnemyCreator enemyCreator)
 {
     SeaArt seaArt = new SeaArt();
     BattleAction battleAction = new BattleAction();
@@ -13,8 +13,6 @@ public class Sea(RewardSystem rewardSystem)
 
     public void EnterSea(Player player)
     {
-        EnemyCreator enemyCreator = new EnemyCreator();
-
         Enemy enemy = enemyCreator.CreateRandomEnemy(player);
 
         ToBattle(enemy, player);

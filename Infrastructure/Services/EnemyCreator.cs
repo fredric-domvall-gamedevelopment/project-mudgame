@@ -1,11 +1,16 @@
-﻿using Infrastructure.Enums;
+﻿using Infrastructure.Configurations;
+using Infrastructure.Enums;
 using Infrastructure.Models;
+using Infrastructure.Repositories;
 
 namespace Infrastructure.Services;
 
-public class EnemyCreator
+public class EnemyCreator(JsonFileRepository<Enemy> jsonFileRepository, FileSources fileSources)
 {
     private readonly List<Enemy> _enemies = new List<Enemy>();
+    private readonly JsonFileRepository<Enemy> _JsonFileRepository = jsonFileRepository;
+    private readonly FileSources _filesources = fileSources;
+
     public Enemy CreateEnemy(EnemyType enemyType, Player player)
     {
         Enemy enemy = new Enemy();
@@ -75,5 +80,16 @@ public class EnemyCreator
         EnemyType enemytype = (EnemyType)random.Next(0, 3);
 
         return CreateEnemy(enemytype, player);
+    }
+
+    public async Task ReadEnemyFromFile()
+    {
+            var mountainEnemies = await _JsonFileRepository.ReadFromJsonAsync(_filesources.MountainEnemiesFileSource);
+            if(mountainEnemies.Data is not null)
+                _enemies.AddRange(mountainEnemies.Data);
+
+            var seaEnemies = await _JsonFileRepository.ReadFromJsonAsync(_filesources.SeaEnemiesFileSource);
+            if (seaEnemies.Data is not null)
+                _enemies.AddRange(seaEnemies.Data);
     }
 }

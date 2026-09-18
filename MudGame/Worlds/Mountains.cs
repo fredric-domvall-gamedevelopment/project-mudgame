@@ -6,7 +6,7 @@ using MUD.Art;
 
 namespace MUD.Worlds;
 
-public class Mountains(RewardSystem rewardSystem)
+public class Mountains(RewardSystem rewardSystem, EnemyCreator enemyCreator)
 {
     MountainsArt mountainsArt = new MountainsArt();
     BattleAction battleAction = new BattleAction();
@@ -14,8 +14,6 @@ public class Mountains(RewardSystem rewardSystem)
 
     public void EnterMountains(Player player)
     {
-        EnemyCreator enemyCreator = new EnemyCreator();
-
         Enemy enemy = enemyCreator.CreateRandomEnemy(player);
 
         ToBattle(enemy, player);

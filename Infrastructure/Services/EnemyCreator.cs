@@ -69,7 +69,11 @@ public class EnemyCreator(JsonFileRepository<Enemy> jsonFileRepository, FileSour
                 var seaEnemies = await _JsonFileRepository.ReadFromJsonAsync(_filesources.SeaEnemiesFileSource);
                 if (seaEnemies.Data is not null)
                     _enemies.AddRange(seaEnemies.Data);
-
+                break;
+            case EnemySpawnArea.Forest:
+                var forestEnemies = await _JsonFileRepository.ReadFromJsonAsync(_filesources.ForestEnemiesFileSource);
+                if (forestEnemies.Data is not null)
+                    _enemies.AddRange(forestEnemies.Data);
                 break;
             default:
                 throw new ArgumentException("Invalid enemy spawn area");

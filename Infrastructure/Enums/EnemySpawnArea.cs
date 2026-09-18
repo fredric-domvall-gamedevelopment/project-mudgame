@@ -3,5 +3,6 @@
 public enum EnemySpawnArea
 {
     Sea,
-    Mountain
+    Mountain,
+    Forest
 }

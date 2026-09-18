@@ -97,7 +97,22 @@ public class PlayerSystem(JsonFileRepository<Player> jsonFileRepository, FileSou
         return new ResultResponse<Player> { IsSuccess = true, Data = player, Information = _playerInformation };
 
     }
-    
+
+    public async Task<ResultResponse<Player>> LoadPlayerByPlayerId(Guid playerId)
+    {
+         Player player = new Player();
+
+         await GetPlayersFromList();
+        
+        if(_savedPlayers.FirstOrDefault(p => p.PlayerId == playerId) is Player foundPlayer)
+        {
+            player = foundPlayer;
+            return new ResultResponse<Player> { IsSuccess = true, Data = player, Information = new List<string> { "Player loaded successfully." } };
+        }
+        else
+            return new ResultResponse<Player> { IsSuccess = false, Data = player, Information = new List<string> { "Player not found." } };
+    }
+
     public async Task<ResultResponse<List<Player>>> GetPlayersFromList()
     {
         _savedPlayers.Clear();

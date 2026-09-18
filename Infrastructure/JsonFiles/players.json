@@ -1,6 +1,6 @@
 [
   {
-    "PlayerId": "ed926b94-ce3e-44ef-82ab-d3ab284842df",
+    "PlayerId": "a676affa-4ec5-4dac-b878-742f0ba709f8",
     "CurrentXp": 0,
     "NextLevelXp": 100,
     "Gold": 0,
@@ -17,6 +17,26 @@
       "Strength": 10,
       "Dexterity": 5,
       "Endurance": 5
+    }
+  },
+  {
+    "PlayerId": "821a334a-63a4-46fc-9bf0-a90c47667d89",
+    "CurrentXp": 70,
+    "NextLevelXp": 300,
+    "Gold": 180,
+    "SkillPoints": 0,
+    "Score": 20,
+    "Name": "Fredric",
+    "Level": 3,
+    "Health": 1750,
+    "MaxHealth": 1750,
+    "Attack": 38,
+    "Defense": 20,
+    "IsDead": false,
+    "Stats": {
+      "Strength": 20,
+      "Dexterity": 10,
+      "Endurance": 10
     }
   }
 ]

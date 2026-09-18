@@ -78,6 +78,7 @@ public class PlayerManager(PlayerCreator playerCreator, PlayerSystem playerSyste
         {
             Console.WriteLine("No saved players found. Please create a new player.");
             ConsoleHelper.Continue();
+
             return player;
         }
 
@@ -93,10 +94,10 @@ public class PlayerManager(PlayerCreator playerCreator, PlayerSystem playerSyste
         {
             var choice = result.Data[selection - 1];
 
-            Console.WriteLine($"selected saved player id: {choice.PlayerId}");
+            Console.WriteLine($"Player {choice.Name} loaded successfully.");
+            ConsoleHelper.Continue();
 
             return choice;
-
         }
         else
         {

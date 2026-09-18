@@ -5,6 +5,7 @@ namespace Infrastructure.Services;
 
 public class EnemyCreator
 {
+    private readonly List<Enemy> _enemies = new List<Enemy>();
     public Enemy CreateEnemy(EnemyType enemyType, Player player)
     {
         Enemy enemy = new Enemy();

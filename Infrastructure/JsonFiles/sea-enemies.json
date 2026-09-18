@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "Murloc",
+    "Type": "Murloc",
+    "SpawnArea": "Sea"
+  },
+  {
+    "Name": "Siren",
+    "Type": "Siren",
+    "SpawnArea": "Sea"
+  },
+  {
+    "Name": "Pirate",
+    "Type": "Pirate",
+    "SpawnArea": "Sea"
+  }
+]

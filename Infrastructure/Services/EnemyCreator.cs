@@ -19,26 +19,14 @@ public class EnemyCreator(JsonFileRepository<Enemy> jsonFileRepository, FileSour
         enemy.Rank = enemyRank;
         enemy.SpawnArea = enemyTemplate.SpawnArea;
 
+        AdjustEnemyStats(enemy, enemyRank, player);
+
         CharacterStatsCalculator characterStatsCalculator = new CharacterStatsCalculator();
         
-
-        switch (enemyRank)
-        {
-            case EnemyRank.Normal:
-
-                break;
-
-            case EnemyRank.Elite:
-
-                break;
-
-            case EnemyRank.Boss:
-
-                break;
-
-            default:
-                throw new ArgumentException("Invalid enemy type");
-        }
+        enemy.Attack = characterStatsCalculator.CalculateCharacterAttack(enemy);
+        enemy.Defense = characterStatsCalculator.ClalculateCharacterDefense(enemy);
+        enemy.MaxHealth = characterStatsCalculator.CalculateCharacterHealth(enemy);
+        enemy.Health = enemy.MaxHealth;
 
         return enemy;
     }
@@ -84,8 +72,6 @@ public class EnemyCreator(JsonFileRepository<Enemy> jsonFileRepository, FileSour
 
     private void AdjustEnemyStats(Enemy enemy, EnemyRank enemyRank, Player player)
     {
-        CharacterStatsCalculator characterStatsCalculator = new CharacterStatsCalculator();
-
         switch (enemyRank)
         {
             case EnemyRank.Normal:

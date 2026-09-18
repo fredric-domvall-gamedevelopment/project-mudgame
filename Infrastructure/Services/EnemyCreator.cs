@@ -28,6 +28,8 @@ public class EnemyCreator(JsonFileRepository<Enemy> jsonFileRepository, FileSour
         enemy.MaxHealth = characterStatsCalculator.CalculateCharacterHealth(enemy);
         enemy.Health = enemy.MaxHealth;
 
+        enemy.ArmorRating = Math.Min(enemy.Stats.Endurance / 100f, 0.9f);
+
         enemy.Level = Random.Shared.Next(Math.Max(1, player.Level - 2), player.Level + 3);
         enemy.Reward.Gold = (int)Random.Shared.Next(5, 15) * (int)enemyRank + enemy.Level;
         enemy.Reward.Xp = (int)Random.Shared.Next(10, 20) * (int)enemyRank + enemy.Level;

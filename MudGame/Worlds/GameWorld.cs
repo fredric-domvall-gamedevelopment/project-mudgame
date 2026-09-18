@@ -4,7 +4,7 @@ using Infrastructure.Services;
 
 namespace MUD.Worlds
 {
-    public class GameWorld(ScoreSystem scoreSystem, PlayerManager playerManager, Sea sea, Mountains mountains)
+    public class GameWorld(ScoreSystem scoreSystem, PlayerManager playerManager, Sea sea, Mountains mountains, Forest forest)
     {
         private readonly ScoreSystem _scoreSystem = scoreSystem;
 
@@ -28,7 +28,8 @@ namespace MUD.Worlds
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("1. Go to the Sea");
             Console.WriteLine("2. Go to the Mountains");
-            Console.WriteLine("3. Go to the Tavern\n");
+            Console.WriteLine("3. Go to the Forest");
+            Console.WriteLine("4. Go to the Town\n");
             Console.WriteLine("M. Open Player Menu");
 
             char choice = Console.ReadKey().KeyChar;
@@ -46,8 +47,11 @@ namespace MUD.Worlds
                     await mountains.EnterMountains(player);
                     await PlayGame(player);
                     break;
-
                 case '3':
+                    await forest.EnterForest(player);
+                    await PlayGame(player);
+                    break;
+                case '4':
                     town.EnterTown(player);
                     await PlayGame(player);
                     break;

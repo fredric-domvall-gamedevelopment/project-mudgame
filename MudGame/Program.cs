@@ -29,6 +29,7 @@ namespace MUD
                     services.AddSingleton<GameWorld>();
                     services.AddSingleton<Sea>();
                     services.AddSingleton<Mountains>();
+                    services.AddSingleton<Forest>();
                 })
                 .Build();
 

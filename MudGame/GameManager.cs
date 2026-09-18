@@ -5,7 +5,7 @@ using MUD.Worlds;
 
 namespace MUD;
 
-public class GameManager(ScoreSystem scoreSystem, GameWorld gameWorld, PlayerCreator playerCreator)
+public class GameManager(ScoreSystem scoreSystem, GameWorld gameWorld, PlayerCreator playerCreator, PlayerManager playerManager)
 {
     Player player = new Player();
     private readonly ScoreSystem _scoreSystem = scoreSystem;
@@ -15,8 +15,9 @@ public class GameManager(ScoreSystem scoreSystem, GameWorld gameWorld, PlayerCre
     {
         Console.WriteLine("Welcome the magical worlds of MUDs \n");
         Console.WriteLine("1. Start New Game");
-        Console.WriteLine("2. Show Highscore List");
-        Console.WriteLine("3. Exit");
+        Console.WriteLine("2. Load Saved Game");
+        Console.WriteLine("3. Show Highscore List");
+        Console.WriteLine("4. Exit");
 
         char choice = Console.ReadKey().KeyChar;
         Console.Clear();
@@ -31,11 +32,18 @@ public class GameManager(ScoreSystem scoreSystem, GameWorld gameWorld, PlayerCre
                 break;
 
             case '2':
-                await HighscoreList();
+                player = await playerManager.LoadPlayer(player);
+                await _gameWorld.PlayGame(player);
                 await StartMenu();
                 break;
 
             case '3':
+                await HighscoreList();
+                await StartMenu();
+                break;
+
+
+            case '4':
                 Console.WriteLine("Thank you for playing! Goodbye!");
                 Environment.Exit(0);
                 break;

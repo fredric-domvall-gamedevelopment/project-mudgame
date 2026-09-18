@@ -46,6 +46,8 @@ public class PlayerSystem(JsonFileRepository<Player> jsonFileRepository, FileSou
         player.MaxHealth = calculator.CalculateCharacterHealth(player);
         player.Health = player.MaxHealth;
 
+        player.ArmorRating = Math.Min(player.Stats.Endurance / 50f, 0.9f);
+
         switch (choice)
         {
             case '1':

@@ -1,20 +1,15 @@
-﻿using Infrastructure.Models;
+﻿using Infrastructure.Configurations;
+using Infrastructure.Models;
 using Infrastructure.Repositories;
 
 namespace Infrastructure.Services;
 
-public class PlayerSystem
+public class PlayerSystem(JsonFileRepository<Player> jsonFileRepository, FileSources fileSources)
 {
     private readonly List<string> _playerInformation = new List<string>();
-    private readonly JsonFileRepository<Player> _jsonFileRepository;
-    private readonly string _fileSources;
+    private readonly JsonFileRepository<Player> _jsonFileRepository = jsonFileRepository;
+    private readonly FileSources _fileSources = fileSources;
     CharacterStatsCalculator calculator = new CharacterStatsCalculator();
-
-    public PlayerSystem(JsonFileRepository<Player> jsonFileRepository, string fileSources)
-    {
-        _jsonFileRepository = jsonFileRepository;
-        _fileSources = fileSources;
-    }
 
     public ResultResponse<Player> CreatePlayer(Player player)
     {

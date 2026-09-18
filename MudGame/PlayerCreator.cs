@@ -6,7 +6,12 @@ namespace MUD;
 
 public class PlayerCreator
 {
-    PlayerSystem playerSystem = new PlayerSystem();
+    private readonly PlayerSystem playerSystem;
+
+    public PlayerCreator(PlayerSystem playerSystem)
+    {
+        this.playerSystem = playerSystem;
+    }
 
     public Player PlayerCreation(Player player)
     {

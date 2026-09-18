@@ -3,17 +3,12 @@ using Infrastructure.Models;
 using Infrastructure.Repositories;
 
 namespace Infrastructure.Services;
-public class ScoreSystem
+public class ScoreSystem(JsonFileRepository<Player> jsonFileRepository, FileSources fileSources)
 {
     private readonly List<Player> _playerHighscore = new List<Player>();
-    private readonly JsonFileRepository<Player> _jsonFileRepository;
-    private readonly string _fileSources;
+    private readonly JsonFileRepository<Player> _jsonFileRepository = jsonFileRepository;
+    private readonly string _fileSources = fileSources.HighscoreFileSource;
 
-    public ScoreSystem(JsonFileRepository<Player> jsonFileRepository, FileSources fileSources)
-    {
-        _jsonFileRepository = jsonFileRepository;
-        _fileSources = fileSources.HighscoreFileSource;
-    }
     public void CalculateHighscore(Player player)
     {
         player.Score = (int)(player.Stats.Strength + player.Stats.Dexterity + player.Stats.Endurance);

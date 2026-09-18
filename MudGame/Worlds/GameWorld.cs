@@ -4,14 +4,11 @@ using Infrastructure.Services;
 
 namespace MUD.Worlds
 {
-    public class GameWorld
+    public class GameWorld(ScoreSystem scoreSystem,PlayerManager playerManager, Sea sea, Mountains mountains)
     {
-        private readonly ScoreSystem _scoreSystem;
+        private readonly ScoreSystem _scoreSystem = scoreSystem;
 
-        public GameWorld(ScoreSystem scoreSystem)
-        {
-            _scoreSystem = scoreSystem;
-        }
+        Town town = new Town();
 
         public async Task PlayGame(Player player)
         {
@@ -40,23 +37,22 @@ namespace MUD.Worlds
             switch (choice)
             {
                 case '1':
-                    GoToSea(player);
+                    sea.EnterSea(player);
                     await PlayGame(player);
                     break;
 
                 case '2':
-                    GoToMountains(player);
+                    mountains.EnterMountains(player);
                     await PlayGame(player);
                     break;
 
                 case '3':
-                    GoToTown(player);
+                    town.EnterTown(player);
                     await PlayGame(player);
                     break;
 
                 case 'M' or 'm':
-                    GameManager gameManager = new GameManager(_scoreSystem, this);
-                    gameManager.PlayerMenu(player);
+                    playerManager.PlayerMenu(player);
                     await PlayGame(player);
                     break;
 
@@ -68,24 +64,5 @@ namespace MUD.Worlds
                     break;
             }
         }
-
-        private void GoToSea(Player player)
-        {
-            Sea sea = new Sea();
-            sea.EnterSea(player);
-        }
-
-        private void GoToMountains(Player player)
-        {
-            Mountains mountains = new Mountains();
-            mountains.EnterMountains(player);
-        }
-
-        private void GoToTown(Player player)
-        {
-            Town town = new Town();
-            town.EnterTown(player);
-        }
-
     }
 }

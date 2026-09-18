@@ -18,8 +18,15 @@ namespace MUD
                     services.AddSingleton<JsonFileRepository<Player>>();
                     services.AddSingleton<FileSources>();
                     services.AddSingleton<ScoreSystem>();
+                    services.AddSingleton<PlayerSystem>();
+                    services.AddSingleton<RewardSystem>();
+
+                    services.AddSingleton<PlayerManager>();
+                    services.AddSingleton<PlayerCreator>();
                     services.AddSingleton<GameManager>();
                     services.AddSingleton<GameWorld>();
+                    services.AddSingleton<Sea>();
+                    services.AddSingleton<Mountains>();
                 })
                 .Build();
             Console.Title = "MUD - The Magical World";

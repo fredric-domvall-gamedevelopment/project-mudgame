@@ -2,9 +2,10 @@
 using Infrastructure.Models;
 
 namespace Infrastructure.Services;
-public class RewardSystem
+public class RewardSystem(PlayerSystem playerSystem)
 {
-    PlayerSystem playerSystem = new PlayerSystem();
+    private readonly PlayerSystem _playerSystem = playerSystem;
+
     public ResultResponse<Reward> BattleRewards(Enemy enemy, Player player, List<string> rewardInformation)
     {
         rewardInformation.Add($"\nYou gained {enemy.Reward.Xp * 10} XP and {enemy.Reward.Gold * 5} Gold!\n");

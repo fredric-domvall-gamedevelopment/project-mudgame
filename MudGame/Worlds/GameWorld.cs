@@ -12,6 +12,7 @@ namespace MUD.Worlds
 
         public async Task PlayGame(Player player)
         {
+             _scoreSystem.CalculateHighscore(player);
 
             if (player.IsDead)
             {

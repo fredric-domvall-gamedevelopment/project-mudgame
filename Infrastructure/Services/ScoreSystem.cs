@@ -11,13 +11,11 @@ public class ScoreSystem(JsonFileRepository<Player> jsonFileRepository, FileSour
 
     public void CalculateHighscore(Player player)
     {
-        player.Score = (int)(player.Stats.Strength + player.Stats.Dexterity + player.Stats.Endurance);
+        player.Score = (int)(player.Stats.Strength + player.Stats.Dexterity + player.Stats.Endurance) - 20;
     }
 
     public async Task<Player>AddPlayerToHighscoreList(Player player)
     {
-        CalculateHighscore(player);
-
         _playerHighscore.Add(player);
         var result = await _jsonFileRepository.WriteToJsonAsync(_fileSources, _playerHighscore);
         return player;

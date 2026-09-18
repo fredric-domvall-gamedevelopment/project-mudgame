@@ -3,6 +3,7 @@ using Infrastructure.Models;
 using Infrastructure.Repositories;
 
 namespace Infrastructure.Services;
+
 public class ScoreSystem(JsonFileRepository<Player> jsonFileRepository, FileSources fileSources)
 {
     private readonly List<Player> _playerHighscore = new List<Player>();
@@ -14,7 +15,7 @@ public class ScoreSystem(JsonFileRepository<Player> jsonFileRepository, FileSour
         player.Score = (int)(player.Stats.Strength + player.Stats.Dexterity + player.Stats.Endurance) - 20;
     }
 
-    public async Task<Player>AddPlayerToHighscoreList(Player player)
+    public async Task<Player> AddPlayerToHighscoreList(Player player)
     {
         _playerHighscore.Add(player);
         var result = await _jsonFileRepository.WriteToJsonAsync(_fileSources, _playerHighscore);

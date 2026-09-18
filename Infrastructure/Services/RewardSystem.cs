@@ -1,8 +1,8 @@
-﻿using Infrastructure.Services;
-using Infrastructure.Models;
+﻿using Infrastructure.Models;
 
 namespace Infrastructure.Services;
-public class RewardSystem()
+
+public class RewardSystem
 {
 
     public ResultResponse<Reward> BattleRewards(Enemy enemy, Player player, List<string> rewardInformation)

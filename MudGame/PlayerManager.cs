@@ -2,6 +2,7 @@
 using Infrastructure.Models;
 
 namespace MUD;
+
 public class PlayerManager(PlayerCreator playerCreator)
 {
     public void PlayerMenu(Player player)

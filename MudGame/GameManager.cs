@@ -1,10 +1,10 @@
-﻿using Infrastructure.Configurations;
-using Infrastructure.Helpers;
+﻿using Infrastructure.Helpers;
 using Infrastructure.Models;
 using Infrastructure.Services;
 using MUD.Worlds;
 
 namespace MUD;
+
 public class GameManager(ScoreSystem scoreSystem, GameWorld gameWorld, PlayerCreator playerCreator)
 {
     Player player = new Player();
@@ -54,7 +54,7 @@ public class GameManager(ScoreSystem scoreSystem, GameWorld gameWorld, PlayerCre
         List<Player> highscoreList = await _scoreSystem.GetHighscoreList();
         Console.WriteLine("-----Highscore List-----\n");
 
-        if(highscoreList.Count == 0)
+        if (highscoreList.Count == 0)
             Console.WriteLine("No players in the highscore list yet.");
         else
             foreach (var player in highscoreList)

@@ -1,4 +1,5 @@
 ﻿namespace Infrastructure.Models;
+
 public class ResultResponse<T>
 {
     public T? Data { get; set; }

@@ -1,6 +1,5 @@
 ﻿using Infrastructure.Enums;
 using Infrastructure.Models;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Infrastructure.Helpers;
 
@@ -18,7 +17,7 @@ public static class PlayerHelper
 
             return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = new List<string> { message } };
         }
-        
+
         return new ResultResponse<BattleResult> { IsSuccess = false };
     }
 }

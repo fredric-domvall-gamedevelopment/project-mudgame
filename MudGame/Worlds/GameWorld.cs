@@ -4,7 +4,7 @@ using Infrastructure.Services;
 
 namespace MUD.Worlds
 {
-    public class GameWorld(ScoreSystem scoreSystem,PlayerManager playerManager, Sea sea, Mountains mountains)
+    public class GameWorld(ScoreSystem scoreSystem, PlayerManager playerManager, Sea sea, Mountains mountains)
     {
         private readonly ScoreSystem _scoreSystem = scoreSystem;
 
@@ -12,12 +12,12 @@ namespace MUD.Worlds
 
         public async Task PlayGame(Player player)
         {
-             _scoreSystem.CalculateHighscore(player);
+            _scoreSystem.CalculateHighscore(player);
 
             if (player.IsDead)
             {
                 Console.WriteLine("You are dead, game over!");
-                
+
                 var result = await _scoreSystem.AddPlayerToHighscoreList(player);
                 return;
             }

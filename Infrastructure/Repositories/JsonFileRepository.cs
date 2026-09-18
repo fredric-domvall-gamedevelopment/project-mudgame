@@ -9,7 +9,7 @@ public class JsonFileRepository<T>
     {
         try
         {
-            if(!File.Exists(filePath))
+            if (!File.Exists(filePath))
                 return new ResultResponse<List<T>> { IsSuccess = false, Data = new List<T>(), Information = new List<string> { "JSON file not found." } };
 
             var jsonData = await File.ReadAllTextAsync(filePath);
@@ -19,7 +19,7 @@ public class JsonFileRepository<T>
 
             var listData = JsonSerializer.Deserialize<List<T>>(jsonData);
 
-            if(listData == null)
+            if (listData == null)
                 return new ResultResponse<List<T>> { IsSuccess = false, Data = new List<T>(), Information = new List<string> { "Failed to deserialize JSON data." } };
 
             return new ResultResponse<List<T>>

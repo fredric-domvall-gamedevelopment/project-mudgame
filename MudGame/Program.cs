@@ -13,7 +13,7 @@ namespace MUD
         static async Task Main(string[] args)
         {
             IHost host = Host.CreateDefaultBuilder(args)
-                .ConfigureServices( services =>
+                .ConfigureServices(services =>
                 {
                     services.AddSingleton<JsonFileRepository<Player>>();
                     services.AddSingleton<FileSources>();

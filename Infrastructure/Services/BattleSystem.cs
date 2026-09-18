@@ -2,7 +2,6 @@
 using Infrastructure.Helpers;
 using Infrastructure.Models;
 
-
 namespace Infrastructure.Services;
 
 public class BattleSystem
@@ -20,7 +19,7 @@ public class BattleSystem
                 enemy.Health -= playerDamage;
                 battleInformation.Add($"You attack the {enemy.Name} for {playerDamage} damage!");
 
-                if(enemy.Health <= 0)
+                if (enemy.Health <= 0)
                 {
                     battleInformation.Add($"You have defeated the {enemy.Name}!");
                     battleResult = BattleResult.EnemyDead;

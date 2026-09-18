@@ -68,7 +68,7 @@ public class PlayerCreator
     {
         Console.Clear();
         Console.WriteLine($"Your character {player.Name} has been created with the following stats:\n" +
-            "\n"+
+            "\n" +
                 $"Strength: {player.Stats.Strength}\n" +
                 $"Dexterity: {player.Stats.Dexterity}\n" +
                 $"Endurance: {player.Stats.Endurance}\n" +

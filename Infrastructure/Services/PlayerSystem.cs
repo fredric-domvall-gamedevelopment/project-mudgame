@@ -74,25 +74,17 @@ public class PlayerSystem(JsonFileRepository<Player> jsonFileRepository, FileSou
 
         var result = await _jsonFileRepository.ReadFromJsonAsync(_fileSources.PlayersFileSource);
 
-        if (result.Data != null)
+        if (result.Data is not null)
             _savedPlayers.AddRange(result.Data);
 
-        if (_savedPlayers.FirstOrDefault(p => p.PlayerId == player.PlayerId) is not null)
-        {
-            _savedPlayers.RemoveAll(p => p.PlayerId == player.PlayerId);
-            _savedPlayers.Add(player);
-        }
-        else
+        Player? savedPlayer = _savedPlayers.FirstOrDefault(p => p.PlayerId == player.PlayerId);
+
+        if (savedPlayer is not null)
+            _savedPlayers.Remove(savedPlayer);
+
             _savedPlayers.Add(player);
 
-        result = await _jsonFileRepository.WriteToJsonAsync(_fileSources.PlayersFileSource, _savedPlayers);
-        if(!result.IsSuccess && result.Information is not null)
-        {
-            _playerInformation.AddRange(result.Information);
-            return new ResultResponse<Player> { IsSuccess = false, Data = player, Information = _playerInformation };
-        }
-
-        _playerInformation.Add("Player saved successfully.");
+        await _jsonFileRepository.WriteToJsonAsync(_fileSources.PlayersFileSource, _savedPlayers);
 
         return new ResultResponse<Player> { IsSuccess = true, Data = player, Information = _playerInformation };
 

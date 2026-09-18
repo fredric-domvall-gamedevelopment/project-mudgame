@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Configurations;
 using Infrastructure.Models;
 using Infrastructure.Repositories;
+using System.Runtime.CompilerServices;
 
 namespace Infrastructure.Services;
 
@@ -95,5 +96,17 @@ public class PlayerSystem(JsonFileRepository<Player> jsonFileRepository, FileSou
 
         return new ResultResponse<Player> { IsSuccess = true, Data = player, Information = _playerInformation };
 
+    }
+    
+    public async Task<ResultResponse<List<Player>>> GetPlayersFromList()
+    {
+        _savedPlayers.Clear();
+
+        var result = await _jsonFileRepository.ReadFromJsonAsync(_fileSources.PlayersFileSource);
+
+        if (result.Data is not null)
+            _savedPlayers.AddRange(result.Data);
+
+        return new ResultResponse<List<Player>> { IsSuccess = result.IsSuccess, Data = _savedPlayers, Information = result.Information };
     }
 }

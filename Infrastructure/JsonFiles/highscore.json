@@ -1,22 +1,42 @@
 [
   {
-    "PlayerId": "dff9a193-fc78-417c-9c5f-b8e33c164541",
-    "CurrentXp": 0,
-    "NextLevelXp": 0,
-    "Gold": 0,
+    "PlayerId": "85306aaa-a9f7-411e-ba3a-7af77fddbf35",
+    "CurrentXp": 160,
+    "NextLevelXp": 200,
+    "Gold": 15,
     "SkillPoints": 0,
-    "Score": -20,
-    "Name": "",
-    "Level": 0,
-    "Health": 0,
-    "MaxHealth": 0,
-    "Attack": 0,
-    "Defense": 0,
+    "Score": 10,
+    "Name": "Fredric",
+    "Level": 2,
+    "Health": -10,
+    "MaxHealth": 750,
+    "Attack": 20,
+    "Defense": 20,
     "IsDead": true,
     "Stats": {
-      "Strength": 0,
-      "Dexterity": 0,
-      "Endurance": 0
+      "Strength": 10,
+      "Dexterity": 10,
+      "Endurance": 10
+    }
+  },
+  {
+    "PlayerId": "c2ce5405-2166-4c38-962c-361d21523170",
+    "CurrentXp": 160,
+    "NextLevelXp": 100,
+    "Gold": 15,
+    "SkillPoints": 0,
+    "Score": 0,
+    "Name": "Test",
+    "Level": 1,
+    "Health": 110,
+    "MaxHealth": 110,
+    "Attack": 22,
+    "Defense": 10,
+    "IsDead": true,
+    "Stats": {
+      "Strength": 11,
+      "Dexterity": 5,
+      "Endurance": 4
     }
   }
 ]

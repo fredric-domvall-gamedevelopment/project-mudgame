@@ -15,6 +15,10 @@ public class Sea(RewardSystem rewardSystem, EnemyCreator enemyCreator)
     {
         Enemy enemy = await enemyCreator.CreateRandomEnemy(player, EnemySpawnArea.Sea);
 
+        Console.Clear();
+        Console.WriteLine($"A {enemy.Rank} {enemy.Name} appeared!");
+        ConsoleHelper.Continue();
+
         ToBattle(enemy, player);
     }
 

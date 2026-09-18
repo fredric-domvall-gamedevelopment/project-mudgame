@@ -26,6 +26,7 @@ public class PlayerSystem(JsonFileRepository<Player> jsonFileRepository, FileSou
         player.Attack = 0f;
         player.Defense = 0f;
         player.MaxHealth = 50f;
+        player.IsDead = false;
 
         if (string.IsNullOrEmpty(player.Name) || string.IsNullOrWhiteSpace(player.Name))
         {

@@ -29,7 +29,9 @@ namespace MUD
                     services.AddSingleton<Mountains>();
                 })
                 .Build();
+
             Console.Title = "MUD - The Magical World";
+
             GameManager gameManager = host.Services.GetRequiredService<GameManager>();
             await gameManager.StartMenu();
         }

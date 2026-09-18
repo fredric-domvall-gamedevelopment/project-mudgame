@@ -1,15 +1,17 @@
 ﻿using Infrastructure.Helpers;
 using Infrastructure.Models;
+using Infrastructure.Services;
 
 namespace MUD;
 
-public class PlayerManager(PlayerCreator playerCreator)
+public class PlayerManager(PlayerCreator playerCreator, PlayerSystem playerSystem)
 {
-    public void PlayerMenu(Player player)
+    public async Task PlayerMenu(Player player)
     {
         Console.WriteLine("Player Menu");
         Console.WriteLine("1. Show Player Stats");
-        Console.WriteLine("2. Back to Game");
+        Console.WriteLine("2. Save Player");
+        Console.WriteLine("3. Back to Game");
 
         char choice = Console.ReadKey().KeyChar;
         Console.Clear();
@@ -50,19 +52,66 @@ public class PlayerManager(PlayerCreator playerCreator)
                         ConsoleHelper.Continue();
                 }
 
-                PlayerMenu(player);
+                await PlayerMenu(player);
                 break;
 
             case '2':
+                await playerSystem.SavePlayer(player);
+                return;
+
+            case '3':
                 return;
 
             default:
                 Console.WriteLine("Invalid choice, please try again.");
                 ConsoleHelper.Continue();
 
-                PlayerMenu(player);
+                await PlayerMenu(player);
                 break;
 
+        }
+    }
+    public async Task<Player> LoadPlayer(Player player)
+    {
+        var result = await playerSystem.GetPlayersFromList();
+
+        if (result.Data == null || result.Data.Count == 0)
+        {
+            Console.WriteLine("No saved players found. Please create a new player.");
+            ConsoleHelper.Continue();
+
+            return player;
+        }
+
+        for (int i = 0; i < result.Data.Count; i++)
+        {
+            var savedPlayer = result.Data[i];
+            Console.WriteLine($"{i + 1}. {savedPlayer.Name} - Level: {savedPlayer.Level}, Score: {savedPlayer.Score}");
+        }
+
+        Console.WriteLine("Select a player to load (enter the number):");
+
+        if (int.TryParse(Console.ReadLine(), out int selection) && selection >= 1 && selection <= result.Data.Count)
+        {
+            var choice = result.Data[selection - 1];
+
+            var loadResult = await playerSystem.LoadPlayerByPlayerId(choice.PlayerId, player);
+
+            if(loadResult.IsSuccess && loadResult.Data is not null)
+            {
+                Console.WriteLine($"Player {choice.Name} loaded successfully.");
+                ConsoleHelper.Continue();
+
+                return loadResult.Data;
+            }
+            return player;
+        }
+        else
+        {
+            Console.WriteLine("Failed to load player.");
+            ConsoleHelper.Continue();
+
+            return await LoadPlayer(player);
         }
     }
 }

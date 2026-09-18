@@ -11,9 +11,9 @@ public class Sea(RewardSystem rewardSystem, EnemyCreator enemyCreator)
     BattleAction battleAction = new BattleAction();
     BattleSystem battleSystem = new BattleSystem();
 
-    public void EnterSea(Player player)
+    public async Task EnterSea(Player player)
     {
-        Enemy enemy = enemyCreator.CreateRandomEnemy(player);
+        Enemy enemy = await enemyCreator.CreateRandomEnemy(player, EnemySpawnArea.Sea);
 
         ToBattle(enemy, player);
     }

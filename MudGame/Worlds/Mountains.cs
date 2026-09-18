@@ -12,9 +12,9 @@ public class Mountains(RewardSystem rewardSystem, EnemyCreator enemyCreator)
     BattleAction battleAction = new BattleAction();
     BattleSystem battleSystem = new BattleSystem();
 
-    public void EnterMountains(Player player)
+    public async Task EnterMountains(Player player)
     {
-        Enemy enemy = enemyCreator.CreateRandomEnemy(player);
+        Enemy enemy = await enemyCreator.CreateRandomEnemy(player, EnemySpawnArea.Mountain);
 
         ToBattle(enemy, player);
     }

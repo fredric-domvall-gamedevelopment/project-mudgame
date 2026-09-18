@@ -38,12 +38,12 @@ namespace MUD.Worlds
             switch (choice)
             {
                 case '1':
-                    sea.EnterSea(player);
+                    await sea.EnterSea(player);
                     await PlayGame(player);
                     break;
 
                 case '2':
-                    mountains.EnterMountains(player);
+                    await mountains.EnterMountains(player);
                     await PlayGame(player);
                     break;
 

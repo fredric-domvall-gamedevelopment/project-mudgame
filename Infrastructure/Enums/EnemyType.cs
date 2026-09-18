@@ -4,5 +4,8 @@ public enum EnemyType
 {
     Goblin,
     Orc,
-    Troll
+    Troll,
+    Murloc,
+    Siren,
+    Pirate
 }

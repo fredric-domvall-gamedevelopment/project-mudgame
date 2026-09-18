@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "Boar",
+    "Type": "Boar",
+    "SpawnArea": "Forest"
+  },
+  {
+    "Name": "Wolf",
+    "Type": "Wolf",
+    "SpawnArea": "Forest"
+  },
+  {
+    "Name": "Bear",
+    "Type": "Bear",
+    "SpawnArea": "Forest"
+  }
+]

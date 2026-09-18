@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Models;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Infrastructure.Repositories;
 
@@ -16,8 +17,10 @@ public class JsonFileRepository<T>
 
             if (string.IsNullOrWhiteSpace(jsonData))
                 return new ResultResponse<List<T>> { IsSuccess = false, Data = new List<T>(), Information = new List<string> { "JSON file is empty." } };
-
-            var listData = JsonSerializer.Deserialize<List<T>>(jsonData);
+            
+            var options = new JsonSerializerOptions{PropertyNameCaseInsensitive = true};
+            options.Converters.Add(new JsonStringEnumConverter());
+            var listData = JsonSerializer.Deserialize<List<T>>(jsonData, options);
 
             if (listData == null)
                 return new ResultResponse<List<T>> { IsSuccess = false, Data = new List<T>(), Information = new List<string> { "Failed to deserialize JSON data." } };

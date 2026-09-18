@@ -16,10 +16,12 @@ namespace MUD
                 .ConfigureServices(services =>
                 {
                     services.AddSingleton<JsonFileRepository<Player>>();
+                    services.AddSingleton<JsonFileRepository<Enemy>>();
                     services.AddSingleton<FileSources>();
                     services.AddSingleton<ScoreSystem>();
                     services.AddSingleton<PlayerSystem>();
                     services.AddSingleton<RewardSystem>();
+                    services.AddSingleton<EnemyCreator>();
 
                     services.AddSingleton<PlayerManager>();
                     services.AddSingleton<PlayerCreator>();
@@ -27,6 +29,7 @@ namespace MUD
                     services.AddSingleton<GameWorld>();
                     services.AddSingleton<Sea>();
                     services.AddSingleton<Mountains>();
+                    services.AddSingleton<Forest>();
                 })
                 .Build();
 

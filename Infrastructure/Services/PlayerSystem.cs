@@ -26,6 +26,7 @@ public class PlayerSystem(JsonFileRepository<Player> jsonFileRepository, FileSou
         player.Attack = 0f;
         player.Defense = 0f;
         player.MaxHealth = 50f;
+        player.IsDead = false;
 
         if (string.IsNullOrEmpty(player.Name) || string.IsNullOrWhiteSpace(player.Name))
         {
@@ -44,6 +45,8 @@ public class PlayerSystem(JsonFileRepository<Player> jsonFileRepository, FileSou
         player.Defense = calculator.ClalculateCharacterDefense(player);
         player.MaxHealth = calculator.CalculateCharacterHealth(player);
         player.Health = player.MaxHealth;
+
+        player.ArmorRating = Math.Min(player.Stats.Endurance / 50f, 0.9f);
 
         switch (choice)
         {

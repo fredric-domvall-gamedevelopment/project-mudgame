@@ -5,12 +5,11 @@ using Infrastructure.Services;
 using MUD.Art;
 
 namespace MUD.Worlds;
-public class Sea
+public class Sea(RewardSystem rewardSystem)
 {
     SeaArt seaArt = new SeaArt();
     BattleAction battleAction = new BattleAction();
     BattleSystem battleSystem = new BattleSystem();
-    PlayerCreator playerCreator = new PlayerCreator();
 
     public void EnterSea(Player player)
     {
@@ -70,7 +69,6 @@ public class Sea
                     break;
 
                 case BattleResult.EnemyDead:
-                    RewardSystem rewardSystem = new RewardSystem();
                     var rewardResult = rewardSystem.BattleRewards(enemy, player, battleSystem.battleInformation);
 
                     if (rewardResult.IsSuccess)
@@ -79,9 +77,6 @@ public class Sea
                                 Console.WriteLine(info);
 
                     ConsoleHelper.Continue();
-
-                    if(player.SkillPoints > 0)
-                        playerCreator.SetSkillPoints(player);
                     break;
 
                 case BattleResult.PlayerDead:

@@ -17,5 +17,6 @@ public class FileSources
     public string PlayersFileSource { get; set; }
     public string MountainEnemiesFileSource { get; set; }
     public string SeaEnemiesFileSource { get; set; }
+    public string ForestEnemiesFileSource { get; set; }
 
 }

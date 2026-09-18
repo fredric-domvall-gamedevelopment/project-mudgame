@@ -4,16 +4,19 @@ using Infrastructure.Services;
 using MUD.Worlds;
 
 namespace MUD;
-public class GameManager
+
+public class GameManager(ScoreSystem scoreSystem, GameWorld gameWorld, PlayerCreator playerCreator)
 {
-    GameWorld gameWorld = new GameWorld();
     Player player = new Player();
-    PlayerCreator playerCreator = new PlayerCreator();
-    public void StartMenu()
+    private readonly ScoreSystem _scoreSystem = scoreSystem;
+    private readonly GameWorld _gameWorld = gameWorld;
+
+    public async Task StartMenu()
     {
         Console.WriteLine("Welcome the magical worlds of MUDs \n");
         Console.WriteLine("1. Start New Game");
-        Console.WriteLine("2. Exit");
+        Console.WriteLine("2. Show Highscore List");
+        Console.WriteLine("3. Exit");
 
         char choice = Console.ReadKey().KeyChar;
         Console.Clear();
@@ -21,32 +24,42 @@ public class GameManager
         switch (choice)
         {
             case '1':
-                StartNewGame();
+                player = playerCreator.PlayerCreation(player);
+                await _gameWorld.PlayGame(player);
+
+                await StartMenu();
                 break;
 
             case '2':
-                ExitGame();
+                await HighscoreList();
+                await StartMenu();
+                break;
+
+            case '3':
+                Console.WriteLine("Thank you for playing! Goodbye!");
+                Environment.Exit(0);
                 break;
 
             default:
                 Console.WriteLine("Invalid choice, please try again.");
                 ConsoleHelper.Continue();
 
-                StartMenu();
+                await StartMenu();
                 break;
-                
         }
     }
 
-    private void StartNewGame()
+    private async Task HighscoreList()
     {
-        player = playerCreator.PlayerCreation();
-        gameWorld.PlayGame(player);
-    }
+        List<Player> highscoreList = await _scoreSystem.GetHighscoreList();
+        Console.WriteLine("-----Highscore List-----\n");
 
-    private void ExitGame()
-    {
-        Console.WriteLine("Thank you for playing! Goodbye!");
-        Environment.Exit(0);
+        if (highscoreList.Count == 0)
+            Console.WriteLine("No players in the highscore list yet.");
+        else
+            foreach (var player in highscoreList)
+                Console.WriteLine($"Name: {player.Name} || Score: {player.Score}");
+
+        ConsoleHelper.Continue();
     }
 }

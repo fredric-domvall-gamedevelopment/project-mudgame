@@ -1,86 +1,91 @@
-﻿using Infrastructure.Helpers;
+﻿using Infrastructure.Enums;
+using Infrastructure.Helpers;
 using Infrastructure.Models;
 
 namespace Infrastructure.Services;
+
 public class BattleSystem
 {
-    PlayerCreator playerCreator = new PlayerCreator();
-    public void Battle(Enemy enemy, Player player, string art, string artType)
+    public readonly List<string> battleInformation = new List<string>();
+    BattleResult battleResult = new BattleResult();
+    public ResultResponse<BattleResult> Battle(BattleAction battleAction, Enemy enemy, Player player)
     {
-        do
+        battleInformation.Clear();
+
+        switch (battleAction)
         {
-            if (artType == "Sea")
-                Console.WriteLine(art);
+            case BattleAction.Attack:
+                float playerDamage = Math.Max(player.Attack - enemy.Defense, 0);
+                enemy.Health -= playerDamage;
+                battleInformation.Add($"You attack the {enemy.Name} for {playerDamage} damage!");
 
-            else if (artType == "Mountains")
-                Console.WriteLine(art);
+                if (enemy.Health <= 0)
+                {
+                    battleInformation.Add($"You have defeated the {enemy.Name}!");
+                    battleResult = BattleResult.EnemyDead;
 
-            Console.WriteLine($"Player: {player.Name} | HP: {player.Health} | Attack: {player.Attack} | Defense: {player.Defense} | Level: {player.Level}");
-            Console.WriteLine($"Enemy: {enemy.Name} | HP: {enemy.Health}  | Attack: {enemy.Attack} | Defense: {enemy.Defense} | Level: {enemy.Level}\n");
-            Console.WriteLine("What would you like to do?");
-            Console.WriteLine("1. Attack");
-            Console.WriteLine("2. Run away");
+                    return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
+                }
 
-            Console.Write("\nYour choice: ");
-            char choice = Console.ReadKey().KeyChar;
+                float enemyDamage = Math.Max(enemy.Attack - player.Defense, 0);
+                player.Health -= enemyDamage;
+                battleInformation.Add($"The {enemy.Name} attacks you for {enemyDamage} damage!");
 
-            switch (choice)
-            {
-                case '1':
-                    float playerDamage = Math.Max(player.Attack - enemy.Defense, 0);
-                    enemy.Health -= playerDamage;
-                    Console.WriteLine($"\n\nYou attack the {enemy.Name} for {playerDamage} damage!\n");
+                var isPlayerDead = PlayerHelper.IsPlayerDead(player);
 
-                    float enemyDamage = Math.Max(enemy.Attack - player.Defense, 0);
-                    player.Health -= enemyDamage;
-                    Console.WriteLine($"The {enemy.Name} attacks you for {enemyDamage} damage!\n");
+                if (isPlayerDead.IsSuccess)
+                    return new ResultResponse<BattleResult> { IsSuccess = true, Data = isPlayerDead.Data, Information = isPlayerDead.Information };
 
-                    ConsoleHelper.Continue();
-                    break;
+                battleInformation.Add("The battle continues...");
+                battleResult = BattleResult.Continue;
 
-                case '2':
-                    Console.WriteLine("\nYou run away from the battle.\n");
-                    return;
+                return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
 
-                default:
-                    Console.WriteLine("Invalid choice, please try again.\n");
-                    ConsoleHelper.Continue();
-                    break;
-            }
-        } while (enemy.Health > 0 && player.Health > 0);
+            case BattleAction.UseItem:
+                battleInformation.Add("You use an item.");
 
-        if (enemy.Health <= 0)
-        {
-            Console.WriteLine($"\nYou have defeated the {enemy.Name}!");
-            Console.WriteLine($"\nYou gained {enemy.Reward.Xp * 10} XP and {enemy.Reward.Gold * 5} Gold!\n");
+                enemyDamage = Math.Max(enemy.Attack - player.Defense, 0);
+                player.Health -= enemyDamage;
+                battleInformation.Add($"The {enemy.Name} attacks you for {enemyDamage} damage!");
 
-            player.CurrentXp += enemy.Reward.Xp * 10;
-            player.Gold += enemy.Reward.Gold * 5;
+                isPlayerDead = PlayerHelper.IsPlayerDead(player);
 
-            if (player.CurrentXp >= player.NextLevelXp)
-            {
-                player.Level++;
-                player.CurrentXp -= player.NextLevelXp;
-                player.NextLevelXp = player.Level * 100;
-                player.SkillPoints += 10;
+                if (isPlayerDead.IsSuccess)
+                    return new ResultResponse<BattleResult> { IsSuccess = true, Data = isPlayerDead.Data, Information = isPlayerDead.Information };
 
-                Console.WriteLine($"\nCongratulations! You have leveled up to level {player.Level}!");
-                Console.WriteLine($"Youve earned 10 Skillpoints.\n");
+                battleResult = BattleResult.Continue;
 
-                ConsoleHelper.Continue();
+                return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
 
-                playerCreator.SetSkillPoints(player);
+            case BattleAction.Flee:
+                int escapeAttempt = new Random().Next(1, 4);
 
-                Console.WriteLine("Player stats upgraded! \n");
+                if (escapeAttempt == 1)
+                {
+                    battleInformation.Add("You successfully escaped from the battle.");
+                    battleResult = BattleResult.Flee;
 
-                ConsoleHelper.Continue();
-            }
-        }
-        else if (player.Health <= 0)
-        {
-            Console.WriteLine("You have been defeated!\n");
+                    return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
+                }
 
-            player.IsDead = true;
+                battleInformation.Add("You failed to escape from the battle.");
+
+                enemyDamage = Math.Max(enemy.Attack - player.Defense, 0);
+                player.Health -= enemyDamage;
+
+                battleInformation.Add($"The {enemy.Name} attacks you for {enemyDamage} damage!");
+
+                isPlayerDead = PlayerHelper.IsPlayerDead(player);
+
+                if (isPlayerDead.IsSuccess)
+                    return new ResultResponse<BattleResult> { IsSuccess = true, Data = isPlayerDead.Data, Information = isPlayerDead.Information };
+
+                battleResult = BattleResult.Continue;
+
+                return new ResultResponse<BattleResult> { IsSuccess = true, Data = battleResult, Information = battleInformation };
+
+            default:
+                throw new ArgumentOutOfRangeException(nameof(battleAction), battleAction, null);
         }
     }
 }

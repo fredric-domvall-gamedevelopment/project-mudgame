@@ -1,7 +1,9 @@
 ﻿namespace Infrastructure.Enums;
+
 public enum BattleResult
 {
     Continue,
     PlayerDead,
-    EnemyDead
+    EnemyDead,
+    Flee
 }

@@ -4,13 +4,21 @@ using Infrastructure.Services;
 
 namespace MUD.Worlds
 {
-    public class GameWorld
+    public class GameWorld(ScoreSystem scoreSystem, PlayerManager playerManager, Sea sea, Mountains mountains)
     {
-        public void PlayGame(Player player)
+        private readonly ScoreSystem _scoreSystem = scoreSystem;
+
+        Town town = new Town();
+
+        public async Task PlayGame(Player player)
         {
-            if(player.IsDead)
+            _scoreSystem.CalculateHighscore(player);
+
+            if (player.IsDead)
             {
                 Console.WriteLine("You are dead, game over!");
+
+                var result = await _scoreSystem.AddPlayerToHighscoreList(player);
                 return;
             }
 
@@ -20,7 +28,8 @@ namespace MUD.Worlds
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("1. Go to the Sea");
             Console.WriteLine("2. Go to the Mountains");
-            Console.WriteLine("3. Go to the Tavern");
+            Console.WriteLine("3. Go to the Tavern\n");
+            Console.WriteLine("M. Open Player Menu");
 
             char choice = Console.ReadKey().KeyChar;
 
@@ -29,46 +38,32 @@ namespace MUD.Worlds
             switch (choice)
             {
                 case '1':
-                    GoToSea(player);
-                    PlayGame(player);
+                    sea.EnterSea(player);
+                    await PlayGame(player);
                     break;
 
                 case '2':
-                    GoToMountains(player);
-                    PlayGame(player);
+                    mountains.EnterMountains(player);
+                    await PlayGame(player);
                     break;
 
                 case '3':
-                    GoToTown(player);
-                    PlayGame(player);
+                    town.EnterTown(player);
+                    await PlayGame(player);
+                    break;
+
+                case 'M' or 'm':
+                    playerManager.PlayerMenu(player);
+                    await PlayGame(player);
                     break;
 
                 default:
                     Console.WriteLine("Invalid choice, please try again.");
                     ConsoleHelper.Continue();
 
-                    PlayGame(player);
+                    await PlayGame(player);
                     break;
             }
         }
-
-        private void GoToSea(Player player)
-        {
-            Sea sea = new Sea();
-            sea.EnterSea(player);
-        }
-
-        private void GoToMountains(Player player)
-        {
-            Mountains mountains = new Mountains();
-            mountains.EnterMountains(player);
-        }
-
-        private void GoToTown(Player player)
-        {
-            Town town = new Town();
-            town.EnterTown(player);
-        }
-
     }
 }

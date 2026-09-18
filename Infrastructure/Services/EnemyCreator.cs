@@ -1,5 +1,5 @@
-﻿using Infrastructure.Models;
-using Infrastructure.Enums;
+﻿using Infrastructure.Enums;
+using Infrastructure.Models;
 
 namespace Infrastructure.Services;
 
@@ -10,7 +10,7 @@ public class EnemyCreator
         Enemy enemy = new Enemy();
         CharacterStatsCalculator characterStatsCalculator = new CharacterStatsCalculator();
 
-        switch(enemyType)
+        switch (enemyType)
         {
             case EnemyType.Goblin:
                 enemy.Name = "Goblin";

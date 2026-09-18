@@ -7,5 +7,8 @@ public enum EnemyType
     Troll,
     Murloc,
     Siren,
-    Pirate
+    Pirate,
+    Boar,
+    Wolf,
+    Bear
 }

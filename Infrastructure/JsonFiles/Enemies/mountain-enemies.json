@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "Goblin",
+    "Type": "Goblin",
+    "SpawnArea": "Mountain"
+  },
+  {
+    "Name": "Orc",
+    "Type": "Orc",
+    "SpawnArea": "Mountain"
+  },
+  {
+    "Name": "Troll",
+    "Type": "Troll",
+    "SpawnArea": "Mountain"
+  }
+]

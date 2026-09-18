@@ -5,15 +5,16 @@ using Infrastructure.Services;
 using MUD.Art;
 
 namespace MUD.Worlds;
-public class Sea(RewardSystem rewardSystem, EnemyCreator enemyCreator)
+
+public class Forest(RewardSystem rewardSystem, EnemyCreator enemyCreator)
 {
-    SeaArt seaArt = new SeaArt();
+    MountainsArt forestArt = new MountainsArt();
     BattleAction battleAction = new BattleAction();
     BattleSystem battleSystem = new BattleSystem();
 
-    public async Task EnterSea(Player player)
+    public async Task EnterForest(Player player)
     {
-        Enemy enemy = await enemyCreator.CreateRandomEnemy(player, EnemySpawnArea.Sea);
+        Enemy enemy = await enemyCreator.CreateRandomEnemy(player, EnemySpawnArea.Forest);
 
         Console.Clear();
         Console.WriteLine($"A {enemy.Rank} {enemy.Name} appeared!");
@@ -24,9 +25,13 @@ public class Sea(RewardSystem rewardSystem, EnemyCreator enemyCreator)
 
     private void ToBattle(Enemy enemy, Player player)
     {
-        Console.WriteLine(seaArt.ShowGraphic());
+        if (player.IsDead)
+            return;
+
+        Console.WriteLine(forestArt.ShowGraphic());
         Console.WriteLine($"Player: {player.Name} | HP: {player.Health} | Attack: {player.Attack} | Defense: {player.Defense} | Level: {player.Level}");
-        Console.WriteLine($"Enemy: {enemy.Name} | HP: {enemy.Health}  | Attack: {enemy.Attack} | Defense: {enemy.Defense} | Level: {enemy.Level}\n");
+        Console.WriteLine($"Enemy: {enemy.Name} | HP: {enemy.Health} | Attack: {enemy.Attack} | Defense: {enemy.Defense} | Level: {enemy.Level}\n");
+
         Console.WriteLine("What would you like to do?");
         Console.WriteLine("1. Attack");
         Console.WriteLine("2. Use Item");
@@ -58,8 +63,8 @@ public class Sea(RewardSystem rewardSystem, EnemyCreator enemyCreator)
 
         if (result.IsSuccess)
         {
-            if(result.Information != null)
-                foreach (var info in result.Information)     
+            if (result.Information != null)
+                foreach (var info in result.Information)
                     Console.WriteLine(info);
 
             ConsoleHelper.Continue();

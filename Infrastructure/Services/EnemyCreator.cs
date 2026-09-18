@@ -1,78 +1,106 @@
-﻿using Infrastructure.Enums;
+﻿using Infrastructure.Configurations;
+using Infrastructure.Enums;
 using Infrastructure.Models;
+using Infrastructure.Repositories;
 
 namespace Infrastructure.Services;
 
-public class EnemyCreator
+public class EnemyCreator(JsonFileRepository<Enemy> jsonFileRepository, FileSources fileSources)
 {
-    public Enemy CreateEnemy(EnemyType enemyType, Player player)
+    private readonly List<Enemy> _enemies = new List<Enemy>();
+    private readonly JsonFileRepository<Enemy> _JsonFileRepository = jsonFileRepository;
+    private readonly FileSources _filesources = fileSources;
+
+    public Enemy CreateEnemy(Enemy enemyTemplate, EnemyRank enemyRank, Player player)
     {
         Enemy enemy = new Enemy();
+        enemy.Name = enemyTemplate.Name;
+        enemy.Type = enemyTemplate.Type;
+        enemy.Rank = enemyRank;
+        enemy.SpawnArea = enemyTemplate.SpawnArea;
+
+        AdjustEnemyStats(enemy, enemyRank, player);
+
         CharacterStatsCalculator characterStatsCalculator = new CharacterStatsCalculator();
+        
+        enemy.Attack = characterStatsCalculator.CalculateCharacterAttack(enemy);
+        enemy.Defense = characterStatsCalculator.ClalculateCharacterDefense(enemy);
+        enemy.MaxHealth = characterStatsCalculator.CalculateCharacterHealth(enemy);
+        enemy.Health = enemy.MaxHealth;
 
-        switch (enemyType)
-        {
-            case EnemyType.Goblin:
-                enemy.Name = "Goblin";
-                enemy.Level = Random.Shared.Next(1, 4);
-                enemy.MaxHealth = 50f;
-                enemy.Stats.Strength = Random.Shared.Next(player.Level, player.Level + 2) * enemy.Level;
-                enemy.Stats.Dexterity = Random.Shared.Next(player.Level, player.Level + 2) * enemy.Level;
-                enemy.Stats.Endurance = Random.Shared.Next(player.Level, player.Level + 2) * enemy.Level;
-                enemy.Attack = characterStatsCalculator.CalculateCharacterAttack(enemy);
-                enemy.Defense = characterStatsCalculator.ClalculateCharacterDefense(enemy);
-                enemy.MaxHealth = characterStatsCalculator.CalculateCharacterHealth(enemy);
-                enemy.Health = enemy.MaxHealth;
-                enemy.Reward.Xp = Random.Shared.Next(1, 10) * enemy.Level;
-                enemy.Reward.Gold = Random.Shared.Next(1, 10) * enemy.Level;
-                enemy.IsDead = false;
-                break;
+        enemy.ArmorRating = Math.Min(enemy.Stats.Endurance / 100f, 0.9f);
 
-            case EnemyType.Orc:
-                enemy.Name = "Orc";
-                enemy.Level = Random.Shared.Next(player.Level, player.Level + 3);
-                enemy.MaxHealth = 60f;
-                enemy.Stats.Strength = Random.Shared.Next(player.Level, player.Level + 2) * enemy.Level;
-                enemy.Stats.Dexterity = Random.Shared.Next(player.Level, player.Level + 2) * enemy.Level;
-                enemy.Stats.Endurance = Random.Shared.Next(player.Level, player.Level + 2) * enemy.Level;
-                enemy.Attack = characterStatsCalculator.CalculateCharacterAttack(enemy);
-                enemy.Defense = characterStatsCalculator.ClalculateCharacterDefense(enemy);
-                enemy.MaxHealth = characterStatsCalculator.CalculateCharacterHealth(enemy);
-                enemy.Health = enemy.MaxHealth;
-                enemy.Reward.Xp = Random.Shared.Next(1, 10) * enemy.Level;
-                enemy.Reward.Gold = Random.Shared.Next(1, 10) * enemy.Level;
-                enemy.IsDead = false;
-                break;
-
-            case EnemyType.Troll:
-                enemy.Name = "Troll";
-                enemy.Level = Random.Shared.Next(player.Level, player.Level + 4);
-                enemy.MaxHealth = 70f;
-                enemy.Stats.Strength = Random.Shared.Next(player.Level, player.Level + 2) * enemy.Level;
-                enemy.Stats.Dexterity = Random.Shared.Next(player.Level, player.Level + 2) * enemy.Level;
-                enemy.Stats.Endurance = Random.Shared.Next(player.Level, player.Level + 2) * enemy.Level;
-                enemy.Attack = characterStatsCalculator.CalculateCharacterAttack(enemy);
-                enemy.Defense = characterStatsCalculator.ClalculateCharacterDefense(enemy);
-                enemy.MaxHealth = characterStatsCalculator.CalculateCharacterHealth(enemy);
-                enemy.Health = enemy.MaxHealth;
-                enemy.Reward.Xp = Random.Shared.Next(1, 10) * enemy.Level;
-                enemy.Reward.Gold = Random.Shared.Next(1, 10) * enemy.Level;
-                enemy.IsDead = false;
-                break;
-
-            default:
-                throw new ArgumentException("Invalid enemy type");
-        }
+        enemy.Level = Random.Shared.Next(Math.Max(1, player.Level - 2), player.Level + 3);
+        enemy.Reward.Gold = (int)Random.Shared.Next(5, 15) * (int)enemyRank + enemy.Level;
+        enemy.Reward.Xp = (int)Random.Shared.Next(10, 20) * (int)enemyRank + enemy.Level;
 
         return enemy;
     }
 
-    public Enemy CreateRandomEnemy(Player player)
+    public async Task<Enemy> CreateRandomEnemy(Player player, EnemySpawnArea spawnArea)
     {
-        Random random = new Random();
+        _enemies.Clear();
 
-        EnemyType enemytype = (EnemyType)random.Next(0, 3);
+        await ReadEnemyFromFile(spawnArea);
+        
+        List<Enemy> enemyOptions = _enemies.Where(e => e.SpawnArea == spawnArea).ToList();
 
-        return CreateEnemy(enemytype, player);
+
+        int randomIndex = new Random().Next(enemyOptions.Count);
+
+        Enemy enemyTemplate = enemyOptions[randomIndex];
+        EnemyRank enemyRank = (EnemyRank)Random.Shared.Next(0, 3);
+
+
+        return CreateEnemy(enemyTemplate, enemyRank, player);
+    }
+
+    public async Task ReadEnemyFromFile(EnemySpawnArea spawnArea)
+    {
+        switch (spawnArea)
+        {
+            case EnemySpawnArea.Mountain:
+                var mountainEnemies = await _JsonFileRepository.ReadFromJsonAsync(_filesources.MountainEnemiesFileSource);
+                if(mountainEnemies.Data is not null)
+                    _enemies.AddRange(mountainEnemies.Data);
+
+                break;
+            case EnemySpawnArea.Sea:
+                var seaEnemies = await _JsonFileRepository.ReadFromJsonAsync(_filesources.SeaEnemiesFileSource);
+                if (seaEnemies.Data is not null)
+                    _enemies.AddRange(seaEnemies.Data);
+                break;
+            case EnemySpawnArea.Forest:
+                var forestEnemies = await _JsonFileRepository.ReadFromJsonAsync(_filesources.ForestEnemiesFileSource);
+                if (forestEnemies.Data is not null)
+                    _enemies.AddRange(forestEnemies.Data);
+                break;
+            default:
+                throw new ArgumentException("Invalid enemy spawn area");
+        }
+    }
+
+    private void AdjustEnemyStats(Enemy enemy, EnemyRank enemyRank, Player player)
+    {
+        switch (enemyRank)
+        {
+            case EnemyRank.Normal:
+                enemy.Stats.Strength = (int)Random.Shared.Next((int)Math.Max(1, player.Stats.Strength - 3), (int)player.Stats.Strength + 3);
+                enemy.Stats.Dexterity = (int)Random.Shared.Next((int)Math.Max(1, player.Stats.Dexterity - 3), (int)player.Stats.Dexterity + 3);
+                enemy.Stats.Endurance = (int)Random.Shared.Next((int)Math.Max(1, player.Stats.Endurance - 3), (int)player.Stats.Endurance + 3);
+                break;
+            case EnemyRank.Elite:
+                enemy.Stats.Strength = (int)Random.Shared.Next((int)Math.Max(1, player.Stats.Strength - 2), (int)player.Stats.Strength + 5);
+                enemy.Stats.Dexterity = (int)Random.Shared.Next((int)Math.Max(1, player.Stats.Dexterity - 2), (int)player.Stats.Dexterity + 5);
+                enemy.Stats.Endurance = (int)Random.Shared.Next((int)Math.Max(1, player.Stats.Endurance - 2), (int)player.Stats.Endurance + 5);
+                break;
+            case EnemyRank.Boss:
+                enemy.Stats.Strength = (int)Random.Shared.Next((int)Math.Max(1, player.Stats.Strength - 1), (int)player.Stats.Strength + 7);
+                enemy.Stats.Dexterity = (int)Random.Shared.Next((int)Math.Max(1, player.Stats.Dexterity - 1), (int)player.Stats.Dexterity + 7);
+                enemy.Stats.Endurance = (int)Random.Shared.Next((int)Math.Max(1, player.Stats.Endurance - 1), (int)player.Stats.Endurance + 7); 
+                break;
+            default:
+                throw new ArgumentException("Invalid enemy rank");
+        }
     }
 }

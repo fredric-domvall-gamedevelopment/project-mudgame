@@ -6,17 +6,19 @@ using MUD.Art;
 
 namespace MUD.Worlds;
 
-public class Mountains(RewardSystem rewardSystem)
+public class Mountains(RewardSystem rewardSystem, EnemyCreator enemyCreator)
 {
     MountainsArt mountainsArt = new MountainsArt();
     BattleAction battleAction = new BattleAction();
     BattleSystem battleSystem = new BattleSystem();
 
-    public void EnterMountains(Player player)
+    public async Task EnterMountains(Player player)
     {
-        EnemyCreator enemyCreator = new EnemyCreator();
+        Enemy enemy = await enemyCreator.CreateRandomEnemy(player, EnemySpawnArea.Mountain);
 
-        Enemy enemy = enemyCreator.CreateRandomEnemy(player);
+        Console.Clear();
+        Console.WriteLine($"A {enemy.Rank} {enemy.Name} appeared!");
+        ConsoleHelper.Continue();
 
         ToBattle(enemy, player);
     }

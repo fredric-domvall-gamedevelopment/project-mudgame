@@ -1,7 +1,6 @@
 ﻿using Infrastructure.Configurations;
 using Infrastructure.Models;
 using Infrastructure.Repositories;
-using System.Runtime.CompilerServices;
 
 namespace Infrastructure.Services;
 
@@ -82,7 +81,7 @@ public class PlayerSystem(JsonFileRepository<Player> jsonFileRepository, FileSou
         if (savedPlayer is not null)
             _savedPlayers.Remove(savedPlayer);
 
-            _savedPlayers.Add(player);
+        _savedPlayers.Add(player);
 
         await _jsonFileRepository.WriteToJsonAsync(_fileSources.PlayersFileSource, _savedPlayers);
 
@@ -90,13 +89,11 @@ public class PlayerSystem(JsonFileRepository<Player> jsonFileRepository, FileSou
 
     }
 
-    public async Task<ResultResponse<Player>> LoadPlayerByPlayerId(Guid playerId)
+    public async Task<ResultResponse<Player>> LoadPlayerByPlayerId(Guid playerId, Player player)
     {
-         Player player = new Player();
+        await GetPlayersFromList();
 
-         await GetPlayersFromList();
-        
-        if(_savedPlayers.FirstOrDefault(p => p.PlayerId == playerId) is Player foundPlayer)
+        if (_savedPlayers.FirstOrDefault(p => p.PlayerId == playerId) is Player foundPlayer)
         {
             player = foundPlayer;
             return new ResultResponse<Player> { IsSuccess = true, Data = player, Information = new List<string> { "Player loaded successfully." } };

@@ -74,7 +74,8 @@ public class PlayerManager(PlayerCreator playerCreator, PlayerSystem playerSyste
     public async Task<Player> LoadPlayer(Player player)
     {
         var result = await playerSystem.GetPlayersFromList();
-        if(result.Data == null || result.Data.Count == 0)
+
+        if (result.Data == null || result.Data.Count == 0)
         {
             Console.WriteLine("No saved players found. Please create a new player.");
             ConsoleHelper.Continue();
@@ -87,7 +88,7 @@ public class PlayerManager(PlayerCreator playerCreator, PlayerSystem playerSyste
             var savedPlayer = result.Data[i];
             Console.WriteLine($"{i + 1}. {savedPlayer.Name} - Level: {savedPlayer.Level}, Score: {savedPlayer.Score}");
         }
-        
+
         Console.WriteLine("Select a player to load (enter the number):");
 
         if (int.TryParse(Console.ReadLine(), out int selection) && selection >= 1 && selection <= result.Data.Count)
